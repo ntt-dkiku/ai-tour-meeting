@@ -1,0 +1,16 @@
+FROM node:24-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY tour_meeting/frontend/package*.json ./
+COPY tour_meeting/frontend/.npmrc ./
+
+# Install dependencies including dev dependencies
+RUN npm install
+
+# Copy source files
+COPY tour_meeting/frontend/ .
+
+# Run tests
+CMD ["npm", "run", "test"]

@@ -1,0 +1,19 @@
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
+# Copy dependency files
+COPY pyproject.toml uv.lock ./
+
+# Install dependencies using uv (with locked versions)
+RUN uv sync --frozen --no-dev && uv pip install pytest pytest-asyncio
+
+# Copy source code and tests
+COPY tour_meeting/ ./tour_meeting/
+COPY tests/ ./tests/
+
+# Run tests
+CMD ["uv", "run", "pytest", "tests/", "-v"]

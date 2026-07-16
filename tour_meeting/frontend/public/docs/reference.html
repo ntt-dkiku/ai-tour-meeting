@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Developer Guide for AI Tour Meeting" />
+    <title>Developer Guide - AI Tour Meeting</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("ai-tour-meeting-docs-theme");
+          if (theme === "light" || theme === "dark") {
+            document.documentElement.dataset.theme = theme;
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-brand">
+        <a class="site-title" href="./index.html">AI Tour Meeting</a>
+        <nav class="site-tabs" aria-label="Primary">
+          <a class="site-tab" href="./index.html">User Guide</a>
+          <a class="site-tab is-active" href="./reference.html" aria-current="page">Developer Guide</a>
+          <a class="site-tab" href="./changelog.html">Changelog</a>
+          <a class="site-tab" href="./developer.html">Contact</a>
+        </nav>
+      </div>
+      <div class="site-header__actions">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme" aria-pressed="false" title="Switch theme">
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 17.5a5.5 5.5 0 1 1 0-11a5.5 5.5 0 0 1 0 11Zm0-15a1 1 0 0 1 1 1V5a1 1 0 1 1-2 0V3.5a1 1 0 0 1 1-1Zm0 17a1 1 0 0 1 1 1V20a1 1 0 1 1-2 0v-1.5a1 1 0 0 1 1-1Zm9-9a1 1 0 0 1-1 1H19a1 1 0 1 1 0-2h1.5a1 1 0 0 1 1 1ZM5 12a1 1 0 0 1-1 1H2.5a1 1 0 1 1 0-2H4a1 1 0 0 1 1 1Zm12.95-6.95a1 1 0 0 1 1.41 0l1.06 1.06a1 1 0 1 1-1.41 1.41l-1.06-1.06a1 1 0 0 1 0-1.41ZM5.58 18.42a1 1 0 0 1 1.41 0l1.06 1.06a1 1 0 1 1-1.41 1.41l-1.06-1.06a1 1 0 0 1 0-1.41Zm13.84 0a1 1 0 0 1 0 1.41l-1.06 1.06a1 1 0 0 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0ZM6.64 5.64a1 1 0 0 1 0 1.41L5.58 8.11a1 1 0 1 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0Z"/>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M21 14.1A8.5 8.5 0 0 1 9.9 3a1 1 0 0 0-1.25 1.25A7 7 0 1 0 19.75 15.35A1 1 0 0 0 21 14.1Z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="docs-frame">
+      <aside class="sidebar" aria-label="Docs navigation" data-doc-sidebar data-doc-section="developer-guide" data-doc-active="testing"></aside>
+
+      <main id="content" class="content">
+        <header class="page-header">
+          <div class="page-header__copy">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <span class="breadcrumb__current">Developer Guide</span>
+            </nav>
+            <h1>Customize the engine, tests, and integration points</h1>
+            <p class="lede">
+              If you want to change how meetings are run, add a new API field, or make the GUI behave differently, this is the place to start.
+              The sections below point to the files and commands that matter most when you are modifying the project.
+            </p>
+          </div>
+        </header>
+
+        <section class="section" id="project-map">
+          <h2>Where behavior lives</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Area</th>
+                  <th>Files</th>
+                  <th>What you change there</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Meeting logic</td>
+                  <td><code>tour_meeting/tour_meeting.py</code>, <code>tour_meeting/participant.py</code></td>
+                  <td>Turn selection, refinement, prompt behavior, and meeting phases.</td>
+                </tr>
+                <tr>
+                  <td>Backend API</td>
+                  <td><code>tour_meeting/backend/api.py</code></td>
+                  <td>Meeting data, persistence, REST endpoints, and websocket payloads.</td>
+                </tr>
+                <tr>
+                  <td>Frontend app</td>
+                  <td><code>tour_meeting/frontend/src/App.tsx</code>, <code>tour_meeting/frontend/src/components/Sidebar.tsx</code></td>
+                  <td>GUI flows, sidebar actions, meeting settings, and the Document link.</td>
+                </tr>
+                <tr>
+                  <td>Docs site</td>
+                  <td><code>docs/</code>, <code>tour_meeting/frontend/public/docs/</code></td>
+                  <td>Static documentation pages and the copy served through the GUI.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="testing">
+          <h2>Run the tests that matter</h2>
+          <p>
+            Frontend and backend changes should both be exercised before you ship them.
+            These targets are the quickest way to catch wiring mistakes or accidental regressions.
+          </p>
+          <pre><code>make test-frontend
+make test-backend</code></pre>
+          <p>
+            Use the frontend target when you change the GUI, docs link, or settings flows.
+            Use the backend target when you change meeting storage, API payloads, or websocket events.
+          </p>
+        </section>
+
+        <section class="section" id="customization">
+          <h2>Common customization paths</h2>
+          <div class="cards">
+            <article class="card">
+              <h3>New meeting behavior</h3>
+              <p>
+                Adjust the meeting engine when you want a different turn rule, a new refinement step, or a new phase in the meeting lifecycle.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Different API shape</h3>
+              <p>
+                Update the backend models and the frontend request helpers together so the GUI and the server keep speaking the same language.
+              </p>
+            </article>
+            <article class="card">
+              <h3>New UI behavior</h3>
+              <p>
+                Extend the sidebar or meeting settings in the React app and then verify the corresponding backend endpoint still behaves as expected.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Docs updates</h3>
+              <p>
+                Edit the HTML pages under <code class="inline-code">docs/</code> and mirror the change to the GUI copy so both surfaces stay in sync.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="coding-agent-integration">
+          <h2>Coding agent integration</h2>
+          <p>
+            This project is designed to work with agent-like coding tools that inspect the repository, edit files, and keep the docs and GUI in sync.
+            When you add a new workflow for that kind of assistant, keep the steps narrow and explicit so the agent can repeat them reliably.
+          </p>
+          <h3 id="agent-skills">Agent skills</h3>
+          <p>
+            Use skills when a task repeats often enough to deserve a named workflow. A good skill makes it obvious what to do, what files to touch,
+            and which checks to run before you hand the change back.
+          </p>
+          <ol class="steps">
+            <li>Keep the skill focused on one kind of work, such as docs updates or release prep.</li>
+            <li>Name the expected files and commands so the agent does not have to infer the workflow.</li>
+            <li>Update the skill when the project shape changes so the instructions stay accurate.</li>
+          </ol>
+        </section>
+
+        <section class="section" id="release-checklist">
+          <h2>Before you merge a change</h2>
+          <ol class="steps">
+            <li>Run the relevant frontend or backend tests.</li>
+            <li>Open the GUI and verify the sidebar, meeting settings, and docs link still work.</li>
+            <li>Check the docs pages in a browser and confirm the tabs, sidebar, and content still match each other.</li>
+            <li>Keep unrelated local data files and scratch experiments out of the commit unless they are part of the change.</li>
+          </ol>
+        </section>
+      </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#project-map">Where behavior lives</a>
+          <a class="toc-link" href="#testing">Run the tests</a>
+          <a class="toc-link" href="#customization">Common customization paths</a>
+          <a class="toc-link" href="#coding-agent-integration">Coding agent integration</a>
+          <a class="toc-link" href="#release-checklist">Before you merge</a>
+        </div>
+      </aside>
+    </div>
+
+    <script src="./nav.js" defer></script>
+    <script src="./theme.js" defer></script>
+  </body>
+</html>

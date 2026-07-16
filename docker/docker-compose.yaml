@@ -1,0 +1,46 @@
+version: "3.9"
+
+# Pin an explicit Compose project name so this stack is isolated from other
+# repos that also keep their compose files in a directory named "docker".
+# Without this, the project name defaults to the directory basename ("docker"),
+# which can collide with another project and cause `up --remove-orphans` to
+# delete that project's containers.
+name: tour-meeting
+
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend
+    container_name: tour-meeting-backend
+    ports:
+      - "${BACKEND_PORT:-8080}:${BACKEND_PORT:-8080}"
+    volumes:
+      - ..:/app
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      - PYTHONUNBUFFERED=1
+      - BACKEND_PORT=${BACKEND_PORT:-8080}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - OLLAMA_BASE=http://ollama:11434
+      - DEBUG_PROMPTS=${DEBUG_PROMPTS:-0}
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend
+    container_name: tour-meeting-frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ../tour_meeting/frontend:/app
+      - /app/node_modules # Don't overwrite node_modules from container
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_BASE=${VITE_API_BASE:-http://localhost:${BACKEND_PORT:-8080}}
+    # command: npm run dev

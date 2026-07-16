@@ -1,0 +1,26 @@
+version: "3.8"
+services:
+  vllm-gpu0:
+    image: vllm/vllm-openai:latest
+    container_name: tour-meeting-vllm
+    runtime: nvidia
+    ports:
+      - "8001:8000"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    env_file:
+      - path: .env
+        required: false
+    ipc: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]
+    command: --model ${VLLM_MODEL:-Qwen/Qwen3-8B}
+
+  backend:
+    environment:
+      - VLLM_BASE=http://vllm-gpu0:8000/v1

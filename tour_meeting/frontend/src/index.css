@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Backgrounds */
+    --surface: #ffffff;
+    --surface-secondary: #f9fafb;
+    --surface-tertiary: #f3f4f6;
+
+    /* Text */
+    --on-surface: #111827;
+    --on-surface-secondary: #374151;
+    --on-surface-tertiary: #6b7280;
+
+    /* Borders */
+    --outline: #e5e7eb;
+    --outline-secondary: #d1d5db;
+
+    /* Sidebar */
+    --sidebar-bg: #f9fafb;
+    --sidebar-text: #374151;
+    --sidebar-hover: #f3f4f6;
+    --sidebar-border: #e5e7eb;
+
+    /* Accent (green) */
+    --accent: #16a34a;
+    --accent-hover: #15803d;
+    --accent-text: #ffffff;
+    --accent-soft: #f0fdf4;
+    --accent-soft-text: #16a34a;
+  }
+
+  /* Ensure form elements inherit theme colors */
+  input, textarea, select {
+    background-color: var(--surface);
+    color: var(--on-surface);
+  }
+
+  .dark {
+    /* Backgrounds */
+    --surface: #111827;
+    --surface-secondary: #1f2937;
+    --surface-tertiary: #374151;
+
+    /* Text */
+    --on-surface: #f9fafb;
+    --on-surface-secondary: #d1d5db;
+    --on-surface-tertiary: #9ca3af;
+
+    /* Borders */
+    --outline: #374151;
+    --outline-secondary: #4b5563;
+
+    /* Sidebar */
+    --sidebar-bg: #1f2937;
+    --sidebar-text: #d1d5db;
+    --sidebar-hover: #374151;
+    --sidebar-border: #374151;
+
+    /* Accent (green) */
+    --accent: #22c55e;
+    --accent-hover: #16a34a;
+    --accent-text: #ffffff;
+    --accent-soft: #14532d;
+    --accent-soft-text: #86efac;
+  }
+}
+
+@layer utilities {
+  /* The chat pane is the scroll container that owns the position:sticky speaker
+     rows. In Safari a sticky element's offset inside an overflow scroller is
+     resolved on the compositor, but when the pane itself is NOT its own
+     compositing layer Safari re-resolves the STUCK (pinned) row's position
+     against a main-thread origin every time the pane repaints. A streaming turn
+     repaints the pane every frame — the typing dots animate `translateY` and
+     the search shimmer animates `translateX` inside the same box — so the
+     pinned top speaker row got re-snapped each frame and the device-pixel
+     rounding disagreed by 2-3px: the visible horizontal twitch. Only the
+     pinned/stationary row shows it (a row still scrolling hides any re-snap in
+     its own motion), which is why it looked like "only the first speaker."
+     Promoting the whole pane to its own GPU layer gives sticky a stable origin,
+     so the stuck row is snapped once and stays put regardless of per-frame
+     repaints. (No scrollbar-gutter: the pane spans the full main area and its
+     content is a centered max-w-5xl column; reserving a gutter would shift that
+     column off-centre from the page header. Overlay scrollbars — the case that
+     produced the twitch — take no layout width, so nothing re-centers anyway.) */
+  .chat-scroll {
+    transform: translateZ(0);
+  }
+  .query-loading {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+  }
+  .query-loading::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.9) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    opacity: 0.8;
+    mix-blend-mode: screen;
+    transform: translateX(-100%);
+    animation: queryShimmer 1.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .dark .query-loading::after {
+    background: linear-gradient(
+      120deg,
+      rgba(55, 65, 81, 0) 0%,
+      rgba(55, 65, 81, 0.9) 50%,
+      rgba(55, 65, 81, 0) 100%
+    );
+  }
+}
+
+@keyframes queryShimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Typing indicator: three dots that rise and fall in sequence (left→right),
+   shown in a chat bubble while an agent's reply is still being generated. */
+.typing-dot {
+  animation: typingBounce 1.2s ease-in-out infinite;
+}
+@keyframes typingBounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+}
+
+/* Reply "pop": once the typing dots resolve, the message box unfolds from the
+   top-left corner toward the bottom-right. Decelerating ease with no
+   overshoot — grows straight to full size and stops. "backwards" (not "both")
+   so the finished box carries no lingering transform/compositing layer:
+   with dozens of popped boxes those layers made the pinned avatar jitter. */
+.chat-pop {
+  transform-origin: top left;
+  animation: chatPop 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+@keyframes chatPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chat-pop {
+    animation: none;
+  }
+}

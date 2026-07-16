@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Participants guide for AI Tour Meeting" />
+    <title>Participants - AI Tour Meeting</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("ai-tour-meeting-docs-theme");
+          if (theme === "light" || theme === "dark") {
+            document.documentElement.dataset.theme = theme;
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-brand">
+        <a class="site-title" href="./index.html">AI Tour Meeting</a>
+        <nav class="site-tabs" aria-label="Primary">
+          <a class="site-tab is-active" href="./index.html" aria-current="page">User Guide</a>
+          <a class="site-tab" href="./reference.html">Developer Guide</a>
+          <a class="site-tab" href="./changelog.html">Changelog</a>
+          <a class="site-tab" href="./developer.html">Contact</a>
+        </nav>
+      </div>
+      <div class="site-header__actions">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme" aria-pressed="false" title="Switch theme">
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 17.5a5.5 5.5 0 1 1 0-11a5.5 5.5 0 0 1 0 11Zm0-15a1 1 0 0 1 1 1V5a1 1 0 1 1-2 0V3.5a1 1 0 0 1 1-1Zm0 17a1 1 0 0 1 1 1V20a1 1 0 1 1-2 0v-1.5a1 1 0 0 1 1-1Zm9-9a1 1 0 0 1-1 1H19a1 1 0 1 1 0-2h1.5a1 1 0 0 1 1 1ZM5 12a1 1 0 0 1-1 1H2.5a1 1 0 1 1 0-2H4a1 1 0 0 1 1 1Zm12.95-6.95a1 1 0 0 1 1.41 0l1.06 1.06a1 1 0 1 1-1.41 1.41l-1.06-1.06a1 1 0 0 1 0-1.41ZM5.58 18.42a1 1 0 0 1 1.41 0l1.06 1.06a1 1 0 1 1-1.41 1.41l-1.06-1.06a1 1 0 0 1 0-1.41Zm13.84 0a1 1 0 0 1 0 1.41l-1.06 1.06a1 1 0 0 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0ZM6.64 5.64a1 1 0 0 1 0 1.41L5.58 8.11a1 1 0 1 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0Z"/>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M21 14.1A8.5 8.5 0 0 1 9.9 3a1 1 0 0 0-1.25 1.25A7 7 0 1 0 19.75 15.35A1 1 0 0 0 21 14.1Z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="docs-frame">
+      <aside class="sidebar" aria-label="Docs navigation" data-doc-sidebar data-doc-section="user-guide" data-doc-active="participants"></aside>
+
+      <main id="content" class="content">
+        <header class="page-header">
+          <div class="page-header__copy">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <a class="breadcrumb__link" href="./getting-started.html">User Guide</a>
+              <span aria-hidden="true">&gt;</span>
+              <span class="breadcrumb__current">Framework</span>
+            </nav>
+            <h1>Participants</h1>
+            <p class="lede">
+              Participants are the voices in a meeting. They can be AI agents with their own roles and prompts, or a human participant inserted into the turn order.
+            </p>
+          </div>
+        </header>
+
+        <section class="section" id="participant-roles">
+          <h2>Participant roles</h2>
+          <p>
+            Give each participant a clear role so the meeting produces useful contrast. For example, one participant can focus on route quality,
+            another can challenge assumptions, and another can summarize tradeoffs.
+          </p>
+        </section>
+
+        <section class="section" id="ordering">
+          <h2>Ordering participants</h2>
+          <p>
+            Drag participants into the order you want before starting. Round robin uses this order directly. Random can either preserve balance across
+            a cycle or choose freely when balanced turns are off.
+          </p>
+        </section>
+
+        <section class="section" id="human-participant">
+          <h2>Human participant</h2>
+          <p>
+            A human participant lets you join the meeting yourself. The app keeps a placeholder for that participant internally, then removes or inserts it
+            as needed when the backend receives the final order.
+          </p>
+        </section>
+      </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#participant-roles">Participant roles</a>
+          <a class="toc-link" href="#ordering">Ordering participants</a>
+          <a class="toc-link" href="#human-participant">Human participant</a>
+        </div>
+      </aside>
+    </div>
+
+    <script src="./nav.js" defer></script>
+    <script src="./theme.js" defer></script>
+  </body>
+</html>

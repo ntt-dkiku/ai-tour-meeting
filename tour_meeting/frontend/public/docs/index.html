@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="AI Tour Meeting documentation overview" />
+    <title>Overview - AI Tour Meeting</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("ai-tour-meeting-docs-theme");
+          if (theme === "light" || theme === "dark") {
+            document.documentElement.dataset.theme = theme;
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-brand">
+        <a class="site-title" href="./index.html">AI Tour Meeting</a>
+        <nav class="site-tabs" aria-label="Primary">
+          <a class="site-tab is-active" href="./index.html" aria-current="page">User Guide</a>
+          <a class="site-tab" href="./reference.html">Developer Guide</a>
+          <a class="site-tab" href="./changelog.html">Changelog</a>
+          <a class="site-tab" href="./developer.html">Contact</a>
+        </nav>
+      </div>
+      <div class="site-header__actions">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme" aria-pressed="false" title="Switch theme">
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 17.5a5.5 5.5 0 1 1 0-11a5.5 5.5 0 0 1 0 11Zm0-15a1 1 0 0 1 1 1V5a1 1 0 1 1-2 0V3.5a1 1 0 0 1 1-1Zm0 17a1 1 0 0 1 1 1V20a1 1 0 1 1-2 0v-1.5a1 1 0 0 1 1-1Zm9-9a1 1 0 0 1-1 1H19a1 1 0 1 1 0-2h1.5a1 1 0 0 1 1 1ZM5 12a1 1 0 0 1-1 1H2.5a1 1 0 1 1 0-2H4a1 1 0 0 1 1 1Zm12.95-6.95a1 1 0 0 1 1.41 0l1.06 1.06a1 1 0 1 1-1.41 1.41l-1.06-1.06a1 1 0 0 1 0-1.41ZM5.58 18.42a1 1 0 0 1 1.41 0l1.06 1.06a1 1 0 1 1-1.41 1.41l-1.06-1.06a1 1 0 0 1 0-1.41Zm13.84 0a1 1 0 0 1 0 1.41l-1.06 1.06a1 1 0 0 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0ZM6.64 5.64a1 1 0 0 1 0 1.41L5.58 8.11a1 1 0 1 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0Z"/>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M21 14.1A8.5 8.5 0 0 1 9.9 3a1 1 0 0 0-1.25 1.25A7 7 0 1 0 19.75 15.35A1 1 0 0 0 21 14.1Z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="docs-frame">
+      <aside class="sidebar" aria-label="Docs navigation" data-doc-sidebar data-doc-section="user-guide" data-doc-active="overview"></aside>
+
+      <main id="content" class="content">
+        <header class="page-header">
+          <div class="page-header__copy">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <a class="breadcrumb__link" href="./index.html">User Guide</a>
+              <span aria-hidden="true">&gt;</span>
+              <span class="breadcrumb__current">Getting Started</span>
+            </nav>
+            <h1>Overview</h1>
+            <p class="lede">
+              Start here if you are new to the project. The docs walk you through launching the app, using the GUI,
+              understanding turn-taking, and changing the code with confidence.
+            </p>
+            <div class="home-actions">
+              <a class="button button--primary" href="./getting-started.html">Open Quick Start</a>
+              <a class="button" href="./gui.html">GUI Guide</a>
+              <a class="button" href="./reference.html">Developer Guide</a>
+            </div>
+          </div>
+        </header>
+
+        <section class="section" id="who-is-this-for">
+          <h2>Who is this for</h2>
+          <div class="cards">
+            <article class="card">
+              <h3>For first-time users</h3>
+              <p>Launch the stack, enter your keys, open the GUI, and run a sample meeting.</p>
+            </article>
+            <article class="card">
+              <h3>For daily use</h3>
+              <p>Use the GUI guide when you want to set up participants, adjust meeting settings, or inspect logs.</p>
+            </article>
+            <article class="card">
+              <h3>For custom changes</h3>
+              <p>Use the developer guide when you need to change the engine, update the API, or run tests.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="suggested-path">
+          <h2>Suggested path</h2>
+          <ol class="steps">
+            <li>Read <a href="./getting-started.html">Quick Start</a> to get a meeting running.</li>
+            <li>Move to <a href="./gui.html">GUI Guide</a> when you want to work from the browser app.</li>
+            <li>Use <a href="./meeting-workflow.html">Meeting Flow</a> to understand how turns and cycles behave.</li>
+            <li>Finish with <a href="./reference.html">Developer Guide</a> when you want to customize or test the project.</li>
+          </ol>
+        </section>
+
+        <section class="section" id="what-this-project-does">
+          <h2>What this project does</h2>
+          <div class="cards">
+            <article class="card">
+              <h3>Meeting planning</h3>
+              <p>Participants discuss routes, refine proposals, and settle on a meeting plan.</p>
+            </article>
+            <article class="card">
+              <h3>GUI control</h3>
+              <p>The browser app is the main place to create meetings, edit settings, and watch the log stream.</p>
+            </article>
+            <article class="card">
+              <h3>Developer tools</h3>
+              <p>The repository also includes test targets, a Python entry point, and the files that shape the engine.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#who-is-this-for">Who is this for</a>
+          <a class="toc-link" href="#suggested-path">Suggested path</a>
+          <a class="toc-link" href="#what-this-project-does">What this project does</a>
+        </div>
+      </aside>
+    </div>
+
+    <script src="./nav.js" defer></script>
+    <script src="./theme.js" defer></script>
+  </body>
+</html>

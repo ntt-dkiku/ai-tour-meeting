@@ -1,0 +1,1804 @@
+{
+  "meetings": [
+    {
+      "title": "One-Day Tour in Kyoto",
+      "global_goals": "Agree on a single one-day itinerary in Kyoto that fits a reasonable pace, a fixed day budget, and practical timing constraints while accounting for everyone’s limited time.",
+      "participants": [
+        {
+          "name": "Sofia Alvarez",
+          "background": "An art conservator from Spain who has one free day in Kyoto before a conference and wants meaningful cultural experiences.",
+          "personality": "analytical, cautious, tasteful, selective",
+          "preferences": "Prioritizes museum-quality cultural stops and authentic crafts; avoids noisy crowds and overly commercial attractions; wants to keep spending moderate but will pay for one special experience.",
+          "personal_goals": "Tour a ceramics or textile workshop, visit a museum or palace with strong historical collections, and have a carefully chosen lunch in a traditional neighborhood.",
+          "role": "attendee",
+          "speaking_style": "thoughtful and precise",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Mina Tanaka",
+          "background": "A graduate student visiting Kyoto for the first time after reading extensively about Japanese garden design and temple architecture.",
+          "personality": "curious, patient, reflective, detail-oriented",
+          "preferences": "Prefers quiet, slower-paced outings with minimal transit changes; dislikes crowded nightlife and rushed schedules; values historical atmosphere and low-cost options.",
+          "personal_goals": "Visit a Zen temple garden, spend time at a traditional tea house, and walk through a preserved historic district at an unhurried pace.",
+          "role": "facilitator",
+          "speaking_style": "calm and organized",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Jordan Lee",
+          "background": "A travel photographer on a short stopover in Kyoto, hoping to capture the city’s energy in a single day.",
+          "personality": "energetic, opportunistic, sociable, decisive",
+          "preferences": "Likes packed itineraries, iconic viewpoints, and lively streets; dislikes long stationary visits; comfortable with moderate spending if it maximizes photo opportunities and variety.",
+          "personal_goals": "Shoot sunrise or early-morning street scenes, visit a major shrine or castle, and end the day in a bustling food market or neon-lit entertainment area.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "both"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Barcelona",
+      "global_goals": "Agree on a single one-day itinerary in Barcelona that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Priya Nair",
+          "background": "Priya is a freelance photographer who often travels with a camera and prefers structured days that leave space for image-making rather than checking off attractions.",
+          "personality": "Observant, meticulous, independent, and slightly cautious",
+          "preferences": "Loves atmospheric streets, architectural details, and scenic light; dislikes noisy tourist traps and crowded interiors; wants to keep costs low, minimize backtracking, and avoid an early start if it means missing evening light; prefers time for coffee breaks and unhurried stops.",
+          "personal_goals": "Photograph modernist buildings in Eixample, spend sunset at Park Güell or a similar elevated spot, and end the day somewhere with interesting street scenes rather than a packed indoor venue.",
+          "role": "attendee",
+          "speaking_style": "thoughtful and precise",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Elena Ruiz",
+          "background": "Elena is a museum educator from Madrid visiting Barcelona for the first time in years; she has one free day before a conference and wants to make it count.",
+          "personality": "Curious, patient, reflective, and detail-oriented",
+          "preferences": "Prefers quiet, culturally rich places; dislikes rushed schedules, loud crowds, and long transit hops; wants to keep spending moderate and avoid expensive ticketed attractions; is comfortable starting early and ending by late afternoon.",
+          "personal_goals": "Visit the Picasso Museum, spend time in the Gothic Quarter, and have a long lunch at a traditional Catalan café with time to wander on foot.",
+          "role": "facilitator",
+          "speaking_style": "calm and organized",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Marcus Chen",
+          "background": "Marcus is a software consultant on a short vacation, trying to squeeze the maximum number of memorable experiences into a single day in the city.",
+          "personality": "Energetic, decisive, optimistic, and efficiency-minded",
+          "preferences": "Likes active, fast-paced itineraries; enjoys iconic landmarks, viewpoints, and hopping between neighborhoods; dislikes long museum stops and overly slow pacing; prioritizes getting a full panorama of the city and is willing to pay for convenience.",
+          "personal_goals": "See Sagrada Família from the outside, ride up to a city viewpoint, and fit in a beach walk plus a late tapas stop before nightlife begins.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic and direct",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Singapore",
+      "global_goals": "Agree on a single one-day itinerary in Singapore that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Mei Chen",
+          "background": "Mei is traveling with a tight budget and is trying to make the day feel special without paying for expensive tickets.",
+          "personality": "Practical, sociable, and budget-conscious.",
+          "preferences": "Likes free or low-cost attractions, local food courts, and relaxed conversation; dislikes high admission fees, taxi-heavy routes, and exclusive venues; prioritizes good food and manageable spending.",
+          "personal_goals": "Have lunch at a hawker centre, visit Gardens by the Bay from the outside or only low-cost sections, stop by Merlion Park, and keep total expenses low enough to leave room for dinner.",
+          "role": "attendee",
+          "speaking_style": "supportive",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Aisha Rahman",
+          "background": "Aisha is visiting Singapore for the first time after a week of conference meetings nearby, and she only has one free day before flying home.",
+          "personality": "Curious, efficient, and slightly impatient with delays.",
+          "preferences": "Likes early starts, efficient transit, modern city views, and keeping costs moderate; dislikes long meal stops, detours, and spending too much on premium attractions; prioritizes covering several districts in one day.",
+          "personal_goals": "Ride the MRT to Marina Bay, visit the SkyPark at Marina Bay Sands, walk the Helix Bridge, and end with the Supertree Grove light show.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Tomás Vega",
+          "background": "Tomás is a freelance photographer who came to Singapore to shoot street scenes and is sensitive to overly polished tourist routes.",
+          "personality": "Observant, patient, and independent.",
+          "preferences": "Likes slow exploration, heritage streets, small cafes, and time for photography; dislikes crowded high-rise attractions, rushed schedules, and moving too quickly between stops; prioritizes neighborhood atmosphere over quantity of sights.",
+          "personal_goals": "Spend the day in Kampong Glam and Little India, photograph street murals and shophouses, linger at a traditional tea shop, and avoid a packed cross-city schedule.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Marrakech",
+      "global_goals": "Agree on a single one-day itinerary in Marrakech that balances a reasonable pace, a fixed budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Camille Dubois",
+          "background": "Camille is a freelance writer traveling on a strict budget and is sensitive to noise and crowds after a long work-heavy month.",
+          "personality": "reflective, frugal, sensitive, selective",
+          "preferences": "Prioritizes low-cost experiences, peaceful spaces, and minimal entrance fees; dislikes crowded squares, expensive meals, and constant transit; prefers a relaxed schedule with time to sit, write, and observe; avoids activities that require too much walking in heat.",
+          "personal_goals": "Have lunch at a modest local eatery, visit a free or low-cost garden or museum, and spend part of the afternoon in a quiet tea house rather than in busy markets.",
+          "role": "attendee",
+          "speaking_style": "soft-spoken and analytical",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Leila Benyoussef",
+          "background": "Leila is a Marrakech-based architecture student who has guided visiting relatives around the medina before. She loves explaining historic districts and knows the city’s layout well.",
+          "personality": "curious, patient, detail-oriented, culturally attentive",
+          "preferences": "Prefers slow, immersive sightseeing in older quarters; likes quiet courtyards, artisan workshops, and shaded cafés; dislikes rushed hopping between far-apart attractions; wants to avoid high-cost luxury venues and overly noisy tourist traps.",
+          "personal_goals": "Visit Bahia Palace, spend time in a traditional riad courtyard, and browse one or two artisan souks in the medina without rushing.",
+          "role": "facilitator",
+          "speaking_style": "calm and organized",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Noah Patel",
+          "background": "Noah is a first-time visitor on a short stopover in Marrakech and wants to maximize the number of memorable places he sees in a single day.",
+          "personality": "energetic, spontaneous, ambitious, impatient with downtime",
+          "preferences": "Prefers a packed itinerary with many landmarks; likes early starts and moving quickly between areas; enjoys lively streets, markets, and panoramic viewpoints; dislikes long breaks, lingering in one place too long, and spending most of the day in just one district.",
+          "personal_goals": "See Jardin Majorelle, climb to a rooftop viewpoint over the medina, and fit in a visit to Jemaa el-Fnaa before sunset.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic and fast-paced",
+          "explanation_style": "auto"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Istanbul",
+      "global_goals": "Agree on a single one-day itinerary in Istanbul that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Nadia Petrova",
+          "background": "A budget-conscious software engineer visiting Istanbul for the first time after a long work project, hoping for a relaxed but rewarding day.",
+          "personality": "pragmatic, cautious, observant, independent",
+          "preferences": "Prioritizes low cost, minimal transit hassle, and a late start after a busy week; likes local food and scenic spots, but dislikes early mornings, expensive attractions, and overpacked itineraries.",
+          "personal_goals": "Sleep in, have a simple Turkish breakfast near Beyoğlu, spend part of the day in a quiet café or park, and avoid paying for multiple admission tickets.",
+          "role": "attendee",
+          "speaking_style": "friendly and practical",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Derya Kaya",
+          "background": "A local history graduate student who has one free day before a conference and wants to make the most of it without spending much.",
+          "personality": "curious, patient, detail-oriented, reflective",
+          "preferences": "Prefers quiet, culturally rich places; likes walking through old neighborhoods and taking time at museums; dislikes rushed schedules, crowded tourist traps, and expensive dining; needs to keep transportation simple and costs low.",
+          "personal_goals": "Visit the Hagia Sophia, spend unhurried time in the Archaeological Museums, and end with a slow stroll through the Sultanahmet area.",
+          "role": "facilitator",
+          "speaking_style": "calm and analytical",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Mason Clarke",
+          "background": "A travel vlogger on a tight schedule who is only in the city for one day and wants energetic, visually striking experiences for short-form content.",
+          "personality": "sociable, spontaneous, ambitious, energetic",
+          "preferences": "Likes panoramic views, lively streets, boat rides, and iconic photo spots; dislikes long museum visits, slow pacing, and staying in one area too long; willing to spend more on transport and a memorable lunch.",
+          "personal_goals": "Ride a ferry on the Bosphorus, capture sunset views from Galata Tower, and spend time in a bustling market area like the Grand Bazaar or Spice Bazaar.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic and fast-paced",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Buenos Aires",
+      "global_goals": "Agree on a single one-day itinerary in Buenos Aires that fits a reasonable pace, a fixed budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Priya Sen",
+          "background": "Priya is a food-focused traveler who planned this trip around local neighborhoods and live evening atmosphere. She is comfortable walking but wants the day to build toward a memorable night out.",
+          "personality": "sociable, curious, energetic, spontaneous",
+          "preferences": "Likes lively streets, market energy, street food, and staying out late; dislikes overly formal sightseeing and early wrap-ups; prioritizes neighborhood atmosphere, music, and a good dinner scene, even if that means skipping some major landmarks.",
+          "personal_goals": "Eat at a famous parrilla in Palermo, explore a craft beer bar or live tango venue after dark, and spend time in a bustling market such as Mercado de San Telmo or a similar food-heavy stop.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Lucía Fernández",
+          "background": "Lucía is visiting Buenos Aires for the first time on a short work break. She has only one free day and wants to see the city’s classic landmarks efficiently before an evening flight.",
+          "personality": "organized, fast-paced, decisive, practical",
+          "preferences": "Prefers a tightly packed itinerary, minimal idle time, and easy transit between stops; dislikes long restaurant meals, detours, and waiting in lines; prioritizes iconic sights and efficiency over lingering.",
+          "personal_goals": "Visit Plaza de Mayo, walk through San Telmo’s historic streets, and fit in a daytime stop at La Boca with enough time left for a sunset waterfront walk in Puerto Madero.",
+          "role": "facilitator",
+          "speaking_style": "clear and efficient",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Mateo Rivas",
+          "background": "Mateo is a local architecture enthusiast hosting visiting friends. He knows the city well and wants to show its layered history and quieter, more reflective side.",
+          "personality": "cautious, observant, reflective, methodical",
+          "preferences": "Prefers a slow pace, fewer locations, and time to look closely at buildings and museums; dislikes crowded tourist traps, loud nightlife, and rushed hopping between neighborhoods; values calm streets and cultural depth.",
+          "personal_goals": "Spend substantial time at the Recoleta Cemetery, browse a traditional museum or historic cultural center, and have a relaxed coffee stop in Recoleta rather than rushing to multiple districts.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Prague",
+      "global_goals": "Agree on a single one-day itinerary in Prague that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Priya Menon",
+          "background": "A software consultant on a rare personal vacation, looking for an easy day after a week of back-to-back meetings. She is interested in food and relaxation more than packed sightseeing.",
+          "personality": "practical, selective, easygoing, budget-conscious",
+          "preferences": "Prefers a later start, comfortable transport, frequent breaks, and memorable food stops; dislikes early mornings, uphill walking, and overspending on premium experiences; prioritizes a relaxed day with good meals and minimal logistical stress.",
+          "personal_goals": "Have a long brunch in a local bakery, try a hearty Czech lunch, visit one affordable beer hall or food market, and keep the itinerary compact enough to avoid exhaustion.",
+          "role": "attendee",
+          "speaking_style": "friendly",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Hana Nováková",
+          "background": "A Prague-based museum educator who has one free day before a conference starts. She knows the city well and wants to show visitors a thoughtful side of it.",
+          "personality": "patient, reflective, organized, culturally minded",
+          "preferences": "Prefers quiet neighborhoods, historic interiors, and a slow pace; dislikes rushed sightseeing, crowded selfie spots, and expensive tasting menus; prioritizes depth over quantity and wants to stay within a modest budget.",
+          "personal_goals": "Visit the Strahov Monastery library, spend time in the Old Town smaller courtyards, and have a calm lunch in a traditional Czech cafe without moving across the city too much.",
+          "role": "facilitator",
+          "speaking_style": "supportive",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Dylan Mercer",
+          "background": "A freelance travel photographer visiting Prague for the first time and hoping to fit in as many iconic shots as possible before flying out the next morning.",
+          "personality": "energetic, impatient, opportunistic, visual",
+          "preferences": "Likes dramatic viewpoints, famous landmarks, lively streets, and long golden-hour sessions; dislikes slow museum visits, long café breaks, and spending too much time in one area; prioritizes covering major highlights in a single day.",
+          "personal_goals": "Photograph Charles Bridge at sunrise, climb to Prague Castle for panoramic views, and end the day in a bustling riverside area with night photos and street life.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Cape Town",
+      "global_goals": "Agree on a single one-day itinerary in Cape Town that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Naledi Khumalo",
+          "background": "A graduate student on a tight budget who is in Cape Town for a short visit and wants a meaningful experience without expensive transport or entry fees.",
+          "personality": "practical, analytical, cautious, independent",
+          "preferences": "Prefers public transport or walking, low-cost food, and free or inexpensive activities; dislikes cable cars, pricey viewpoints, and anything that adds hidden costs; prioritizes staying within budget and avoiding unnecessary transfers.",
+          "personal_goals": "Explore the Bo-Kaap on foot, browse the Greenmarket Square area, and eat a cheap lunch at a local takeaway rather than paying for scenic attractions.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Thandi Mbeki",
+          "background": "A local architect who has one free day between client meetings and wants to show friends a thoughtful side of the city.",
+          "personality": "curious, orderly, culturally attentive, calm",
+          "preferences": "Prefers low-key, scenic, and historically meaningful places; dislikes rushed schedules, heavy traffic, and overly commercial attractions; prioritizes walkability and time for reflection.",
+          "personal_goals": "Visit the Iziko South African Museum, spend time in the Company’s Garden, and end with a quiet coffee in a heritage café in the city bowl.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Ethan Walker",
+          "background": "A travel photographer visiting from abroad who is trying to capture dramatic landscapes and iconic viewpoints in a single day.",
+          "personality": "energetic, impatient, adventurous, visually driven",
+          "preferences": "Likes early starts, outdoor viewpoints, and moving quickly between highlights; dislikes museums, long lunches, and spending too much time in one place; prioritizes maximizing photo opportunities even if the day feels packed.",
+          "personal_goals": "Take the cable car up Table Mountain, photograph the Atlantic seaboard from Signal Hill, and fit in a late-afternoon stop at Camps Bay for sunset shots.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "auto"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Lisbon",
+      "global_goals": "Agree on a single one-day itinerary in Lisbon that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Maya Iyer",
+          "background": "A remote worker from Singapore who booked a short stopover in Lisbon and wants to make the most of the day without exhausting herself.",
+          "personality": "pragmatic, cautious, adaptable, organized",
+          "preferences": "Needs a midday rest break, avoids very steep walking routes, and wants a balanced mix of culture and comfort; dislikes extreme crowding, too many transfers, and an itinerary that runs late into the night; prioritizes one or two major sights plus a relaxed meal.",
+          "personal_goals": "Ride Tram 28, visit the Museu Nacional do Azulejo, and have a long sit-down lunch in a neighborhood café without rushing between stops.",
+          "role": "attendee",
+          "speaking_style": "practical",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Inês Carvalho",
+          "background": "A Lisbon-based architecture graduate student who loves historic neighborhoods and has a rare free day before exams.",
+          "personality": "curious, patient, reflective, detail-oriented",
+          "preferences": "Prefers slow walks, quiet streets, and low-cost activities; dislikes rushed schedules, loud nightlife, and spending heavily on taxis or entry fees; prioritizes scenic viewpoints and heritage areas within one compact district.",
+          "personal_goals": "Spend the day in Alfama, visit the Lisbon Cathedral, stop at a small azulejo museum, and end with a sunset at a quiet miradouro.",
+          "role": "facilitator",
+          "speaking_style": "calm",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Daniel Brooks",
+          "background": "A visiting food blogger from Toronto with only one day in the city and a list of restaurants he wants to sample.",
+          "personality": "sociable, impulsive, enthusiastic, experience-driven",
+          "preferences": "Prefers a packed itinerary with multiple food stops; dislikes waiting long in museums or lingering too long in one place; prioritizes trendy neighborhoods, tasting menus, and a lively atmosphere even if it means higher costs.",
+          "personal_goals": "Try pastéis de nata in Belém, have seafood at a riverside restaurant, and squeeze in a late-afternoon stop at a rooftop bar before dinner.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Seoul",
+      "global_goals": "Agree on a single one-day itinerary in Seoul that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Mina Volkov",
+          "background": "A museum curator from abroad who has been in Seoul for several days but saved one free day specifically for culture and design. She is traveling on a strict per-day spending limit.",
+          "personality": "analytical, patient, selective, disciplined",
+          "preferences": "Likes museums, contemporary art, carefully planned routes, and efficient transport. Dislikes shopping-heavy stops, noisy crowds, and unnecessary detours. Prioritizes staying on budget and avoiding paid attractions that add little value.",
+          "personal_goals": "Visit the National Museum of Korea or Leeum Museum of Art, stop by a design-focused café or craft area in Hongdae or Ikseon-dong, and avoid expensive cable cars or premium experiences that would strain the budget.",
+          "role": "attendee",
+          "speaking_style": "measured and analytical",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Jisoo Han",
+          "background": "A freelance illustrator visiting Seoul for the first time after months of remote work. She wants the day to feel like a calm reset and has only one full day before leaving for a conference.",
+          "personality": "curious, reflective, cautious, detail-oriented",
+          "preferences": "Likes quiet neighborhoods, historic architecture, tea houses, and slow walking routes. Dislikes packed schedules, loud nightlife, and long transit hops. Prioritizes low-cost or free sights and time to sketch.",
+          "personal_goals": "Spend the morning at Bukchon Hanok Village, have tea at a traditional teahouse in Insadong, and end with a peaceful walk along Cheonggyecheon rather than rushing across the city.",
+          "role": "facilitator",
+          "speaking_style": "calm and thoughtful",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Daniel Park",
+          "background": "An energetic food blogger on a short layover in Seoul who wants to squeeze the maximum number of experiences into one day and document them for his audience.",
+          "personality": "outgoing, ambitious, impatient, spontaneous",
+          "preferences": "Likes bustling markets, street food, iconic viewpoints, and dense itineraries. Dislikes slow pacing, long rest breaks, and spending too much time in one place. Prioritizes getting a lot done and trying several dishes.",
+          "personal_goals": "Start early at Gwangjang Market for breakfast, fit in a Han River bike ride or riverside stop, and reach N Seoul Tower before sunset for city views and evening photos.",
+          "role": "attendee",
+          "speaking_style": "energetic and direct",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Amsterdam",
+      "global_goals": "Agree on a single one-day itinerary in Amsterdam that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Keiko Sato",
+          "background": "A retired literature professor from Osaka traveling in Europe for inspiration, with a strong interest in contemplative urban spaces and local history.",
+          "personality": "thoughtful, cautious, patient, detail-oriented",
+          "preferences": "Prefers quiet gardens, small historic sites, and unhurried tea breaks; dislikes crowded attractions, noisy bars, and overly ambitious routing; has a modest spending limit and wants an early finish.",
+          "personal_goals": "Spend time in the Begijnhof, browse a small bookshop or archival museum, and have a serene afternoon at the Amsterdamse Bos or a quiet teahouse.",
+          "role": "attendee",
+          "speaking_style": "supportive",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Sanne de Vries",
+          "background": "A freelance graphic designer living in Amsterdam for two years, often hosting visiting friends and trying to show them the city beyond the usual postcard spots.",
+          "personality": "curious, organized, socially confident, mildly perfectionist",
+          "preferences": "Prefers a calm, walkable day with fewer transit changes, enjoys museums, historic streets, and canal-side cafés, dislikes rushed schedules and loud nightlife, wants to keep costs moderate.",
+          "personal_goals": "Visit the Rijksmuseum, take a slow canal walk around the Jordaan, and stop at a traditional brown café for lunch.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Malik Thompson",
+          "background": "A startup product manager visiting from Toronto on a rare short break, interested in maximizing how much of the city he can see in one day.",
+          "personality": "energetic, ambitious, pragmatic, impatient",
+          "preferences": "Likes packed itineraries, efficient transport, famous landmarks, and late-afternoon-to-evening activity; dislikes long museum visits, slow wandering, and spending too much time in one neighborhood.",
+          "personal_goals": "See the Anne Frank House area, climb the A'DAM Lookout, and fit in a boat tour plus a lively evening in De Pijp.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Edinburgh",
+      "global_goals": "Agree on a single one-day itinerary in Edinburgh that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Priya Desai",
+          "background": "A postgraduate student on a tight travel budget who wants an efficient but memorable sightseeing day while avoiding extra expenses.",
+          "personality": "analytical, frugal, practical",
+          "preferences": "Likes free or low-cost attractions, predictable timing, and walkable routes; dislikes paid tours, taxis, and long café breaks; prioritizes staying within a strict budget.",
+          "personal_goals": "Use mostly free viewpoints and public spaces, visit the Scottish Parliament area and Princes Street Gardens, and keep the itinerary compact enough to avoid costly transport.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Fiona MacLeod",
+          "background": "A local museum educator who has one free day to show friends around her city; she knows the historic center well and prefers thoughtful planning.",
+          "personality": "cautious, organized, reflective",
+          "preferences": "Likes quiet heritage sites, minimal transit changes, and low-cost meals; dislikes rushed schedules, noisy crowds, and expensive attractions; prioritizes depth over quantity.",
+          "personal_goals": "Visit Edinburgh Castle, spend time in the National Museum of Scotland, and have a slow lunch in the Old Town before a sunset walk on Calton Hill.",
+          "role": "facilitator",
+          "speaking_style": "supportive",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Oliver Grant",
+          "background": "A freelance photographer visiting Edinburgh for the first time, hoping to capture iconic city views and energetic street scenes in a single day.",
+          "personality": "curious, energetic, spontaneous",
+          "preferences": "Likes scenic overlooks, lively neighborhoods, and flexible timing; dislikes spending too long indoors or following a slow museum-heavy plan; prioritizes maximizing photo opportunities.",
+          "personal_goals": "Start early at Arthur’s Seat for sunrise, wander the Royal Mile for street photography, and finish with night shots around Victoria Street and Grassmarket.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Mexico City",
+      "global_goals": "Agree on a single one-day itinerary in Mexico City that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Nina Okafor",
+          "background": "Nina is traveling with a strict personal budget and is sensitive to crowds and noise. She prefers efficient planning and wants to avoid expensive detours or anything that feels touristy.",
+          "personality": "cautious, practical, analytical, and reserved",
+          "preferences": "Prefers low-cost transit, free or low-fee attractions, and short lines; dislikes pricey restaurants, long rides across the city, and crowded hotspot stops; prioritizes budget control and low stress; would rather have fewer stops with more certainty.",
+          "personal_goals": "Visit the Zócalo area, see the Metropolitan Cathedral exterior, and find an inexpensive lunch near a local market.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Lucia Herrera",
+          "background": "Lucia is visiting Mexico City for the first time and has one full day free between work meetings. She loves art, architecture, and local history, but she only has enough stamina for a carefully paced day.",
+          "personality": "curious, reflective, patient, and detail-oriented",
+          "preferences": "Prefers quiet museums and historic neighborhoods; dislikes rushed schedules, loud nightlife, and long transit hops; prioritizes learning and scenic walks over quantity of stops; wants to keep the day moderate in cost.",
+          "personal_goals": "Visit the Museo Frida Kahlo, spend time in Coyoacán’s historic center, and have a relaxed lunch at a traditional café.",
+          "role": "facilitator",
+          "speaking_style": "calm and organized",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Diego Navarro",
+          "background": "Diego is a food and street-photography enthusiast who has been to Mexico City before, but only in the trendy central districts. He wants a day that feels energetic and visually rich.",
+          "personality": "outgoing, spontaneous, observant, and enthusiastic",
+          "preferences": "Likes markets, street food, busy plazas, and neighborhoods with strong local character; dislikes overly formal museum-heavy plans and slow meals; prioritizes variety, vibrant atmosphere, and lots of photo opportunities; is comfortable starting early and moving quickly.",
+          "personal_goals": "Eat tacos al pastor at a famous taquería, browse Mercado de Coyoacán, and capture sunset scenes in a lively public square.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Reykjavik",
+      "global_goals": "Agree on a single one-day itinerary in Reykjavik that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Sofia Mendes",
+          "background": "A freelance designer traveling on a careful budget who is interested in food and contemporary culture but has limited time before meeting a friend the next morning.",
+          "personality": "creative, practical, selective, easygoing",
+          "preferences": "Prefers affordable experiences, local cafés, and one or two substantial activities instead of many short stops; dislikes high-cost admissions and overly touristy dining; prioritizes staying within budget and having time to sit down somewhere pleasant.",
+          "personal_goals": "Browse the Einar Jónsson Sculpture Museum or a small design gallery, have coffee and cinnamon rolls in a neighborhood café, and try an affordable dinner in the city center rather than paying for an upscale tasting menu.",
+          "role": "attendee",
+          "speaking_style": "friendly",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Erik Jónsson",
+          "background": "A local history graduate student who has spent years guiding visiting friends around Iceland's capital and nearby coastal areas.",
+          "personality": "cautious, reflective, detail-oriented, patient",
+          "preferences": "Prefers quiet, low-key neighborhoods, minimal transit changes, and avoiding expensive tourist traps; dislikes rushed schedules, loud nightlife, and long time spent in souvenir shops; prioritizes meaningful stops and predictable timing.",
+          "personal_goals": "Visit the National Museum of Iceland, spend time at the Old Harbour, and end with a relaxed hot dog or seafood lunch near the waterfront without crossing the city too many times.",
+          "role": "facilitator",
+          "speaking_style": "analytical",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Maya Collins",
+          "background": "A travel blogger on a short stopover who wants to maximize iconic experiences before an evening flight the same day.",
+          "personality": "energetic, spontaneous, ambitious, sociable",
+          "preferences": "Likes packed itineraries, photo-friendly landmarks, and lively streets; dislikes slow pacing, long museum visits, and spending too much time in one area; prioritizes seeing as many famous sights as possible, even if it means a tight schedule.",
+          "personal_goals": "Climb to the Hallgrímskirkja tower, visit Harpa concert hall, and fit in a geothermal spa or a whale-watching harbor stop if there is any room left in the day.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "both"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Hanoi",
+      "global_goals": "Agree on a single one-day itinerary in Hanoi that fits a reasonable pace, a fixed budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Marina Petrova",
+          "background": "An architecture consultant visiting for work and squeezing in sightseeing before an evening train, with a strict budget from her expense policy.",
+          "personality": "practical, analytical, reserved, detail-oriented",
+          "preferences": "Prefers a compact route, modern transport, and one or two high-value stops; dislikes chaotic crowds, heat, and long waits; wants to avoid pricey add-ons and any schedule that risks missing her train.",
+          "personal_goals": "See the French Quarter façades, tour one museum or heritage site with minimal queueing, and finish the day with a calm lakeside dinner near the station area.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Quynh Tran",
+          "background": "A local-history graduate student who is hosting two visiting friends and wants to make the most of her day off by showing them the city she knows well.",
+          "personality": "thoughtful, patient, culturally curious, organized",
+          "preferences": "Prefers quiet, walkable neighborhoods, historical landmarks, and unhurried café breaks; dislikes rushed transit, loud nightlife, and expensive ticketed attractions; wants to keep costs low and minimize backtracking.",
+          "personal_goals": "Visit the Temple of Literature, spend time around Hoan Kiem Lake, and stop at a traditional egg coffee shop in the Old Quarter.",
+          "role": "facilitator",
+          "speaking_style": "supportive",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Ethan Brooks",
+          "background": "A travel blogger on a short stopover with only one full day in the city, eager to pack in as many iconic sights as possible.",
+          "personality": "energetic, decisive, adventurous, impatient with downtime",
+          "preferences": "Likes dense itineraries, street markets, panoramic viewpoints, and multiple food stops; dislikes slow museum visits, long coffee breaks, and staying in one area too long; prioritizes variety over comfort.",
+          "personal_goals": "Cover the Old Quarter, visit the Ho Chi Minh Mausoleum area, take a cyclo ride, and fit in a sunset walk by West Lake.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Hong Kong",
+      "global_goals": "Agree on a single one-day itinerary in Hong Kong that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Sophie Martin",
+          "background": "A freelance photographer traveling with a tight budget and an early morning flight the next day.",
+          "personality": "practical, cautious, observant, budget-conscious",
+          "preferences": "Prefers inexpensive transit, compact routes, and good photo opportunities; dislikes expensive restaurants, long detours, and staying out late; prioritizes natural light, efficient planning, and staying within budget.",
+          "personal_goals": "Take skyline photos from Victoria Peak or the Peak Tram area, photograph the harbor from Tsim Sha Tsui Promenade, and keep the day centered around one or two adjacent districts.",
+          "role": "attendee",
+          "speaking_style": "supportive",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Amelia Wong",
+          "background": "A museum educator visiting Hong Kong for the first time after years of researching colonial-era architecture and harbor history.",
+          "personality": "curious, methodical, reflective, culturally attentive",
+          "preferences": "Prefers quiet, information-rich places; likes walking at a measured pace; dislikes rushed transfers, loud nightlife, and overly commercial attractions; prioritizes historic districts and scenic viewpoints over shopping.",
+          "personal_goals": "Visit Tai Kwun, spend time at Man Mo Temple, walk through Central’s older streets, and ride the Star Ferry at sunset.",
+          "role": "facilitator",
+          "speaking_style": "analytical",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Rafael Costa",
+          "background": "A food-and-night-market content creator on a short stopover who wants to maximize the city’s energy in a single day.",
+          "personality": "sociable, impulsive, energetic, playful",
+          "preferences": "Prefers lively crowds, street food, neon-lit areas, and late-night activities; dislikes quiet museum-heavy plans, long tea breaks, and strict schedules; prioritizes trying many small dishes and seeing the city after dark.",
+          "personal_goals": "Eat at Temple Street Night Market, sample egg waffles and claypot rice, explore Mong Kok’s street scenes, and end the night in Lan Kwai Fong.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Nairobi",
+      "global_goals": "Agree on a single one-day itinerary in Nairobi that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Lena Muthoni",
+          "background": "Lena is a food and nightlife blogger from Mombasa visiting friends in Nairobi. She only has this one day and wants the city to feel lively and social.",
+          "personality": "sociable, spontaneous, bold, upbeat",
+          "preferences": "Likes busy markets, street food, late afternoons, and evening energy; dislikes quiet, slow-moving sightseeing and very early starts; prioritizes experiencing neighborhoods where there are people and movement.",
+          "personal_goals": "Browse City Market, try nyama choma for lunch, spend time in a lively arts or craft district, and end the day at a rooftop bar or music venue.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Amina Wanjiku",
+          "background": "Amina is a Nairobi-based wildlife photographer who has one free day before a work trip. She wants to make the most of being in the city without spending heavily.",
+          "personality": "curious, energetic, observant, flexible",
+          "preferences": "Likes early starts, outdoor spaces, and minimizing transit time; dislikes long indoor museum visits and expensive splurges; prioritizes seeing distinctive local character and getting good photo opportunities.",
+          "personal_goals": "Visit Nairobi National Park at sunrise, stop by the Giraffe Centre, and fit in a quick local lunch without leaving the southern side of the city for too long.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Owen Patel",
+          "background": "Owen is a finance analyst visiting Nairobi for the first time on a strict personal budget. He prefers structured plans and wants the day to stay efficient and affordable.",
+          "personality": "analytical, cautious, practical, patient",
+          "preferences": "Likes predictable schedules, low-cost transport, and value-for-money experiences; dislikes rushed changes, pricey attractions, and paid experiences that feel redundant; prioritizes staying within a tight budget.",
+          "personal_goals": "See the Nairobi National Museum, have lunch at a budget-friendly spot near the city center, and avoid any attraction that requires multiple paid entry fees.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Oslo",
+      "global_goals": "Agree on a single one-day itinerary in Oslo that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Maya Okafor",
+          "background": "A travel content creator who is in Oslo for only one day before a flight the next morning; she wants visually lively experiences and memorable moments.",
+          "personality": "sociable, spontaneous, energetic, expressive",
+          "preferences": "Likes lively public spaces, street life, scenic viewpoints, and late-afternoon energy; dislikes quiet-only itineraries, long museum visits, and anything that feels too slow or formal; wants variety and photo-friendly stops.",
+          "personal_goals": "Ride the ferry to the islands or waterfront if timing allows, spend time in Vigeland Park, and end with dinner in a lively district such as Grünerløkka.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Erik Lund",
+          "background": "A software product manager visiting Oslo on a short work break; he has one free day and wants to make the most of it without spending much time in transit.",
+          "personality": "analytical, efficient, pragmatic, mildly impatient",
+          "preferences": "Prefers a tightly organized schedule, minimal backtracking, and low-cost or free attractions; dislikes long meal stops, slow wandering, and expensive admissions; wants to keep the day focused on a few high-value stops.",
+          "personal_goals": "Visit the Viking Ship Museum area if possible, see the Oslo Opera House exterior and rooftop, and fit in a quick harbor-area walk before sunset.",
+          "role": "facilitator",
+          "speaking_style": "clear and practical",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Nora Sæther",
+          "background": "A local architecture student hosting friends from abroad; she cares about the city’s design identity and wants a day that feels thoughtful rather than rushed.",
+          "personality": "curious, reflective, organized, selective",
+          "preferences": "Likes museums, modern architecture, and calm neighborhood exploration; dislikes crowded tourist traps, overly packed schedules, and overly commercial shopping areas; prefers quality over quantity.",
+          "personal_goals": "Spend time at the National Museum, explore the Barcode district and the waterfront, and include a quiet café stop with a view of the fjord.",
+          "role": "attendee",
+          "speaking_style": "thoughtful",
+          "explanation_style": "both"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Melbourne",
+      "global_goals": "Agree on a single one-day itinerary in Melbourne that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Grace Kim",
+          "background": "A local graduate student hosting visiting friends while balancing a tight personal budget and an early train home that evening.",
+          "personality": "practical, cautious, observant, straightforward",
+          "preferences": "Wants low-cost plans, minimal transit, and a manageable schedule; dislikes expensive meals, long detours, and late-night commitments; prioritizes public transport efficiency and a finish before dinner.",
+          "personal_goals": "See Federation Square and the Yarra riverfront, have a cheap lunch near Flinders Street, and avoid anything that runs past early evening.",
+          "role": "attendee",
+          "speaking_style": "direct",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Priya Menon",
+          "background": "A museum educator visiting Melbourne on a short break from a conference. She knows the city only lightly and wants to make the most of limited time.",
+          "personality": "curious, reflective, organized, patient",
+          "preferences": "Prefers quiet, culturally rich experiences; dislikes rushing, loud crowds, and spending heavily; values walkable routes and clear scheduling; needs a lunch break that is calm and seated.",
+          "personal_goals": "Visit the National Gallery of Victoria, spend time in the Royal Botanic Gardens, and have afternoon tea at a heritage café in the city center.",
+          "role": "facilitator",
+          "speaking_style": "calm",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Ethan Brooks",
+          "background": "A food and nightlife blogger from out of town who has one full day free and wants to sample Melbourne’s energetic side.",
+          "personality": "outgoing, impulsive, sociable, energetic",
+          "preferences": "Likes busy districts, street art, late lunches, rooftop bars, and spontaneous stops; dislikes overly formal settings, long museum visits, and early starts; willing to spend more for standout experiences.",
+          "personal_goals": "Explore Hosier Lane street art, browse Queen Victoria Market, grab dumplings in Chinatown, and end the day at a rooftop bar in the CBD.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Vancouver",
+      "global_goals": "Agree on a single one-day itinerary in Vancouver that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Mei Sato",
+          "background": "An architecture freelancer in town for a client meeting, hoping to see iconic city design and waterfront landmarks before leaving the next morning.",
+          "personality": "analytical, selective, brisk, detail-oriented",
+          "preferences": "Prioritizes signature architecture, efficient routing, and a polished city experience; dislikes backtracking, informal wandering without purpose, and long outdoor segments if they crowd out major sights; needs the day to feel structured and visually rich.",
+          "personal_goals": "See Canada Place, walk through Gastown for historic streetscapes, and include the Vancouver Lookout or another major viewpoint before dinner.",
+          "role": "attendee",
+          "speaking_style": "precise and thoughtful",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Clara Nguyen",
+          "background": "A marine biology graduate student visiting Vancouver between conference sessions; she has one free day and wants to make the most of it without spending much.",
+          "personality": "curious, methodical, budget-conscious, patient",
+          "preferences": "Prefers quiet, nature-oriented places; likes walking and scenic viewpoints; dislikes rushed schedules, expensive dining, and overly crowded attractions; needs to keep costs low and avoid long transit detours.",
+          "personal_goals": "Visit Stanley Park Seawall, spend time at the Vancouver Aquarium area, and end with a sunset walk at English Bay.",
+          "role": "facilitator",
+          "speaking_style": "calm and organized",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Darius Patel",
+          "background": "A visiting food blogger on a short Pacific Northwest trip who wants to sample as much local food as possible in one day.",
+          "personality": "sociable, energetic, impulsive, opinionated",
+          "preferences": "Prefers lively neighborhoods, street food, craft coffee, and vibrant markets; dislikes slow museum-heavy plans and long scenic walks that reduce eating time; willing to spend more on standout meals.",
+          "personal_goals": "Eat lunch in Richmond’s food scene, stop at Granville Island Public Market, and fit in a late-night dessert or cocktail spot in Downtown Vancouver.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic and direct",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Buenos Aires",
+      "global_goals": "Agree on a single one-day itinerary in Buenos Aires that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Linh Tran",
+          "background": "Linh is a remote worker visiting Buenos Aires after a busy month and wants the day to feel restorative rather than packed.",
+          "personality": "gentle, selective, sensory, cautious",
+          "preferences": "Likes scenic parks, calm riverfront areas, tea or coffee breaks, and low-stress transit; dislikes crowds, long walks under strong sun, and switching locations too often; prioritizes comfort and a relaxed rhythm within a strict moderate budget.",
+          "personal_goals": "Spend time in the Japanese Garden, have a long lunch in Palermo, and end with a quiet waterfront walk near Puerto Madero or Reserva Ecológica.",
+          "role": "attendee",
+          "speaking_style": "soft and thoughtful",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Valentina Rojas",
+          "background": "Valentina is a local architecture graduate student hosting two visiting friends for the day; she knows the city well and wants to show off its historic neighborhoods.",
+          "personality": "curious, patient, detail-oriented, reflective",
+          "preferences": "Likes slow walks, older buildings, bookstores, and quiet cafés; dislikes rushed schedules, loud nightlife, and spending heavily on taxis or upscale dining; prioritizes depth over quantity and prefers staying in one or two districts.",
+          "personal_goals": "Visit the Recoleta Cemetery, browse a classic café like Café Tortoni, and spend time in San Telmo’s antique market and side streets.",
+          "role": "facilitator",
+          "speaking_style": "calm and organized",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Evan Miller",
+          "background": "Evan is on a short layover in Buenos Aires and wants to make the most of a single free day before an overnight flight.",
+          "personality": "energetic, spontaneous, practical, impatient",
+          "preferences": "Likes efficient sightseeing, iconic landmarks, lots of movement, and straightforward logistics; dislikes long museum stops, lingering meals, and spending too much time in one neighborhood; prioritizes covering as much of the city as possible.",
+          "personal_goals": "See La Boca and Caminito, stop by Puerto Madero, ride the Subte at least once, and fit in a panoramic city-view spot before sunset.",
+          "role": "attendee",
+          "speaking_style": "direct and upbeat",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Cape Town",
+      "global_goals": "Agree on a single one-day itinerary in Cape Town that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Maya Okafor",
+          "background": "A young travel blogger based in Nairobi who is in Cape Town for the first time and wants a memorable, social day with a strong food and neighborhood vibe.",
+          "personality": "sociable, spontaneous, adventurous, energetic",
+          "preferences": "Likes lively streets, markets, and tasting local dishes; dislikes formal sightseeing that feels too quiet or too academic, and she is sensitive to high costs; prioritizes local flavor, street energy, and places where she can mingle with people.",
+          "personal_goals": "Explore the Bo-Kaap streets, browse the Oranjezicht City Farm Market if possible, and end the day with a relaxed seafood dinner near the waterfront.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Zanele Mokoena",
+          "background": "A Cape Town-based photo editor visiting from Johannesburg for a short work break; she knows the city well enough to navigate quickly but has only one free day.",
+          "personality": "curious, fast-paced, decisive, visually oriented",
+          "preferences": "Likes dramatic viewpoints, efficient routing, and getting several highlights into one day; dislikes slow-moving plans, long lunch breaks, and spending too much time in one place; prioritizes maximizing scenery and photo opportunities.",
+          "personal_goals": "Ride the Table Mountain cableway early, stop at Signal Hill for sunset views, and fit in the V&A Waterfront for a quick harbor walk and photos.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Hugo Ferreira",
+          "background": "A museum volunteer from Lisbon who is spending a week in South Africa and wants one carefully chosen day in Cape Town to focus on history and local culture.",
+          "personality": "patient, reflective, analytical, structured",
+          "preferences": "Likes calm indoor spaces, guided explanations, and a slow pace with time to read and observe; dislikes crowded tourist rushes, rushed transfers, and overly packed schedules; prioritizes depth over quantity and prefers keeping transportation minimal.",
+          "personal_goals": "Spend substantial time at the District Six Museum, visit the Iziko South African Museum, and have a quiet lunch in the Company’s Garden area without being rushed.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Buenos Aires",
+      "global_goals": "Agree on a single one-day itinerary in Buenos Aires that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Nadia Sokolova",
+          "background": "A nightlife blogger and street-food enthusiast on a short stopover; she wants a day that starts late and ends late.",
+          "personality": "sociable, bold, trend-focused, flexible",
+          "preferences": "Likes late starts, energetic neighborhoods, cocktail bars, tango shows, and tasting many small bites. Dislikes early mornings, long seated museum visits, and quiet-only plans. Prioritizes food, atmosphere, and evening entertainment over daytime sightseeing.",
+          "personal_goals": "Do a food crawl in Palermo, sample empanadas and choripán at a market or casual spot, and finish with a tango show or bar-hopping in San Telmo.",
+          "role": "attendee",
+          "speaking_style": "friendly",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Camila Torres",
+          "background": "A documentary photographer visiting Buenos Aires for the first time after years of planning the trip; she wants to make the most of limited daylight.",
+          "personality": "curious, energetic, visually driven, spontaneous",
+          "preferences": "Likes iconic city views, colorful neighborhoods, outdoor walking, and flexible stops for photos. Dislikes slow museum-heavy days, long restaurant breaks, and spending much of the day indoors. Prioritizes seeing as many distinct parts of the city as possible.",
+          "personal_goals": "Photograph the street art in La Boca, walk through the historic center around Plaza de Mayo, and catch sunset at Puerto Madero or a rooftop viewpoint.",
+          "role": "facilitator",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Diego Fernández",
+          "background": "A retired literature professor who travels to read, sketch, and linger in places with historical depth; he has a full notebook of sites he hopes to visit.",
+          "personality": "patient, reflective, detail-oriented, cautious",
+          "preferences": "Likes quiet museums, old cafés, bookshops, and unhurried conversation. Dislikes rushing, noisy crowds, and overly packed itineraries. Prioritizes depth over coverage and prefers staying in a compact area.",
+          "personal_goals": "Spend time at El Ateneo Grand Splendid, have a long coffee in Café Tortoni, and visit the Museo Nacional de Bellas Artes or another calm cultural museum without being hurried.",
+          "role": "attendee",
+          "speaking_style": "calm",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Seoul",
+      "global_goals": "Agree on a single one-day itinerary in Seoul that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Sana Al-Rashid",
+          "background": "A graduate student visiting from abroad who has saved for this trip and is trying to keep expenses low while seeing a few iconic places at a comfortable pace.",
+          "personality": "practical, cautious, curious, budget-conscious",
+          "preferences": "Strongly prefers free or low-cost attractions, subway-based travel, and one affordable sit-down meal; dislikes pricey admissions, premium dining, and constant moving between districts; wants enough rest breaks.",
+          "personal_goals": "Browse Insadong, visit Gyeongbokgung if entrance timing works, and end the day at a cheap street-food area without paying for an expensive evening show.",
+          "role": "attendee",
+          "speaking_style": "friendly",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Hyejin Park",
+          "background": "A local museum educator who often gives visiting colleagues a condensed first-time introduction to the city and likes helping people see Seoul beyond the obvious landmarks.",
+          "personality": "analytical, calm, detail-oriented, culturally curious",
+          "preferences": "Prefers quiet, historically rich places; values efficient transit connections; dislikes rushed restaurant hopping and loud nightlife; wants a moderate budget with time for thoughtful stops.",
+          "personal_goals": "Visit Bukchon Hanok Village, spend time at the National Museum of Korea, and have a slow tea break in a traditional teahouse.",
+          "role": "facilitator",
+          "speaking_style": "supportive",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Ethan Brooks",
+          "background": "A travel photographer on a short layover who wants to capture as many visually striking scenes as possible before leaving the city the next morning.",
+          "personality": "energetic, impatient, adventurous, opportunistic",
+          "preferences": "Prefers a packed schedule, rooftop views, neon streets, and late-evening energy; dislikes long museum visits, slow pacing, and spending too much on taxis; willing to start early and end late.",
+          "personal_goals": "Shoot sunrise at a hilltop overlook, walk through Dongdaemun Design Plaza, and finish with night photography in Myeongdong or along the Cheonggyecheon stream.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Athens",
+      "global_goals": "Agree on a single one-day itinerary in Athens that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Sara Haddad",
+          "background": "A budget-conscious graduate student visiting Athens during a solo Euro trip and trying to keep daily spending low.",
+          "personality": "practical, cautious, observant, frugal",
+          "preferences": "Prefers low-cost attractions, public transit, and short walking distances; dislikes expensive meals, ticket-heavy itineraries, and taxi-dependent plans; prioritizes sticking to a strict budget and avoiding fatigue.",
+          "personal_goals": "See one major ancient site, have a cheap souvlaki lunch, and include a free viewpoint or park without paying for multiple museum entries.",
+          "role": "attendee",
+          "speaking_style": "friendly",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Elena Papadopoulou",
+          "background": "A museum educator visiting Athens for the first time after years of studying classical history online; she has one free day between conferences.",
+          "personality": "curious, methodical, patient, reflective",
+          "preferences": "Prefers quiet, culturally rich stops; dislikes rushed sightseeing, noisy nightlife, and long waits; prioritizes depth over quantity and wants to keep expenses moderate.",
+          "personal_goals": "Visit the Acropolis Museum, spend time at the National Archaeological Museum, and enjoy a long lunch at a traditional taverna in a calm neighborhood.",
+          "role": "facilitator",
+          "speaking_style": "analytical",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Marco Bianchi",
+          "background": "A social travel blogger on a short layover who wants to capture the energy of the city in a compact day trip.",
+          "personality": "sociable, energetic, spontaneous, bold",
+          "preferences": "Loves lively streets, street food, rooftop views, and late-afternoon wandering; dislikes quiet museum-heavy plans and early starts; prioritizes maximizing variety and photo opportunities.",
+          "personal_goals": "Walk through Monastiraki and Psyrri, snack at Varvakios Market, and end the day with sunset drinks overlooking the city.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Montreal",
+      "global_goals": "Agree on a single one-day itinerary in Montreal that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Priya Nambiar",
+          "background": "Priya is a graduate student on a tight budget who has visited Montreal once before. She wants a practical day that avoids expensive surprises and leaves her with enough energy for an early train the next morning.",
+          "personality": "frugal, cautious, detail-oriented, adaptable",
+          "preferences": "Strongly prefers low-cost attractions, efficient transit, and limited backtracking. Dislikes expensive dining, admission-heavy stops, and very late evenings. Prioritizes free viewpoints, affordable local food, and a compact route.",
+          "personal_goals": "Keep total costs low by focusing on free or inexpensive activities, have a poutine stop at an affordable counter, and avoid any plan that requires paid taxis or multiple paid admissions.",
+          "role": "attendee",
+          "speaking_style": "friendly and practical",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Claire Dubois",
+          "background": "Claire is a Francophone museum educator visiting Montreal for a long weekend after a conference. She knows the city’s cultural reputation and wants to make the most of her only full day.",
+          "personality": "analytical, patient, culturally curious, methodical",
+          "preferences": "Prefers quiet indoor cultural spaces, minimal transit changes, and a steady pace. Dislikes rushed sightseeing, loud nightlife, and long meal detours. Prioritizes historic neighborhoods and well-curated exhibitions over shopping or spontaneous stops.",
+          "personal_goals": "Visit the Montreal Museum of Fine Arts and spend time in Old Montreal, ideally including a guided walk or a historic church interior.",
+          "role": "facilitator",
+          "speaking_style": "calm and organized",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Ethan Brooks",
+          "background": "Ethan is a street photographer on a short solo trip who joined the meeting to coordinate with others before meeting friends later in the evening.",
+          "personality": "adventurous, energetic, spontaneous, observant",
+          "preferences": "Likes lively streets, public markets, panoramic viewpoints, and outdoor time. Dislikes long museum visits, slow pacing, and overly structured schedules. Prioritizes photo-friendly neighborhoods and variety throughout the day.",
+          "personal_goals": "Photograph the Jean-Talon Market, ride up Mount Royal for city views, and spend some time in a colorful neighborhood like Plateau-Mont-Royal.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Berlin",
+      "global_goals": "Agree on a single one-day itinerary in Berlin that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Meera Iyer",
+          "background": "A graduate student on a tight travel budget who is in Berlin for a conference and wants to squeeze in a memorable day without overspending.",
+          "personality": "careful, practical, curious, frugal",
+          "preferences": "Prioritizes low-cost or free attractions, efficient transit, and a manageable amount of walking; dislikes expensive dining, paid guided tours, and late-night plans; prefers a balanced day with at least one food stop that is affordable and local.",
+          "personal_goals": "See the Brandenburg Gate and the memorials around the center, eat at a budget-friendly currywurst or döner spot, and visit one free viewpoint or park before returning early to rest.",
+          "role": "attendee",
+          "speaking_style": "friendly and pragmatic",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Anika Brandt",
+          "background": "A Berlin-based museum educator who has one free day before starting a new job and wants to make the most of it.",
+          "personality": "analytical, patient, culturally curious, organized",
+          "preferences": "Prefers quiet, historically rich places; likes walking and time to read exhibits; dislikes rushed schedules, crowded nightlife, and spending heavily on food or entry fees; wants to stay within central districts and avoid too many transit changes.",
+          "personal_goals": "Visit the Museum Island area, spend unhurried time at the Pergamon-related collections or a comparable major museum, and finish with a calm evening walk near the Spree.",
+          "role": "facilitator",
+          "speaking_style": "calm and structured",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Leo Hartmann",
+          "background": "A freelance photographer visiting Berlin for the weekend, with only this day available to capture the city’s energy.",
+          "personality": "sociable, energetic, spontaneous, bold",
+          "preferences": "Prefers lively streets, street art, markets, and sunset views; dislikes long museum visits, slow pacing, and early finishes; is comfortable with moving quickly and spending more on experiences that feel iconic.",
+          "personal_goals": "Photograph colorful street art in Kreuzberg or Friedrichshain, stop at a busy market for lunch, and end the day at a rooftop bar or another energetic viewpoint with city lights.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic and direct",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Stockholm",
+      "global_goals": "Agree on a single one-day itinerary in Stockholm that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Maya Okafor",
+          "background": "A freelance photographer visiting Stockholm for the first time, with one full day to capture iconic views and local atmosphere.",
+          "personality": "observant, flexible, aesthetically driven, independent",
+          "preferences": "Prioritizes scenic viewpoints, ferry rides, and photogenic streets; dislikes long indoor stretches, expensive tasting menus, and an itinerary that ends too early; prefers a start that leaves room for sunset shots.",
+          "personal_goals": "Take photos from Monteliusvägen, ride a ferry through the archipelago edges, and end the day at a harbor area with night views.",
+          "role": "attendee",
+          "speaking_style": "warm and vivid",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Elsa Lindgren",
+          "background": "A museum curator in her early 30s who has hosted visiting colleagues many times and loves introducing people to layered historical neighborhoods.",
+          "personality": "curious, organized, patient, culturally attentive",
+          "preferences": "Prefers quiet, well-paced days centered on museums, old streets, and scenic walks; dislikes rushed schedules, noisy nightlife, and spending heavily on taxis or premium dining; wants most activities within the same district.",
+          "personal_goals": "Visit the Vasa Museum, spend time in Gamla Stan, and have a slow fika in a traditional café without needing to cross the city multiple times.",
+          "role": "facilitator",
+          "speaking_style": "calm and structured",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Noah Kim",
+          "background": "A software engineer on a short vacation who usually plans trips around food, modern design, and efficient transit.",
+          "personality": "pragmatic, energetic, direct, selective",
+          "preferences": "Likes trendy neighborhoods, contemporary architecture, and trying several local dishes; dislikes long museum visits, overly formal tours, and walking without clear payoff; wants a lively itinerary with minimal downtime.",
+          "personal_goals": "Explore Södermalm, eat lunch at a popular street-food or market hall spot, and fit in a waterfront bar or late-afternoon cocktail stop.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic and blunt",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Taipei",
+      "global_goals": "Agree on a single one-day itinerary in Taipei that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Jordan Alvarez",
+          "background": "A fitness-minded travel blogger on a tight budget who wants a lively day and plenty of variety for photos and social content.",
+          "personality": "sociable, energetic, spontaneous, competitive",
+          "preferences": "Prefers packed itineraries, street life, and iconic viewpoints; dislikes quiet museum-heavy days, long seated meals, and spending too much on entry tickets; wants maximum variety and nightlife energy.",
+          "personal_goals": "Catch sunrise or early-morning views from Elephant Mountain, explore Ximending, and finish with multiple street-food stops at Shilin Night Market.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Hiroshi Sato",
+          "background": "A remote software engineer visiting Taipei for the first time after a conference ends at noon; he has only one free day and wants to make it count.",
+          "personality": "analytical, calm, punctual, cautious",
+          "preferences": "Prefers efficient transit, clear schedules, and low-risk plans; dislikes long detours, expensive splurges, and crowds that make timing unpredictable; prioritizes seeing a city’s highlights without wasting time.",
+          "personal_goals": "Visit Taipei 101 observatory, browse one major night market for snacks, and fit in a short stop at the National Palace Museum if the schedule allows.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Mei-Ling Chen",
+          "background": "A local-history graduate student who loves architecture and traditional culture; she is eager to show friends the city beyond the most famous landmarks.",
+          "personality": "curious, patient, reflective, detail-oriented",
+          "preferences": "Prefers slow, immersive experiences, older neighborhoods, and museums with context; dislikes rushed photo stops, overly commercial attractions, and constantly changing plans; values depth over quantity.",
+          "personal_goals": "Spend time at Lungshan Temple, walk through Dihua Street and the historic Dadaocheng area, and stop for a traditional tea house experience.",
+          "role": "attendee",
+          "speaking_style": "supportive",
+          "explanation_style": "both"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Marrakech",
+      "global_goals": "Agree on a single one-day itinerary in Marrakech that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Nadia Bensaid",
+          "background": "A finance professional who is traveling with a strict expense limit and is sensitive to fatigue after a busy work month.",
+          "personality": "cautious, practical, analytical, reserved",
+          "preferences": "Prioritizes low-cost transport, predictable timing, and minimal admission fees. Dislikes premium restaurants, optional add-ons, and late-night plans.",
+          "personal_goals": "Stay under budget with mostly free or inexpensive sights, visit a spice market and a public garden, and finish the day early enough to avoid an expensive evening out.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Salma Idrissi",
+          "background": "A local architecture graduate student who has only one free day before exams and wants to show visiting friends the city’s historic core.",
+          "personality": "curious, patient, detail-oriented, reflective",
+          "preferences": "Prefers quiet, atmospheric places and dislikes rushing, crowded attractions, and long taxi hops. Values walkability, shaded stops, and keeping expenses low.",
+          "personal_goals": "Visit the Ben Youssef Madrasa, spend time in a traditional riad courtyard, and have a calm tea break near the medina rather than a packed shopping schedule.",
+          "role": "facilitator",
+          "speaking_style": "supportive",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Ethan Mercer",
+          "background": "A travel vlogger on a tight content deadline who is in Marrakech for just 24 hours and wants a visually dynamic route.",
+          "personality": "energetic, spontaneous, social, decisive",
+          "preferences": "Likes bustling streets, iconic photo spots, and trying multiple things in one day. Dislikes slow pacing, long museum visits, and spending too much time in one neighborhood.",
+          "personal_goals": "Capture sunrise views from a rooftop, walk through Jemaa el-Fnaa, fit in a camel-ride photo stop on the city edge, and end with a lively dinner in the new town.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Zurich",
+      "global_goals": "Agree on a single one-day itinerary in Zurich that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Nadia Okafor",
+          "background": "A graduate student on a tight budget who is combining sightseeing with a brief research break.",
+          "personality": "cautious, analytical, practical, independent",
+          "preferences": "Prefers low-cost or free activities, efficient public transit, and early starts; dislikes expensive restaurants, paid tours, and unnecessary detours; prioritizes value, structure, and time efficiency.",
+          "personal_goals": "Cover Bahnhofstrasse, visit a free museum or two if possible, and finish the day with inexpensive lake views rather than paid attractions.",
+          "role": "attendee",
+          "speaking_style": "clear and practical",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Lena Vogel",
+          "background": "A freelance architecture photographer visiting Zurich for the first time, with only one free day between assignments.",
+          "personality": "observant, patient, selective, detail-oriented",
+          "preferences": "Prefers quiet neighborhoods, modern architecture, scenic walks, and minimal transit changes; dislikes rushed schedules, souvenir shopping, and overly crowded attractions; prioritizes photo opportunities and calm breaks.",
+          "personal_goals": "Spend time at the Freitag Tower and around the Zürich West district, photograph the Prime Tower area, and take a slow walk along the Limmat riverfront.",
+          "role": "facilitator",
+          "speaking_style": "calm and organized",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Marco Steiner",
+          "background": "A local food blogger who wants to show a visiting friend the best of the city’s daytime flavors.",
+          "personality": "sociable, enthusiastic, impulsive, sensory-driven",
+          "preferences": "Likes long meals, market browsing, and trying multiple specialties; dislikes skipping lunch, strict schedules, and museum-heavy days; prioritizes tasting local dishes and stopping at lively food spots.",
+          "personal_goals": "Visit the Bürkliplatz market, have a long Swiss lunch at a traditional restaurant, and stop for chocolates and pastries in the old town.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Buenos Aires",
+      "global_goals": "Agree on a single one-day itinerary in Buenos Aires that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Lucía Ferrer",
+          "background": "Lucía is a graduate student on a tight budget who has already spent several months in Latin America. She values authentic neighborhood experiences and is cautious about tourist pricing.",
+          "personality": "frugal, observant, skeptical, independent",
+          "preferences": "Strongly prefers low-cost or free activities, public transit, and casual local food; dislikes high entrance fees, upscale restaurants, and paid evening entertainment; wants to avoid unnecessary taxis and any schedule that forces expensive shortcuts.",
+          "personal_goals": "Explore San Telmo market stalls, visit Plaza de Mayo and the historic center, eat an inexpensive lunch at a simple parrilla or empanada spot, and skip any costly add-ons like tango dinners or premium museum tickets.",
+          "role": "attendee",
+          "speaking_style": "practical and reserved",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Renata Silva",
+          "background": "Renata is a freelance photographer visiting Buenos Aires for the first time after a week of client work in South America. She likes planning around light, timing, and neighborhoods that feel distinctive on foot.",
+          "personality": "curious, visual, patient, lightly perfectionist",
+          "preferences": "Prefers a slow-paced day with long walks, local cafés, and atmospheric streets; dislikes rushed transfers, expensive tasting menus, and overly crowded tourist hotspots; wants to keep costs moderate and stay mostly in one or two adjacent districts.",
+          "personal_goals": "Spend the morning photographing colorful streets in La Boca, have a long lunch at a classic café, and end with golden-hour shots near Puerto Madero or the riverfront.",
+          "role": "facilitator",
+          "speaking_style": "calm and thoughtful",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Mateo Gómez",
+          "background": "Mateo is a tech consultant in town for only 24 hours before flying out the next morning. He wants to squeeze as much as possible into a single day because this may be his only chance to see the city.",
+          "personality": "energetic, decisive, ambitious",
+          "preferences": "Prefers a packed itinerary with efficient transport, famous landmarks, and multiple stops; dislikes slow wandering, long meals, and spending too much time in cafés; prioritizes seeing a lot over lingering in any one place.",
+          "personal_goals": "Visit the Recoleta Cemetery, see Avenida 9 de Julio and the Obelisco, fit in a stop at Teatro Colón, and still leave time for a late-night tango show or milonga.",
+          "role": "attendee",
+          "speaking_style": "direct and enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Vancouver",
+      "global_goals": "Agree on a single one-day itinerary in Vancouver that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Jordan Alvarez",
+          "background": "A recent graduate celebrating a move to the West Coast and eager to make the most of a rare day off with visiting friends.",
+          "personality": "sociable, adventurous, impatient, optimistic",
+          "preferences": "Likes lively food spots, busy markets, and evening activities; dislikes slow pacing, early finishes, and overly quiet neighborhoods; prioritizes maximizing the number of distinct experiences in one day.",
+          "personal_goals": "Browse Granville Island Public Market, try local seafood or street food, and end the day in a lively area such as Commercial Drive or downtown for drinks and people-watching.",
+          "role": "attendee",
+          "speaking_style": "friendly",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Avery Chen",
+          "background": "A freelance photographer visiting Vancouver for a short break after a work-heavy season; this is their first trip to the city.",
+          "personality": "curious, energetic, visually oriented, spontaneous",
+          "preferences": "Likes scenic viewpoints, waterfront walks, and flexible stops; dislikes long museum visits, rigid schedules, and spending too much on transport; prioritizes sunrise or golden-hour light.",
+          "personal_goals": "Visit Queen Elizabeth Park for city views, spend time at the Seawall around False Creek, and fit in a photo stop at the Vancouver Lookout or another skyline vantage point.",
+          "role": "facilitator",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Maya Singh",
+          "background": "An archivist who travels to unwind and prefers historically grounded, low-key experiences; she has a full workday the following morning.",
+          "personality": "cautious, analytical, patient, introverted",
+          "preferences": "Likes quiet neighborhoods, heritage sites, and minimal transit changes; dislikes crowded attractions, loud nightlife, and rushed multi-stop itineraries; prioritizes a calm pace and keeping costs low.",
+          "personal_goals": "Spend meaningful time at the Museum of Vancouver or a heritage area like Gastown, have a relaxed lunch in one district, and avoid crossing the city several times.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Porto",
+      "global_goals": "Agree on a single one-day itinerary in Porto that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Amina Rahman",
+          "background": "A graduate photographer visiting Porto for the first time, focused on capturing evening light and street scenes.",
+          "personality": "creative, flexible, sociable, sensory-seeking",
+          "preferences": "Likes vibrant markets, colorful streets, scenic viewpoints, and night atmosphere; dislikes early starts, overly formal sightseeing, and days that end before dark; prioritizes nightlife energy and atmospheric locations.",
+          "personal_goals": "Start late, photograph the azulejo-covered São Bento Station, spend the afternoon in the Bolhão area, and finish with a riverside dinner and live fado or jazz after dark.",
+          "role": "attendee",
+          "speaking_style": "warm and expressive",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Bruna Almeida",
+          "background": "A local architecture graduate student who spends weekends sketching historic streets and industrial waterfronts.",
+          "personality": "observant, patient, detail-oriented, mildly perfectionist",
+          "preferences": "Likes slow walks, historic neighborhoods, scenic viewpoints, and spontaneous photo stops; dislikes rushed schedules, loud bars, and spending heavily on formal attractions; prioritizes cultural depth over covering many places.",
+          "personal_goals": "Visit Livraria Lello, spend time in Ribeira, and end with a relaxed walk along the Douro riverfront at sunset.",
+          "role": "facilitator",
+          "speaking_style": "calm and structured",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Ethan Walker",
+          "background": "A software consultant on a short business trip who wants to make the most of a rare free day.",
+          "personality": "decisive, energetic, practical, impatient with downtime",
+          "preferences": "Likes efficient transit, dense itineraries, lively neighborhoods, and memorable food stops; dislikes long museum visits, backtracking, and slow-paced wandering; prioritizes seeing as much of the city as possible in one day.",
+          "personal_goals": "Ride the tram to multiple districts, visit the Clérigos Tower, sample a francesinha lunch, and fit in a late-afternoon port wine cellar tasting.",
+          "role": "attendee",
+          "speaking_style": "direct and enthusiastic",
+          "explanation_style": "auto"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Johannesburg",
+      "global_goals": "Agree on a single one-day itinerary in Johannesburg that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Lucas Ferreira",
+          "background": "A São Paulo-based startup founder visiting Johannesburg on a tight schedule, trying to squeeze in both networking and a memorable city experience.",
+          "personality": "Ambitious, analytical, time-conscious, and decisive",
+          "preferences": "Likes efficient routing, premium experiences, and a packed agenda; dislikes long idle gaps and indirect detours; prioritizes business-friendly areas, reliable transport, and ending the day with a standout meal.",
+          "personal_goals": "Fit in a quick Sandton business lunch, see Nelson Mandela Square, and reserve time for a high-end dinner in Rosebank or Sandton.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Thabo Maseko",
+          "background": "A local freelance photographer who has one free day before a weekend assignment and wants to show visiting friends the city’s creative side.",
+          "personality": "Sociable, energetic, spontaneous, and visually driven",
+          "preferences": "Likes street art, lively neighborhoods, markets, and flexible plans; dislikes slow museum-heavy days and overly rigid schedules; prioritizes variety and photo opportunities.",
+          "personal_goals": "Visit Maboneng for street murals, stop at Arts on Main, and end with sunset views from a rooftop or skyline lookout.",
+          "role": "facilitator",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Amina Naidoo",
+          "background": "A research assistant from Durban who has a rare day off and wants a calm, meaningful introduction to Johannesburg’s history and civic identity.",
+          "personality": "Cautious, reflective, orderly, and patient",
+          "preferences": "Likes quiet cultural sites, guided context, and minimal transit stress; dislikes crowds, rushing, and noisy nightlife; prioritizes safety, structure, and depth over quantity.",
+          "personal_goals": "Spend time at Constitution Hill, browse the Apartheid Museum, and have a peaceful lunch at a sit-down café away from the busiest tourist zones.",
+          "role": "attendee",
+          "speaking_style": "supportive",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Vienna",
+      "global_goals": "Agree on a single one-day itinerary in Vienna that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Mei Nakamura",
+          "background": "Mei is a graduate student on a tight travel budget, visiting Vienna with limited time and a strict cap on spending. She is interested in local life and affordable experiences.",
+          "personality": "practical, cautious, observant, frugal",
+          "preferences": "Needs low-cost or free activities, efficient transit, and minimal paid entries. Dislikes upscale restaurants, expensive taxis, and any plan that requires multiple ticketed attractions. Prioritizes budget control, rest breaks, and reliable timing.",
+          "personal_goals": "Spend time in the Stadtpark or along the Ringstrasse, visit one affordable pastry shop for a simple lunch, and include a free viewpoint or public square without adding extra admission costs.",
+          "role": "attendee",
+          "speaking_style": "supportive",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Clara Weiss",
+          "background": "Clara is a museum curator visiting Vienna for the first time on a rare day off after a conference. She wants to make the most of the city’s classical heritage without feeling rushed.",
+          "personality": "curious, meticulous, calm, reflective",
+          "preferences": "Prefers quiet indoor cultural sites, fewer transitions, and a slow pace. Dislikes crowded attractions, late-night plans, and long waits. Prioritizes depth over quantity and wants to keep transportation simple.",
+          "personal_goals": "Visit the Kunsthistorisches Museum, spend time in a historic café like Café Central, and include at least one peaceful walk through a palace garden such as the Belvedere grounds.",
+          "role": "facilitator",
+          "speaking_style": "analytical",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Jonas Berger",
+          "background": "Jonas is a freelance travel photographer who has only one afternoon and evening in Vienna before catching an early train the next morning. He wants iconic views and energetic street scenes.",
+          "personality": "adventurous, impatient, sociable, opportunistic",
+          "preferences": "Likes dense itineraries, outdoor landmarks, and lively neighborhoods. Dislikes long museum visits, slow café breaks, and sticking to one area for too long. Prioritizes visual variety, sunset shots, and ending the day in a vibrant district.",
+          "personal_goals": "Photograph St. Stephen’s Cathedral from multiple angles, explore the Naschmarkt, and finish with evening atmosphere in the MuseumsQuartier or near the Danube canal.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Stockholm",
+      "global_goals": "Agree on a single one-day itinerary in Stockholm that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Jonas Berg",
+          "background": "Jonas is a software engineer from a neighboring city who is visiting Stockholm with a strict travel budget. He has been looking forward to trying the city’s food and a couple of free or low-cost experiences.",
+          "personality": "practical, frugal, sociable, straightforward",
+          "preferences": "Wants low-cost or free activities, an easy pace, and time for casual meals. Dislikes premium admissions, expensive restaurants, and overly formal cultural stops. Prefers spending on one special food experience rather than multiple ticketed attractions.",
+          "personal_goals": "Try a classic street-food lunch, browse a market hall, and end the day with a relaxed waterfront walk instead of paying for several museum entries.",
+          "role": "attendee",
+          "speaking_style": "friendly",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Erik Lund",
+          "background": "Erik is a local history graduate student visiting Stockholm with a visiting professor from abroad. He knows the city well enough to want a coherent route and wants to avoid wasting time in transit.",
+          "personality": "analytical, patient, orderly, mildly cautious",
+          "preferences": "Prefers a slow, well-structured day centered on museums, old neighborhoods, and scenic walks. Dislikes rushed schedules, expensive dining, and crowded nightlife. Prioritizes depth over quantity and prefers staying within one compact area.",
+          "personal_goals": "Spend time at the Vasa Museum, walk through Gamla Stan, and have a quiet fika at a traditional café before sunset.",
+          "role": "facilitator",
+          "speaking_style": "calm and organized",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Maya Okafor",
+          "background": "Maya is a freelance photographer on a short stopover. She has only one day and wants to capture as many iconic city views as possible, even if the schedule is full.",
+          "personality": "curious, energetic, spontaneous, competitive",
+          "preferences": "Likes fast-paced itineraries, panoramic viewpoints, waterfront scenes, and lively streets. Dislikes long museum visits, slow café breaks, and spending too much time in one place. Prefers a packed route that covers multiple districts.",
+          "personal_goals": "Photograph City Hall, take ferry views around the archipelago waterfront, and climb to a viewpoint for wide city panoramas.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Chicago",
+      "global_goals": "Agree on a single one-day itinerary in Chicago that fits a reasonable pace, fixed time and budget limits, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Maya Okafor",
+          "background": "A graduate student with a strict travel budget and an early train out the next morning; she wants a practical but memorable day.",
+          "personality": "Analytical, frugal, organized, and direct",
+          "preferences": "Likes low-cost attractions, efficient routing, and predictable timing; dislikes expensive admissions, long detours, and late-night plans; prefers using public transit and keeping the day compact.",
+          "personal_goals": "See Millennium Park and the Bean, spend time at Navy Pier without paying for extras, and keep the itinerary inexpensive enough to avoid sit-down dinners or multiple paid entries.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Grace Kim",
+          "background": "A museum educator visiting Chicago for a short professional conference; she has one free day and wants to make it count.",
+          "personality": "Curious, patient, thoughtful, and mildly cautious",
+          "preferences": "Likes quiet cultural spaces, scenic walks, and planned breaks; dislikes rushed schedules, loud nightlife, and spending heavily on premium tickets; prefers staying central and minimizing transit changes.",
+          "personal_goals": "Visit the Art Institute of Chicago, spend time at the Chicago Cultural Center, and fit in a calm walk along the Riverwalk with a coffee stop.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Darius Patel",
+          "background": "A food-and-night-market blogger who is in the city for the weekend and wants to maximize memorable local eats and energetic neighborhood stops.",
+          "personality": "Outgoing, impulsive, adventurous, and persuasive",
+          "preferences": "Likes trying multiple restaurants, lively districts, and evening activities; dislikes slow museum-heavy days, early starts, and long idle periods; okay with a higher budget if it buys more experiences and movement across the city.",
+          "personal_goals": "Eat deep-dish pizza, sample snacks at a food hall, and end the day in a busy entertainment area like the West Loop or Wicker Park for drinks and live atmosphere.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Tallinn",
+      "global_goals": "Agree on a single one-day itinerary in Tallinn that fits a reasonable pace, a fixed budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Marta Kovalenko",
+          "background": "A freelance writer recovering from a hectic work month, looking for a restorative day with good food and a relaxed rhythm.",
+          "personality": "reflective, cautious, selective, appreciative",
+          "preferences": "Prefers slow-paced wandering, cozy cafés, and independent bookstores; dislikes rushed schedules, noisy nightlife, and too many location changes; prioritizes downtime and comfort.",
+          "personal_goals": "Browse a quiet bookstore or craft shop in the city center, enjoy a long fika-style café break, and end with an unhurried dinner rather than a late-night outing.",
+          "role": "attendee",
+          "speaking_style": "supportive",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Kaisa Merila",
+          "background": "A Tallinn-based museum educator who has one free day to show visiting friends around the city.",
+          "personality": "curious, structured, patient, culturally minded",
+          "preferences": "Prefers quiet, historically rich places, short walks, and minimal transit; dislikes crowded attractions, late-night plans, and overpriced tourist stops; prioritizes depth over quantity.",
+          "personal_goals": "Visit the Estonian History Museum at Maarjamäe, spend time in Kadriorg Park, and have a calm lunch in a traditional café near the Old Town.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Leo Grant",
+          "background": "A travel photographer on a brief stopover who wants to capture as much of the city as possible in one day.",
+          "personality": "energetic, spontaneous, ambitious, sociable",
+          "preferences": "Likes packed itineraries, scenic viewpoints, lively streets, and markets; dislikes long museum visits, slow pacing, and staying in one neighborhood too long; prioritizes variety and iconic photo spots.",
+          "personal_goals": "See the Old Town viewpoints, photograph the port area at sunset, and fit in a stop at Telliskivi Creative City for street scenes and food stalls.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Dublin",
+      "global_goals": "Agree on a single one-day itinerary in Dublin that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Priya Nair",
+          "background": "A budget-conscious traveler who has one day in Dublin before an early train the next morning; she wants variety but needs firm limits.",
+          "personality": "practical, analytical, flexible, mildly cautious",
+          "preferences": "Prioritizes low cost, efficient transit, and a compact route; dislikes expensive attractions, unnecessary detours, and very late finishes; needs the day to wrap up early.",
+          "personal_goals": "See the EPIC The Irish Emigration Museum or the Little Museum of Dublin, visit the Ha'penny Bridge area, and finish with an early dinner near the city center.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Aoife Byrne",
+          "background": "A museum educator visiting Dublin for one free day after a conference; she knows the city’s history but has limited time.",
+          "personality": "curious, patient, reflective, detail-oriented",
+          "preferences": "Prefers quiet cultural sites, scenic walking, and a slow pace; dislikes rushed schedules, loud nightlife, and long taxi rides; wants to keep spending moderate.",
+          "personal_goals": "Visit Trinity College’s Book of Kells, spend time in the National Gallery of Ireland, and have a relaxed walk through St Stephen’s Green.",
+          "role": "facilitator",
+          "speaking_style": "supportive",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Marcus O'Connell",
+          "background": "A food-and-nightlife blogger on a short Dublin stopover who wants to make the most of the city’s evening energy.",
+          "personality": "sociable, spontaneous, energetic, persuasive",
+          "preferences": "Likes busy streets, pubs, live music, and late starts; dislikes museums that take too long and quiet neighborhoods after dark; is willing to spend more on memorable meals and drinks.",
+          "personal_goals": "Have lunch at a traditional Irish pub, browse Temple Bar, and end the day with live music and a pint in a well-known pub.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Tallinn",
+      "global_goals": "Agree on a single one-day itinerary in Tallinn that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Marta Lind",
+          "background": "A visiting software consultant traveling with a strict expense limit and a train departure late that night. She values practical choices and has already spent heavily earlier in the week.",
+          "personality": "Pragmatic, cautious, analytical, and budget-conscious",
+          "preferences": "Needs a very low-cost day with cheap meals and free or inexpensive sights; dislikes paid attractions with high admission fees, taxis, and anything requiring special bookings; prioritizes predictable timing and short walking distances.",
+          "personal_goals": "Keep the entire day centered on free old-town landmarks, eat at a low-cost lunch spot, and avoid any activity that requires an entrance fee above a modest limit.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Kairi Saar",
+          "background": "A Tallinn-based museum educator who has one free day to show visiting friends around. She knows the old town well but wants to avoid the most tourist-heavy routines.",
+          "personality": "Curious, organized, calm, and detail-oriented",
+          "preferences": "Prefers a slow, culturally rich day with minimal transit; likes historic streets, small museums, and quiet cafés; dislikes rushed schedules, loud nightlife, and long ferry rides; prioritizes walkability and low-cost activities.",
+          "personal_goals": "Visit the Estonian History Museum in the Great Guild Hall, spend time in Toompea and the old town viewpoints, and have a long stop at a traditional café for local pastry and coffee.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Evan Price",
+          "background": "A freelance photographer on a short stopover in Estonia, hoping to make the most of daylight for city views and waterfront shots before an evening flight.",
+          "personality": "Energetic, spontaneous, adventurous, and impatient with slow planning",
+          "preferences": "Prefers a packed itinerary with early starts and lots of photo-worthy landmarks; likes harbor views, modern architecture, and elevated viewpoints; dislikes long museum visits, leisurely lunches, and staying in one neighborhood too long.",
+          "personal_goals": "Capture sunrise or early-morning shots from Patkuli viewing platform, photograph the Seaplane Harbour area, and fit in at least one modern district or coastal stop before sunset.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Porto",
+      "global_goals": "Agree on a single one-day itinerary in Porto that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Helena Sousa",
+          "background": "A museum educator visiting Porto with limited mobility after a recent knee injury, and she needs the day to be physically manageable.",
+          "personality": "cautious, warm, observant, practical",
+          "preferences": "Likes accessible routes, seated breaks, indoor cultural sites, and predictable timing; dislikes steep hills, too much walking, crowded viewpoints, and late-night plans; prioritizes comfort and a relaxed tempo over seeing everything.",
+          "personal_goals": "Include a leisurely visit to the Serralves area or another accessible museum, schedule a long lunch stop, and avoid steep climbs like doing both riverfront hills and tower queues in the same day.",
+          "role": "attendee",
+          "speaking_style": "supportive and measured",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Inês Rodrigues",
+          "background": "A local architecture graduate student who knows the city center well and wants to show a visiting friend the best of Porto in a thoughtful way.",
+          "personality": "curious, patient, detail-oriented, reflective",
+          "preferences": "Likes historic streets, scenic viewpoints, walking routes, and unhurried stops; dislikes rushed schedules, expensive tasting menus, and spending too much time in transit; prioritizes depth over quantity and prefers to stay within central Porto.",
+          "personal_goals": "Visit Livraria Lello, spend time in the Ribeira district, and end at a Douro river viewpoint without cramming in too many attractions.",
+          "role": "facilitator",
+          "speaking_style": "calm and organized",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Marcus Bennett",
+          "background": "A travel blogger on a tight schedule who is in Porto for only one day and wants to capture as many landmarks and food stops as possible.",
+          "personality": "energetic, impatient, adventurous, pragmatic",
+          "preferences": "Likes packed itineraries, photo stops, famous landmarks, and efficient transport; dislikes long museum visits, slow café breaks, and narrow plans that only cover one neighborhood; prioritizes seeing multiple districts and trying several local specialties quickly.",
+          "personal_goals": "Cross the Dom Luís I Bridge, visit the Clérigos Tower, fit in a port wine cellar tasting, and add a second district beyond the old town.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic and direct",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Buenos Aires",
+      "global_goals": "Agree on a single one-day itinerary in Buenos Aires that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Priya Nair",
+          "background": "A visiting architecture graduate student balancing a limited budget with a strong interest in design and public space.",
+          "personality": "analytical, cautious, observant, independent",
+          "preferences": "Prioritizes modern architecture, efficient transit, clear costs, and minimal detours; dislikes expensive sit-down meals, long taxi rides, and nightlife that runs too late.",
+          "personal_goals": "See Teatro Colón or another landmark building, spend time in Puerto Madero to compare waterfront design, and keep the day compact enough to avoid cross-city backtracking.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Lucía Ferreyra",
+          "background": "A freelance illustrator visiting Buenos Aires for the first time after a long work stint; she wants to absorb the city's old neighborhoods and café culture.",
+          "personality": "curious, reflective, patient, detail-oriented",
+          "preferences": "Prefers quiet streets, historic architecture, long lunch breaks, and low-cost activities; dislikes rushing, loud nightlife, and spending heavily on taxis or premium attractions.",
+          "personal_goals": "Walk through San Telmo’s antique market, visit Plaza de Mayo and the Cabildo, and spend an unhurried afternoon in a classic café with sketchbook time.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Mateo Salazar",
+          "background": "An energetic food and nightlife blogger who has only one day in the city and wants to maximize fresh experiences.",
+          "personality": "sociable, spontaneous, enthusiastic, assertive",
+          "preferences": "Prefers a packed schedule, lively districts, street food, late meals, and evening entertainment; dislikes slow museum-heavy plans and spending too much time in one place.",
+          "personal_goals": "Try empanadas and asado in a top-rated parrilla, browse colorful street art in La Boca, and finish with drinks in Palermo Soho after dark.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Cape Town",
+      "global_goals": "Agree on a single one-day itinerary in Cape Town that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Daniel Brookes",
+          "background": "A budget-conscious software engineer traveling with a strict daily spend limit and limited mobility after a recent ankle strain.",
+          "personality": "pragmatic, cautious, analytical",
+          "preferences": "Needs an itinerary with minimal walking, reliable public transport or one central base, and low entrance fees; dislikes steep climbs, frequent venue changes, and pricey lunch spots; prioritizes comfort and predictability over variety.",
+          "personal_goals": "Keep transportation costs low, avoid steep hikes, have time for a relaxed sit-down lunch in the city center, and include only one major paid attraction if possible.",
+          "role": "attendee",
+          "speaking_style": "analytical and direct",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Sibusiso Mthembu",
+          "background": "A local history teacher who often leads weekend walking groups for visiting relatives and wants to make the most of a rare free day.",
+          "personality": "patient, reflective, organized, culturally curious",
+          "preferences": "Prefers slow-paced, low-cost plans centered on museums, heritage districts, and scenic viewpoints; dislikes rushed transfers, loud nightlife, and expensive ticketed attractions; wants to avoid spending heavily on taxis.",
+          "personal_goals": "Visit the District Six Museum, take a slow walk through Bo-Kaap, and finish with sunset from Signal Hill.",
+          "role": "facilitator",
+          "speaking_style": "calm and considerate",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Maya Ndlovu",
+          "background": "A freelance photographer visiting Cape Town for a weekend stopover, hoping to capture iconic city and ocean shots before flying out the next morning.",
+          "personality": "energetic, adventurous, spontaneous, visually driven",
+          "preferences": "Prefers an action-packed day with dramatic landscapes, coastal drives, and multiple photo stops; dislikes long museum visits, overly structured schedules, and spending too much time in one neighborhood; is willing to start early and stay out late.",
+          "personal_goals": "Ride the Table Mountain cable car, photograph Chapman’s Peak Drive, and spend time at Camps Bay or a lively waterfront area.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic and vivid",
+          "explanation_style": "subjective"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Taipei",
+      "global_goals": "Agree on a single one-day itinerary in Taipei that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Maya Singh",
+          "background": "A food-and-culture blogger on a tight travel budget who is in Taipei for a short layover extension. She wants a day that feels authentic but not expensive.",
+          "personality": "sociable, adaptable, bargain-conscious, lively",
+          "preferences": "Likes local eats, tea houses, walkable neighborhoods, and value-for-money experiences; dislikes expensive attractions, long taxi rides, and an overly structured itinerary; prioritizes memorable meals and time to explore casually.",
+          "personal_goals": "Try breakfast at a local soy milk shop, sample small bites in a traditional market, and spend part of the afternoon in a tea house near an old district rather than at premium-ticket attractions.",
+          "role": "attendee",
+          "speaking_style": "friendly",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Hana Kim",
+          "background": "A freelance photographer visiting Taipei for the first time, with a limited window between client deadlines. She wants to capture the city's everyday energy and distinctive visuals.",
+          "personality": "curious, spontaneous, observant, energetic",
+          "preferences": "Likes street life, neon-lit neighborhoods, night markets, and scenic viewpoints; dislikes slow museum-heavy days, early starts, and spending too much time in one place; prioritizes visually rich stops and flexible timing.",
+          "personal_goals": "Photograph the Ximending pedestrian area at golden hour, ride up Taipei 101 for skyline views, and end the day at Raohe Night Market for night scenes and snacks.",
+          "role": "facilitator",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Victor Chen",
+          "background": "A retired civil engineer who enjoys urban history and well-organized travel. He is visiting Taipei with a written list of heritage sites he has always wanted to see.",
+          "personality": "methodical, patient, detail-oriented, cautious",
+          "preferences": "Likes temples, historic districts, orderly routes, and low walking fatigue; dislikes rushed transfers, loud crowds, and late-night plans; prioritizes educational stops and efficient transit.",
+          "personal_goals": "Spend time at Longshan Temple, visit the old streets around Dihua Street, and fit in the National Palace Museum if the schedule allows.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Vienna",
+      "global_goals": "Agree on a single one-day itinerary in Vienna that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Mei Nakamura",
+          "background": "Mei is a budget-conscious solo traveler finishing a long rail trip through Central Europe. She wants one memorable day in Vienna without overspending or exhausting herself.",
+          "personality": "careful, practical, independent, analytical",
+          "preferences": "Prioritizes low-cost or free experiences, efficient routing, and avoiding paid attractions that take too much time. Dislikes pricey dining, taxi rides, and itineraries that stretch late into the night.",
+          "personal_goals": "Walk through the Hofburg exterior and nearby squares, visit a free museum courtyard or public garden, and keep food and admission costs as low as possible.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Clara Weiss",
+          "background": "Clara is a musicology graduate student visiting Vienna for the first time. She has a tight schedule and wants to make the most of a rare free day in the city.",
+          "personality": "curious, orderly, reflective, patient",
+          "preferences": "Prefers quiet, culturally rich places, minimal time spent in transit, and a slower pace with time to observe details. Dislikes rushed schedules, loud nightlife, and expensive ticketed attractions.",
+          "personal_goals": "Visit the Musikverein or a classical music museum, spend time in St. Stephen's Cathedral area, and have a calm coffee break in a traditional Viennese coffee house.",
+          "role": "facilitator",
+          "speaking_style": "gentle and organized",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Jonas Berger",
+          "background": "Jonas is a food photographer who came to Vienna hoping to capture the city's markets, street scenes, and evening atmosphere for a portfolio project.",
+          "personality": "sociable, energetic, impulsive, creative",
+          "preferences": "Likes busy neighborhoods, visually lively spots, and spending time where there are lots of people and movement. Dislikes early starts, museum-heavy itineraries, and long seated breaks.",
+          "personal_goals": "Photograph Naschmarkt, stop for Viennese street food and a slice of cake, and end the day in a lively district with evening lights and outdoor activity.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Tallinn",
+      "global_goals": "Agree on a single one-day itinerary in Tallinn that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Mira Kapoor",
+          "background": "A visiting finance consultant who is in Tallinn for one day and needs the tour to stay efficient, comfortable, and within a strict budget.",
+          "personality": "pragmatic, cautious, analytical, time-conscious",
+          "preferences": "Prefers predictable timing, cheap or free attractions, and direct transport; dislikes expensive dinners, paid tours, and bouncing across the city; wants enough downtime to check work messages.",
+          "personal_goals": "Keep transportation costs low, include one affordable Baltic Sea coastline stop, and finish the day early enough to rest before a flight the next morning.",
+          "role": "attendee",
+          "speaking_style": "analytical",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Kadi Tamm",
+          "background": "A Tallinn-based museum educator who loves showing visiting friends the city’s layered history and compact old town.",
+          "personality": "organized, patient, historically minded, calm",
+          "preferences": "Prefers quiet, culturally rich stops; likes walking tours, heritage museums, and scenic viewpoints; dislikes rushed schedules, nightlife, and crowded shopping areas; wants a low-stress day with minimal transit.",
+          "personal_goals": "Visit the Estonian History Museum, spend time in Toompea viewing platforms, and have a long lunch in the Old Town at a traditional café.",
+          "role": "facilitator",
+          "speaking_style": "friendly",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Evan Brooks",
+          "background": "A freelance photographer on a short stopover who wants to capture striking city scenes and lively street life.",
+          "personality": "curious, energetic, spontaneous, observant",
+          "preferences": "Prefers a packed itinerary with many photo stops; likes markets, harbor areas, and places with strong visual contrasts; dislikes long indoor museum visits and slow pacing; accepts early starts if the day feels full.",
+          "personal_goals": "Shoot sunrise or early-morning scenes at the harbor, explore the Kalamaja area, and visit Telliskivi Creative City for street photography and cafés.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Bangkok",
+      "global_goals": "Agree on a single one-day itinerary in Bangkok that fits a reasonable pace, a fixed day budget, and practical timing constraints.",
+      "participants": [
+        {
+          "name": "Ethan Rossi",
+          "background": "A budget-conscious backpacker who is passing through Bangkok for only one day before catching an overnight train.",
+          "personality": "practical, restless, inquisitive, frugal",
+          "preferences": "Likes low-cost transit, compact itineraries, and maximizing the number of experiences; dislikes expensive attractions, idle downtime, and scenic detours that take too long; prioritizes food stalls, cheap viewpoints, and covering as much ground as possible.",
+          "personal_goals": "Fit in a canal boat ride, sample several inexpensive local dishes for lunch, and squeeze in a rooftop viewpoint before sunset without spending much.",
+          "role": "attendee",
+          "speaking_style": "direct",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Niran Srisai",
+          "background": "A local freelance photographer who often shows visiting friends around Bangkok on their first day in the city.",
+          "personality": "sociable, energetic, improvisational, optimistic",
+          "preferences": "Likes vibrant street life, easy access by transit, and plenty of stops for photos; dislikes slow museum-heavy days, strict schedules, and long taxi rides; prioritizes variety and lively neighborhoods over comfort and quiet.",
+          "personal_goals": "Visit the Grand Palace area early, photograph Wat Arun from across the river, and end the day at a busy night market for street food and neon-lit scenes.",
+          "role": "facilitator",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Maya Thornton",
+          "background": "A museum educator on a rare vacation day who wants to experience Bangkok beyond the obvious tourist circuit.",
+          "personality": "calm, reflective, analytical, patient",
+          "preferences": "Likes quiet cultural sites, historical context, and slower pacing; dislikes crowded markets, rushed transfers, and spending too much on optional extras; prioritizes meaningful time at one or two places rather than a long checklist.",
+          "personal_goals": "Spend time in a traditional museum or heritage house, take a long lunch in a peaceful café, and avoid spending the afternoon in loud commercial districts.",
+          "role": "attendee",
+          "speaking_style": "friendly",
+          "explanation_style": "contrastive"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Rome",
+      "global_goals": "Agree on a single one-day itinerary in Rome that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Maya Desai",
+          "background": "Maya is a graduate student on a strict travel budget who enjoys food-focused wandering and local neighborhoods. She is using this day to experience Rome without overspending.",
+          "personality": "practical, curious, friendly, budget-conscious",
+          "preferences": "Wants inexpensive meals, walkable routes, and enough downtime to browse markets and side streets. Dislikes premium attractions with high entrance fees, expensive taxis, and overly packed itineraries. Prioritizes affordable authentic food over paid sightseeing.",
+          "personal_goals": "Eat supplì or pizza al taglio at a local bakery, browse Campo de' Fiori or a neighborhood market, and fit in a relaxed gelato stop in a non-touristy area.",
+          "role": "attendee",
+          "speaking_style": "friendly",
+          "explanation_style": "contrastive"
+        },
+        {
+          "name": "Giulia Conti",
+          "background": "Giulia is a museum educator visiting Rome for the first time in several years. She likes structuring her days around major historical landmarks and prefers to move methodically through the city.",
+          "personality": "analytical, patient, orderly, reserved",
+          "preferences": "Prefers early starts, minimal transit hassle, and quiet historical sites. Dislikes long meal stops, late-night plans, and rushing between too many neighborhoods. Prioritizes depth over variety and keeps a close eye on spending.",
+          "personal_goals": "Visit the Colosseum, spend time in the Roman Forum, and end with the Capitoline Museums or another major classical history site.",
+          "role": "facilitator",
+          "speaking_style": "calm",
+          "explanation_style": "auto"
+        },
+        {
+          "name": "Noah Bell",
+          "background": "Noah is a freelance photographer who is in Rome for one day between train connections. He wants to capture energetic street scenes, nightlife, and dramatic city views.",
+          "personality": "spontaneous, sociable, energetic, adventurous",
+          "preferences": "Likes lively districts, sunset viewpoints, and flexible timing. Dislikes slow museum-heavy schedules, strict plans, and quiet-only itineraries. Prioritizes photo opportunities, aperitivo spots, and staying out late rather than an early finish.",
+          "personal_goals": "Shoot golden-hour photos at a panoramic overlook, have aperitivo in Trastevere, and stay out long enough to experience a busy evening square like Piazza Navona.",
+          "role": "attendee",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "both"
+        }
+      ]
+    },
+    {
+      "title": "One-Day Tour in Wellington",
+      "global_goals": "Agree on a single one-day itinerary in Wellington that fits a reasonable pace, a fixed day budget, and practical timing constraints for everyone involved.",
+      "participants": [
+        {
+          "name": "Maya Okafor",
+          "background": "A graduate student with a tight budget who is in Wellington for a conference and only has one full free day. She wants affordable activities that still feel memorable and distinctly local.",
+          "personality": "practical, friendly, frugal, flexible",
+          "preferences": "Likes low-cost or free attractions, public transport, and simple meals; dislikes expensive detours, long taxi rides, and schedules that leave no room for lunch or rest; prioritizes budget control and a relaxed afternoon start.",
+          "personal_goals": "Explore Te Papa, have lunch at a reasonably priced spot on the waterfront, and end the day at a free sunset viewpoint without paying for premium experiences.",
+          "role": "attendee",
+          "speaking_style": "supportive",
+          "explanation_style": "subjective"
+        },
+        {
+          "name": "Talia Mercer",
+          "background": "A freelance documentary editor visiting Wellington for the first time after a week of remote work. She wants to make the most of a rare free day and enjoys places with strong visual character.",
+          "personality": "curious, fast-moving, spontaneous, sociable",
+          "preferences": "Likes energetic neighborhoods, scenic viewpoints, and compact routes; dislikes long museum visits, slow pacing, and spending too much time on transit; prioritizes seeing a lot in one day even if it means some short stops.",
+          "personal_goals": "Ride the Wellington Cable Car, walk the Botanic Garden lookout loop, and spend the late afternoon exploring Cuba Street and the waterfront cafes.",
+          "role": "facilitator",
+          "speaking_style": "enthusiastic",
+          "explanation_style": "both"
+        },
+        {
+          "name": "Graham Holt",
+          "background": "A retired architect who has planned walking tours for decades and is spending a few days in Wellington with his spouse. He prefers thoughtful observation over rushing from place to place.",
+          "personality": "cautious, analytical, patient, observant",
+          "preferences": "Likes heritage streets, quiet galleries, and time to sit with a view; dislikes crowded attractions, rushed schedules, and noisy nightlife; prioritizes depth over quantity and wants minimal backtracking.",
+          "personal_goals": "Visit the City Gallery Wellington, spend time in a historic district café, and take a slow walk through the Old St Paul’s area and nearby heritage streets.",
+          "role": "attendee",
+          "speaking_style": "calm",
+          "explanation_style": "contrastive"
+        }
+      ]
+    }
+  ]
+}

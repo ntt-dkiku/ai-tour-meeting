@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Meeting flow guide for AI Tour Meeting" />
+    <title>Meeting Flow - AI Tour Meeting</title>
+    <script>
+      (function () {
+        try {
+          var theme = localStorage.getItem("ai-tour-meeting-docs-theme");
+          if (theme === "light" || theme === "dark") {
+            document.documentElement.dataset.theme = theme;
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
+      <div class="site-brand">
+        <a class="site-title" href="./index.html">AI Tour Meeting</a>
+        <nav class="site-tabs" aria-label="Primary">
+          <a class="site-tab is-active" href="./index.html" aria-current="page">User Guide</a>
+          <a class="site-tab" href="./reference.html">Developer Guide</a>
+          <a class="site-tab" href="./changelog.html">Changelog</a>
+          <a class="site-tab" href="./developer.html">Contact</a>
+        </nav>
+      </div>
+      <div class="site-header__actions">
+        <button type="button" class="theme-toggle" data-theme-toggle aria-label="Switch theme" aria-pressed="false" title="Switch theme">
+          <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 17.5a5.5 5.5 0 1 1 0-11a5.5 5.5 0 0 1 0 11Zm0-15a1 1 0 0 1 1 1V5a1 1 0 1 1-2 0V3.5a1 1 0 0 1 1-1Zm0 17a1 1 0 0 1 1 1V20a1 1 0 1 1-2 0v-1.5a1 1 0 0 1 1-1Zm9-9a1 1 0 0 1-1 1H19a1 1 0 1 1 0-2h1.5a1 1 0 0 1 1 1ZM5 12a1 1 0 0 1-1 1H2.5a1 1 0 1 1 0-2H4a1 1 0 0 1 1 1Zm12.95-6.95a1 1 0 0 1 1.41 0l1.06 1.06a1 1 0 1 1-1.41 1.41l-1.06-1.06a1 1 0 0 1 0-1.41ZM5.58 18.42a1 1 0 0 1 1.41 0l1.06 1.06a1 1 0 1 1-1.41 1.41l-1.06-1.06a1 1 0 0 1 0-1.41Zm13.84 0a1 1 0 0 1 0 1.41l-1.06 1.06a1 1 0 0 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0ZM6.64 5.64a1 1 0 0 1 0 1.41L5.58 8.11a1 1 0 1 1-1.41-1.41l1.06-1.06a1 1 0 0 1 1.41 0Z"/>
+          </svg>
+          <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M21 14.1A8.5 8.5 0 0 1 9.9 3a1 1 0 0 0-1.25 1.25A7 7 0 1 0 19.75 15.35A1 1 0 0 0 21 14.1Z"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="docs-frame">
+      <aside class="sidebar" aria-label="Docs navigation" data-doc-sidebar data-doc-section="user-guide" data-doc-active="workflow"></aside>
+
+      <main id="content" class="content">
+        <header class="page-header">
+          <div class="page-header__copy">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+              <a class="breadcrumb__link" href="./getting-started.html">User Guide</a>
+              <span aria-hidden="true">&gt;</span>
+              <span class="breadcrumb__current">Framework</span>
+            </nav>
+            <h1>How a meeting moves from turn to turn</h1>
+            <p class="lede">
+              The meeting engine keeps track of who should speak next, whether turns should be balanced, and how the conversation moves through each cycle.
+              This page explains the behavior you will see in the GUI so the settings make sense before you press start.
+            </p>
+          </div>
+        </header>
+
+        <section class="section" id="workflow">
+          <h2>Workflow overview</h2>
+          <p>
+            The meeting engine keeps track of who should speak next, whether turns should be balanced, and how the conversation moves through each cycle.
+            This page explains the behavior you will see in the GUI so the settings make sense before you press start.
+          </p>
+        </section>
+
+        <section class="section" id="context-management">
+          <h2>Context management</h2>
+          <p>
+            Each turn carries forward the meeting state that matters for the next speaker: who already spoke, which cycle the conversation is in, and
+            what the current route or proposal looks like. That shared context is what keeps the meeting coherent as it moves from one turn to the next.
+          </p>
+          <p>
+            When balanced turns are on, the engine tries to preserve a full cycle before anyone repeats. When balanced turns are off, the flow becomes
+            freer and the engine can move without waiting for a complete pass through the participants.
+          </p>
+        </section>
+
+        <section class="section" id="meeting-phases">
+          <h2>What happens during a meeting</h2>
+          <div class="cards">
+            <article class="card">
+              <h3>Plan the order</h3>
+              <p>
+                Before the first turn, the app decides which participant should speak first and whether the list should be treated as a balanced cycle.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Run the discussion</h3>
+              <p>
+                Each participant speaks when it is their turn, and the engine records the result so the next turn can be selected correctly.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Refine the route</h3>
+              <p>
+                The meeting can refine the plan after discussion, which is useful when the group needs to adjust the route or improve the proposal.
+              </p>
+            </article>
+            <article class="card">
+              <h3>Review the result</h3>
+              <p>
+                The final state is kept in the logs and meeting data so you can review what happened after the session ends.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="turn-rules">
+          <h2>Turn rules in plain English</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Setting</th>
+                  <th>What it means</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Round robin</td>
+                  <td>Everyone gets a turn in order, so balanced turns are always on.</td>
+                </tr>
+                <tr>
+                  <td>Random</td>
+                  <td>The next speaker is chosen randomly. You can keep balance on for one pass per cycle, or turn it off for a freer order.</td>
+                </tr>
+                <tr>
+                  <td>Inviting</td>
+                  <td>The meeting can invite a particular speaker or move more deliberately when you want to guide the discussion.</td>
+                </tr>
+                <tr>
+                  <td>Facilitating</td>
+                  <td>The engine helps structure the conversation while still letting the meeting progress naturally.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="balanced-turns">
+          <h2>Balanced turns and cycles</h2>
+          <p>
+            A cycle is the span in which each participant gets one turn.
+            When balanced turns are enabled, the engine tries to complete that cycle before repeating anyone.
+            When balanced turns are off, the engine can pick the next speaker more freely and the idea of a strict cycle is no longer useful.
+          </p>
+          <p>
+            That is why round robin keeps balanced turns on automatically, while random mode can be used either way depending on whether you want a full cycle or a freer sequence.
+          </p>
+        </section>
+
+        <section class="section" id="using-the-settings">
+          <h2>How the settings in the GUI affect the flow</h2>
+          <ol class="steps">
+            <li>Pick the turn rule first.</li>
+            <li>Leave balanced turns on for predictable rotation, especially for round robin.</li>
+            <li>Turn it off only when you want a looser order, such as a fully random run.</li>
+            <li>Check the log viewer after starting the meeting so you can confirm the selected behavior matches what you expected.</li>
+          </ol>
+        </section>
+      </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#workflow">Workflow overview</a>
+          <a class="toc-link" href="#context-management">Context management</a>
+          <a class="toc-link" href="#meeting-phases">What happens during a meeting</a>
+          <a class="toc-link" href="#turn-rules">Turn rules in plain English</a>
+          <a class="toc-link" href="#balanced-turns">Balanced turns and cycles</a>
+          <a class="toc-link" href="#using-the-settings">How the settings affect flow</a>
+        </div>
+      </aside>
+    </div>
+
+    <script src="./nav.js" defer></script>
+    <script src="./theme.js" defer></script>
+  </body>
+</html>

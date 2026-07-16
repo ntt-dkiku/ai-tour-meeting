@@ -1,0 +1,13 @@
+.env
+__pycache__
+tour_meeting/data/
+tour_meeting/frontend/dist/
+.llm-mode
+.litellm_cache/
+debug_prompts/
+docker/docker-compose.*.generated.yaml
+/results/*
+!/results/system_validation/
+old/results/
+data/chunks_*/
+paper/

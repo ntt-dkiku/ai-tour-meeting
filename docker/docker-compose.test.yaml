@@ -1,0 +1,44 @@
+services:
+  frontend-test:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend.test
+    container_name: tour-meeting-frontend-test
+    command: npm run test
+
+  frontend-test-watch:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend.test
+    container_name: tour-meeting-frontend-test-watch
+    volumes:
+      - ../tour_meeting/frontend/src:/app/src
+    command: npm run test:watch
+    stdin_open: true
+    tty: true
+
+  frontend-test-coverage:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.frontend.test
+    container_name: tour-meeting-frontend-test-coverage
+    command: npm run test:coverage
+
+  backend-test:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend.test
+    container_name: tour-meeting-backend-test
+    command: uv run pytest tests/ -v
+
+  backend-test-watch:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.backend.test
+    container_name: tour-meeting-backend-test-watch
+    volumes:
+      - ../tour_meeting:/app/tour_meeting
+      - ../tests:/app/tests
+    command: uv run pytest tests/ -v --tb=short -W ignore::DeprecationWarning
+    stdin_open: true
+    tty: true

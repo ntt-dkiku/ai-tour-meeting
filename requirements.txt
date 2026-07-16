@@ -1,0 +1,18 @@
+# LLM
+litellm
+openai
+tiktoken
+
+# Utility
+jupyter
+jupyterlab
+matplotlib
+pandas
+scipy
+tqdm
+pydantic==2.10.6
+ddgs
+
+# API
+uvicorn[standard]
+fastapi
