@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="GUI guide for AI Tour Meeting" />
-    <title>GUI Walkthrough - AI Tour Meeting</title>
+    <title>GUI walkthrough - AI Tour Meeting</title>
     <script>
       (function () {
         try {
@@ -24,8 +24,8 @@
       <div class="site-brand">
         <a class="site-title" href="./index.html">AI Tour Meeting</a>
         <nav class="site-tabs" aria-label="Primary">
-          <a class="site-tab is-active" href="./index.html" aria-current="page">User Guide</a>
-          <a class="site-tab" href="./reference.html">Developer Guide</a>
+          <a class="site-tab is-active" href="./index.html" aria-current="page">User guide</a>
+          <a class="site-tab" href="./reference.html">Developer guide</a>
           <a class="site-tab" href="./changelog.html">Changelog</a>
           <a class="site-tab" href="./developer.html">Contact</a>
         </nav>
@@ -49,137 +49,15 @@
         <header class="page-header">
           <div class="page-header__copy">
             <nav class="breadcrumb" aria-label="Breadcrumb">
-              <a class="breadcrumb__link" href="./getting-started.html">User Guide</a>
+              <a class="breadcrumb__link" href="./getting-started.html">User guide</a>
               <span aria-hidden="true">&gt;</span>
-              <span class="breadcrumb__current">Getting Started</span>
+              <span class="breadcrumb__current">Getting started</span>
             </nav>
-            <h1>GUI Guide</h1>
-            <p class="lede">
-              This page walks through the parts of the interface you will use most often: the sidebar, the meeting settings panel,
-              the participant list, and the log viewer.
-            </p>
+            <h1>GUI guide</h1>
+            <p class="lede">This page is currently in preparation and will be available soon.</p>
           </div>
         </header>
-
-        <section class="section" id="design">
-          <h2>Design the GUI</h2>
-          <div class="cards">
-            <article class="card">
-              <h3>Meeting selection</h3>
-              <p>
-                Switch between meetings from the sidebar when you want to edit a saved conversation or return to a meeting you already started.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Settings</h3>
-              <p>
-                Open the settings area to enter API keys, choose the language model provider, and decide how the meeting should turn between participants.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Document link</h3>
-              <p>
-                Use the Document entry in the app sidebar to open these docs in a separate window while you work.
-              </p>
-            </article>
-            <article class="card">
-              <h3>Random sample</h3>
-              <p>
-                Generate a sample meeting when you want a quick starting point instead of assembling every participant by hand.
-              </p>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" id="llm-settings">
-          <h2>LLM settings</h2>
-          <p>
-            Set the provider, model, and keys before you start a meeting. The GUI keeps these settings close to the rest of the meeting controls so you can
-            move between hosted and local models without leaving the browser.
-          </p>
-          <div class="cards">
-            <article class="card">
-              <h3>Provider</h3>
-              <p>Choose the model provider that matches your environment, such as OpenAI, Anthropic, Google, or a local runtime.</p>
-            </article>
-            <article class="card">
-              <h3>Keys</h3>
-              <p>Add the matching API key in Settings before launching a meeting so the participants can call the model you selected.</p>
-            </article>
-            <article class="card">
-              <h3>Model choice</h3>
-              <p>Use the model that best fits the balance you want between speed, quality, and cost for the current meeting.</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="section" id="meeting-settings">
-          <h2>Meeting Settings</h2>
-          <ol class="steps">
-            <li>Choose a turn rule that fits the style of the meeting.</li>
-            <li>Keep <strong>Balanced Turns</strong> on when you want each participant to speak in regular cycles.</li>
-            <li>Turn it off when you want a freer selection order and are comfortable with repeated speakers appearing sooner.</li>
-            <li>Save the settings before starting the meeting so the engine uses the values you picked.</li>
-          </ol>
-          <p>
-            Round robin style rotation is already balanced, so the app treats that combination as always on.
-            Random order can be used for either a balanced sample or a fully free form sequence depending on the toggle.
-          </p>
-        </section>
-
-        <section class="section" id="participants">
-          <h2>Participants and order</h2>
-          <p>
-            Add the people or agents you want in the meeting, then arrange them in the order that best matches the conversation you want to run.
-            The list can be edited before the meeting starts, and the current order is reflected in the next turn.
-          </p>
-          <p>
-            If you are experimenting, use a random sample first to see how the engine fills out a meeting. Once the shape looks right, replace the sample with the real participants.
-          </p>
-        </section>
-
-        <section class="section" id="logs-and-feedback">
-          <h2>Logs and feedback</h2>
-          <p>
-            Keep the log viewer open while you work. It tells you whether the engine started, which participant was chosen next, and whether an API key or provider setting needs attention.
-          </p>
-          <div class="table-wrap">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>If you see this</th>
-                  <th>Do this</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>No API key configured</td>
-                  <td>Open Settings and add the missing key for the provider you are using.</td>
-                </tr>
-                <tr>
-                  <td>The order looks wrong</td>
-                  <td>Check whether the turn rule is round robin, random, or inviting/facilitating.</td>
-                </tr>
-                <tr>
-                  <td>A meeting will not start</td>
-                  <td>Confirm the backend is running and the participant list is not empty.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
       </main>
-
-      <aside class="page-toc" aria-label="On this page">
-        <div class="toc-card">
-          <p class="toc-title">On this page</p>
-          <a class="toc-link" href="#design">Design the GUI</a>
-          <a class="toc-link" href="#llm-settings">LLM settings</a>
-          <a class="toc-link" href="#meeting-settings">Meeting Settings</a>
-          <a class="toc-link" href="#participants">Participants and order</a>
-          <a class="toc-link" href="#logs-and-feedback">Logs and feedback</a>
-        </div>
-      </aside>
     </div>
 
     <script src="./nav.js" defer></script>

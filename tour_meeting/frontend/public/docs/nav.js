@@ -2,10 +2,10 @@
   var sections = {
     "user-guide": [
       {
-        title: "Getting Started",
+        title: "Getting started",
         items: [
           { key: "overview", label: "Overview", href: "./index.html" },
-          { key: "quick-start", label: "Quick Start", href: "./getting-started.html" },
+          { key: "quick-start", label: "Quick start", href: "./getting-started.html" },
           { key: "gui-guide", label: "GUI", href: "./gui.html" },
           { key: "python-cli", label: "Python CLI", href: "./python-cli.html" },
         ],
@@ -28,7 +28,7 @@
     ],
     "developer-guide": [
       {
-        title: "Developer Guide",
+        title: "Developer guide",
         items: [
           { key: "testing", label: "Testing and customization", href: "./reference.html" },
           { key: "hosting", label: "Hosting and release notes", href: "./deployment.html" },
@@ -104,6 +104,112 @@
       .join("");
   }
 
+  var sectionMeta = {
+    "user-guide": { label: "User guide", href: "./index.html" },
+    "developer-guide": { label: "Developer guide", href: "./reference.html" },
+    "changelog": { label: "Changelog", href: "./changelog.html" },
+    "contact": { label: "Contact", href: "./developer.html" },
+  };
+
+  function renderBreadcrumbBar(section, activeKey) {
+    var meta = sectionMeta[section] || sectionMeta["user-guide"];
+    var groups = sections[section] || sections["user-guide"];
+    var groupTitle = null;
+    var itemLabel = null;
+
+    groups.forEach(function (group) {
+      group.items.forEach(function (item) {
+        if (item.key === activeKey) {
+          groupTitle = group.title;
+          itemLabel = item.label;
+        }
+      });
+    });
+
+    var separator = '<span aria-hidden="true">&gt;</span>';
+    var html =
+      '<nav class="breadcrumb breadcrumb--bar" aria-label="Breadcrumb">' +
+      '<a class="breadcrumb__link" href="' + meta.href + '">' + meta.label + "</a>";
+
+    if (groupTitle && groupTitle !== meta.label) {
+      html += separator + "<span>" + groupTitle + "</span>";
+    }
+
+    if (itemLabel && itemLabel !== groupTitle) {
+      html += separator + '<span class="breadcrumb__current">' + itemLabel + "</span>";
+    }
+
+    return html + "</nav>";
+  }
+
+  function flattenSection(section) {
+    var groups = sections[section] || sections["user-guide"];
+    var items = [];
+
+    groups.forEach(function (group) {
+      items = items.concat(group.items);
+    });
+
+    return items;
+  }
+
+  var chevronLeft =
+    '<svg class="pager__icon" viewBox="0 0 24 24" aria-hidden="true">' +
+    '<path fill="currentColor" d="M14.7 17.7a1 1 0 0 1-1.41 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 1 1 1.41 1.4L10.41 12l4.3 4.3a1 1 0 0 1 0 1.4Z"/>' +
+    "</svg>";
+
+  var chevronRight =
+    '<svg class="pager__icon" viewBox="0 0 24 24" aria-hidden="true">' +
+    '<path fill="currentColor" d="M9.3 6.3a1 1 0 0 1 1.41 0l5 5a1 1 0 0 1 0 1.4l-5 5a1 1 0 1 1-1.41-1.4L13.59 12l-4.3-4.3a1 1 0 0 1 0-1.4Z"/>' +
+    "</svg>";
+
+  function renderPager(section, activeKey) {
+    var items = flattenSection(section);
+    var index = -1;
+
+    items.forEach(function (item, i) {
+      if (item.key === activeKey) {
+        index = i;
+      }
+    });
+
+    if (index === -1) {
+      return "";
+    }
+
+    var prev = index > 0 ? items[index - 1] : null;
+    var next = index < items.length - 1 ? items[index + 1] : null;
+
+    if (!prev && !next) {
+      return "";
+    }
+
+    var html = '<nav class="pager" aria-label="Page navigation">';
+
+    if (prev) {
+      html +=
+        '<a class="pager__link pager__link--prev" href="' + prev.href + '" rel="prev" aria-label="Previous page">' +
+        chevronLeft +
+        '<span class="pager__label">' +
+        prev.label +
+        "</span></a>";
+    } else {
+      html += "<span></span>";
+    }
+
+    if (next) {
+      html +=
+        '<a class="pager__link pager__link--next" href="' + next.href + '" rel="next" aria-label="Next page">' +
+        '<span class="pager__label">' +
+        next.label +
+        "</span>" +
+        chevronRight +
+        "</a>";
+    }
+
+    return html + "</nav>";
+  }
+
   function getScrollContainer() {
     var content = document.querySelector(".content");
 
@@ -119,8 +225,22 @@
   function getScrollOffset() {
     var header = document.querySelector(".site-header");
     var headerHeight = header ? header.getBoundingClientRect().height : 0;
+    var sidebar = document.querySelector(".sidebar");
+    var stickyBarHeight = 0;
 
-    return Math.max(96, Math.round(headerHeight) + 20);
+    if (sidebar && window.getComputedStyle(sidebar).position === "sticky") {
+      stickyBarHeight = sidebar.getBoundingClientRect().height;
+    }
+
+    return Math.max(96, Math.round(headerHeight + stickyBarHeight) + 20);
+  }
+
+  function updateHeaderHeight() {
+    var header = document.querySelector(".site-header");
+
+    if (header) {
+      document.documentElement.style.setProperty("--header-height", header.offsetHeight + "px");
+    }
   }
 
   function scrollToHash(hash, behavior) {
@@ -189,6 +309,9 @@
   }
 
   function init() {
+    updateHeaderHeight();
+    window.addEventListener("resize", updateHeaderHeight);
+
     var sidebars = document.querySelectorAll("[data-doc-sidebar]");
     Array.prototype.forEach.call(sidebars, function (sidebar) {
       sidebar.innerHTML =
@@ -202,12 +325,10 @@
         renderSidebar(sidebar.dataset.docSection || "", sidebar.dataset.docActive || "") +
         "</div>";
 
-      var breadcrumb = document.querySelector(".content .breadcrumb");
-      if (breadcrumb) {
-        var crumbClone = breadcrumb.cloneNode(true);
-        crumbClone.classList.add("breadcrumb--bar");
-        sidebar.appendChild(crumbClone);
-      }
+      sidebar.insertAdjacentHTML(
+        "beforeend",
+        renderBreadcrumbBar(sidebar.dataset.docSection || "", sidebar.dataset.docActive || "")
+      );
 
       var toggle = sidebar.querySelector(".sidebar-toggle");
       var backdrop = sidebar.querySelector(".sidebar-backdrop");
@@ -230,6 +351,17 @@
         }
       });
     });
+
+    var firstSidebar = document.querySelector("[data-doc-sidebar]");
+    var content = document.querySelector(".content");
+
+    if (firstSidebar && content) {
+      var pagerHtml = renderPager(firstSidebar.dataset.docSection || "", firstSidebar.dataset.docActive || "");
+
+      if (pagerHtml) {
+        content.insertAdjacentHTML("beforeend", pagerHtml);
+      }
+    }
 
     document.addEventListener("click", handleSidebarClick);
 
