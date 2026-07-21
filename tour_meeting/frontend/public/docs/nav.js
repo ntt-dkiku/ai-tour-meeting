@@ -7,7 +7,8 @@
           { key: "overview", label: "Overview", href: "./index.html" },
           { key: "quick-start", label: "Quick start", href: "./getting-started.html" },
           { key: "gui-guide", label: "GUI", href: "./gui.html" },
-          { key: "python-cli", label: "Python CLI", href: "./python-cli.html" },
+          { key: "cli", label: "CLI", href: "./cli.html" },
+          { key: "python-api", label: "Python API", href: "./python-api.html" },
         ],
       },
       {
@@ -210,6 +211,88 @@
     return html + "</nav>";
   }
 
+  var copyIcon =
+    '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+    '<path fill="currentColor" d="M9 3a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H9Zm0 2h9v10H9V5ZM5 7a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2h-2v.001H5V9h.001V7H5Z"/>' +
+    "</svg>";
+
+  var checkIcon =
+    '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+    '<path fill="currentColor" d="M9.55 17.05a1 1 0 0 1-.71-.29l-4.1-4.1a1 1 0 1 1 1.42-1.42l3.39 3.4 8.29-8.3a1 1 0 1 1 1.42 1.42l-9 9a1 1 0 0 1-.71.29Z"/>' +
+    "</svg>";
+
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+
+    var textarea = document.createElement("textarea");
+    textarea.value = text;
+    textarea.style.position = "fixed";
+    textarea.style.opacity = "0";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+      document.execCommand("copy");
+      return Promise.resolve();
+    } catch (e) {
+      return Promise.reject(e);
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  }
+
+  function initSyntaxHighlight() {
+    var blocks = document.querySelectorAll("pre code[class*='language-']");
+
+    if (!blocks.length) {
+      return;
+    }
+
+    var script = document.createElement("script");
+    script.src = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js";
+    script.defer = true;
+    script.onload = function () {
+      Array.prototype.forEach.call(blocks, function (block) {
+        window.hljs.highlightElement(block);
+      });
+    };
+    document.head.appendChild(script);
+  }
+
+  function initCopyButtons() {
+    var blocks = document.querySelectorAll("pre");
+
+    Array.prototype.forEach.call(blocks, function (pre) {
+      var wrapper = document.createElement("div");
+      wrapper.className = "code-block";
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "code-copy";
+      button.setAttribute("aria-label", "Copy to clipboard");
+      button.innerHTML = copyIcon;
+      wrapper.appendChild(button);
+
+      var resetTimer = null;
+
+      button.addEventListener("click", function () {
+        copyText(pre.textContent.replace(/\n$/, "")).then(function () {
+          button.classList.add("is-copied");
+          button.innerHTML = checkIcon;
+          window.clearTimeout(resetTimer);
+          resetTimer = window.setTimeout(function () {
+            button.classList.remove("is-copied");
+            button.innerHTML = copyIcon;
+          }, 2000);
+        });
+      });
+    });
+  }
+
   function getScrollContainer() {
     var content = document.querySelector(".content");
 
@@ -311,6 +394,8 @@
   function init() {
     updateHeaderHeight();
     window.addEventListener("resize", updateHeaderHeight);
+    initSyntaxHighlight();
+    initCopyButtons();
 
     var sidebars = document.querySelectorAll("[data-doc-sidebar]");
     Array.prototype.forEach.call(sidebars, function (sidebar) {

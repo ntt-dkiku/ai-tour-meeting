@@ -54,10 +54,106 @@
               <span class="breadcrumb__current">Getting started</span>
             </nav>
             <h1>Quick start</h1>
-            <p class="lede">This page is currently in preparation and will be available soon.</p>
+            <p class="lede">This page guides you through the installation and startup of AI Tour Meeting.</p>
           </div>
         </header>
+
+        <section class="section" id="prerequisites">
+          <h2>Prerequisites</h2>
+          <p>The following must be installed on your machine:</p>
+          <ul>
+            <li>Docker (<a href="https://docs.docker.com/engine/install/" target="_blank" rel="noopener">official Docker installation guide</a>)</li>
+            <li>Make (<span class="inline-code">apt install make</span>)</li>
+          </ul>
+        </section>
+
+        <section class="section" id="clone-the-repository">
+          <h2>1. Clone the repository</h2>
+          <p>Clone the repository and navigate into the project directory.</p>
+          <pre><code class="language-bash">git clone https://github.com/ntt-dkiku/ai-tour-meeting.git
+cd ai-tour-meeting</code></pre>
+        </section>
+
+        <section class="section" id="set-your-api-keys">
+          <h2>2. Set your API keys (optional)</h2>
+          <p>Create your <span class="inline-code">.env</span> file and add your API keys.</p>
+          <pre><code class="language-bash">cp docker/.env.example docker/.env</code></pre>
+          <div class="callout">
+            <p class="callout__title"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-4.2 12.6c.55.41.95.99 1.09 1.65l.13.75h6l.13-.75c.14-.66.54-1.24 1.09-1.65A7 7 0 0 0 12 2Zm-2.5 17a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-.5h-5v.5Z"/></svg>Tip</p>
+            <p>You can also set API keys from the GUI (<span class="inline-code">Settings</span> in the sidebar), so this step can be skipped. However, in that case, you will need to enter the keys every time you open the GUI. If you prefer not to store your API keys in plain text in the <span class="inline-code">.env</span> file, this may be a better option.</p>
+          </div>
+        </section>
+
+        <section class="section" id="deploy-ai-tour-meeting">
+          <h2>3. Deploy AI Tour Meeting</h2>
+          <p>Deploy AI Tour Meeting with the following command:</p>
+          <pre><code class="language-bash">make up</code></pre>
+          <p>After the deployment, access <span class="inline-code">localhost:3000</span> in your browser, and you can try the AI Tour Meeting GUI! (You can also use <span class="inline-code">make up OPEN_GUI=1</span> to open the browser automatically.)</p>
+          <div class="callout">
+            <p class="callout__title"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-4.2 12.6c.55.41.95.99 1.09 1.65l.13.75h6l.13-.75c.14-.66.54-1.24 1.09-1.65A7 7 0 0 0 12 2Zm-2.5 17a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-.5h-5v.5Z"/></svg>Tip</p>
+            <p>If you are working on a remote server, don't forget to set up port forwarding, e.g., <span class="inline-code">ssh &lt;remote-server-name&gt; -L 3000:localhost:3000 -L 8080:localhost:8080</span>. The backend port defaults to <span class="inline-code">8080</span> and can be changed via the <span class="inline-code">BACKEND_PORT</span> environment variable (e.g., <span class="inline-code">BACKEND_PORT=9090 make up</span>).</p>
+          </div>
+        </section>
+
+        <section class="section" id="local-llms">
+          <h2>3.1. Local LLMs</h2>
+          <h3 id="ollama">Ollama</h3>
+          <p>If you want to use local LLMs via Ollama, add the <span class="inline-code">OLLAMA</span> option: <span class="inline-code">OLLAMA=cpu</span> for CPU mode, or <span class="inline-code">OLLAMA=gpu</span> for GPU mode (NVIDIA GPUs only).</p>
+          <pre><code class="language-bash"># CPU mode
+make up OLLAMA=cpu
+# Use all GPUs in a single ollama server
+make up OLLAMA=gpu
+# Specify GPUs used in a single ollama server
+make up OLLAMA=gpu:0,1
+# Specify GPUs used in separated ollama servers
+make up OLLAMA="gpu:0,1 gpu:2,3"</code></pre>
+          <h3 id="vllm">vLLM (GPU only)</h3>
+          <p>You can also use <a href="https://docs.vllm.ai/" target="_blank" rel="noopener">vLLM</a> to serve local models. Add the <span class="inline-code">VLLM</span> option with the model name. An NVIDIA GPU is required.</p>
+          <pre><code class="language-bash"># Single model on single GPU
+make up VLLM=Qwen/Qwen3-8B
+# Single model on multiple GPUs
+make up VLLM="Qwen/Qwen3-32B:gpu=0,1"
+# Multiple models on separated GPUs
+make up VLLM="Qwen/Qwen3-8B:gpu=0 openai/gpt-oss-20b:gpu=1"
+# Multiple models on multiple GPUs
+make up VLLM="Qwen/Qwen3-32B:gpu=0,1 openai/gpt-oss-120b:gpu=2,3"</code></pre>
+          <div class="callout callout--note">
+            <p class="callout__title"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20Zm0 4.5a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5ZM13 17h-2v-6h2v6Z"/></svg>Note</p>
+            <p>For gated models (e.g., Llama), set <span class="inline-code">HF_TOKEN</span> in <span class="inline-code">docker/.env</span>.</p>
+          </div>
+        </section>
+
+        <section class="section" id="use-ai-tour-meeting">
+          <h2>4. Use AI Tour Meeting</h2>
+          <p>AI Tour Meeting provides three interfaces. Pick the one that fits your use case:</p>
+          <div class="path-cards">
+            <a class="path-card" href="./gui.html">
+              <span class="path-card__title">GUI <span aria-hidden="true">&rsaquo;</span></span>
+              <p>Create and run meetings from the browser app.</p>
+            </a>
+            <a class="path-card" href="./cli.html">
+              <span class="path-card__title">CLI <span aria-hidden="true">&rsaquo;</span></span>
+              <p>Run meetings from the terminal.</p>
+            </a>
+            <a class="path-card" href="./python-api.html">
+              <span class="path-card__title">Python API <span aria-hidden="true">&rsaquo;</span></span>
+              <p>Script and customize meetings in Python.</p>
+            </a>
+          </div>
+        </section>
       </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#prerequisites">Prerequisites</a>
+          <a class="toc-link" href="#clone-the-repository">1. Clone the repository</a>
+          <a class="toc-link" href="#set-your-api-keys">2. Set your API keys (optional)</a>
+          <a class="toc-link" href="#deploy-ai-tour-meeting">3. Deploy AI Tour Meeting</a>
+          <a class="toc-link" href="#local-llms">3.1. Local LLMs</a>
+          <a class="toc-link" href="#use-ai-tour-meeting">4. Use AI Tour Meeting</a>
+        </div>
+      </aside>
     </div>
 
     <script src="./nav.js" defer></script>
