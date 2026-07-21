@@ -105,7 +105,15 @@
   }
 
   function getScrollContainer() {
-    return document.querySelector(".content");
+    var content = document.querySelector(".content");
+
+    if (!content) {
+      return null;
+    }
+
+    var overflowY = window.getComputedStyle(content).overflowY;
+
+    return overflowY === "auto" || overflowY === "scroll" ? content : null;
   }
 
   function getScrollOffset() {
@@ -121,9 +129,18 @@
     }
 
     var target = document.getElementById(hash.slice(1));
+
+    if (!target) {
+      return;
+    }
+
     var container = getScrollContainer();
 
-    if (!target || !container) {
+    if (!container) {
+      window.scrollTo({
+        top: target.getBoundingClientRect().top + window.scrollY - getScrollOffset(),
+        behavior: behavior || "auto",
+      });
       return;
     }
 
@@ -158,13 +175,60 @@
 
     event.preventDefault();
     history.pushState(null, "", url.hash);
+
+    var sidebar = link.closest("[data-doc-sidebar]");
+    if (sidebar && sidebar.classList.contains("is-open")) {
+      sidebar.classList.remove("is-open");
+      var toggle = sidebar.querySelector(".sidebar-toggle");
+      if (toggle) {
+        toggle.setAttribute("aria-expanded", "false");
+      }
+    }
+
     scrollToHash(url.hash, "smooth");
   }
 
   function init() {
     var sidebars = document.querySelectorAll("[data-doc-sidebar]");
     Array.prototype.forEach.call(sidebars, function (sidebar) {
-      sidebar.innerHTML = renderSidebar(sidebar.dataset.docSection || "", sidebar.dataset.docActive || "");
+      sidebar.innerHTML =
+        '<button type="button" class="sidebar-toggle" aria-expanded="false" aria-label="Toggle navigation">' +
+        '<svg class="sidebar-toggle__icon" viewBox="0 0 24 24" aria-hidden="true">' +
+        '<path fill="currentColor" d="M3.5 6.25a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2h-15a1 1 0 0 1-1-1Zm0 5.75a1 1 0 0 1 1-1h15a1 1 0 1 1 0 2h-15a1 1 0 0 1-1-1Zm1 4.75a1 1 0 1 0 0 2h15a1 1 0 1 0 0-2h-15Z"/>' +
+        "</svg>" +
+        "</button>" +
+        '<div class="sidebar-backdrop"></div>' +
+        '<div class="sidebar__nav">' +
+        renderSidebar(sidebar.dataset.docSection || "", sidebar.dataset.docActive || "") +
+        "</div>";
+
+      var breadcrumb = document.querySelector(".content .breadcrumb");
+      if (breadcrumb) {
+        var crumbClone = breadcrumb.cloneNode(true);
+        crumbClone.classList.add("breadcrumb--bar");
+        sidebar.appendChild(crumbClone);
+      }
+
+      var toggle = sidebar.querySelector(".sidebar-toggle");
+      var backdrop = sidebar.querySelector(".sidebar-backdrop");
+
+      function closeSidebar() {
+        sidebar.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      }
+
+      toggle.addEventListener("click", function () {
+        var isOpen = sidebar.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      backdrop.addEventListener("click", closeSidebar);
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && sidebar.classList.contains("is-open")) {
+          closeSidebar();
+        }
+      });
     });
 
     document.addEventListener("click", handleSidebarClick);
