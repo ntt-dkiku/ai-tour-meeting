@@ -42,15 +42,13 @@
         ],
       },
     ],
-    "changelog": [
+    "others": [
       {
         title: "Changelog",
         items: [
           { key: "changelog", label: "Changelog", href: "./changelog.html" },
         ],
       },
-    ],
-    "contact": [
       {
         title: "Contact",
         items: [
@@ -105,15 +103,7 @@
       .join("");
   }
 
-  var sectionMeta = {
-    "user-guide": { label: "User guide", href: "./index.html" },
-    "developer-guide": { label: "Developer guide", href: "./reference.html" },
-    "changelog": { label: "Changelog", href: "./changelog.html" },
-    "contact": { label: "Contact", href: "./developer.html" },
-  };
-
   function renderBreadcrumbBar(section, activeKey) {
-    var meta = sectionMeta[section] || sectionMeta["user-guide"];
     var groups = sections[section] || sections["user-guide"];
     var groupTitle = null;
     var itemLabel = null;
@@ -127,14 +117,14 @@
       });
     });
 
-    var separator = '<span aria-hidden="true">&gt;</span>';
-    var html =
-      '<nav class="breadcrumb breadcrumb--bar" aria-label="Breadcrumb">' +
-      '<a class="breadcrumb__link" href="' + meta.href + '">' + meta.label + "</a>";
-
-    if (groupTitle && groupTitle !== meta.label) {
-      html += separator + "<span>" + groupTitle + "</span>";
+    if (!groupTitle && !itemLabel) {
+      return "";
     }
+
+    var separator = '<span aria-hidden="true">&gt;</span>';
+    var html = '<nav class="breadcrumb breadcrumb--bar" aria-label="Breadcrumb">';
+
+    html += "<span>" + groupTitle + "</span>";
 
     if (itemLabel && itemLabel !== groupTitle) {
       html += separator + '<span class="breadcrumb__current">' + itemLabel + "</span>";
