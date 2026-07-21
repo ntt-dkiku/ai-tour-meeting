@@ -1,11 +1,16 @@
 <p align="center" style="text-align:center">
-  <!-- <img src="./resources/ai-tour-meeting-logo.png#gh-dark-mode-only" align="center" width="100%"> -->
   <img src="./resources/ai-tour-meeting-logo.png" align="center" width="100%">
 </p>
 
-This repo is the official implementation of "AI Tour Meeting: Collaborative Tour Planning by LLM Agents" (arXiv preprint). AI Tour Meeting is a collaborative tour planning framework powered by mulit LLM-based agents, where the agents aim to collaboratively find a shared tour route that satisfies every participant's interest. Its two primary use cases include, but not limited to:
-  1) a simulation tool for analyzing the behavior of LLM-based multi-agent systems during tour planning discussions
-  2) a recommender system, where persona-based agents represent absent or surprise participants in discussion and assist with tour planning
+<p align="center">
+  <a href="https://ntt-dkiku.github.io/ai-tour-meeting/" target="_blank"><img src="https://img.shields.io/badge/📗-docs-green"></a>
+  <a href="https://arxiv.org/abs/2607.xxxxx" target="_blank"><img src="https://img.shields.io/badge/arXiv-pdf-red"></a>
+  <a href="https://ntt-rd.app.box.com/s/kvca8nvs1i3gdfh0xcvrrza7qx8w19om" target="_blank"><img src="https://img.shields.io/badge/demo-video-blue"></a>
+</p>
+
+This repo is the official implementation of "AI Tour Meeting: Group Travel Planning by LLM Agents" (arXiv preprint). AI Tour Meeting is a group travel planning framework powered by multi ple LLM-based agents, where the agents collaborates with the others to find an itinerary that satisfies their constraints and preferences. Its two primary use cases include, but not limited to:
+  1) a simulation tool for analyzing the behavior of multiple LLM-based agents during tour planning discussions
+  2) a recommender system where persona-based agents act on behalf of group members who are unable to participate and provide ideas from their perspectives
 
 ## 🚀 Getting Started
 
@@ -143,7 +148,9 @@ Our code is licensed by NTT. The use of our code is limited to research purposes
 ## 🤝 Citation
 If you find this work useful, please cite our paper as follows:
 ```
-@misc{dkiku2026aitourmeeting,
+Comming soon!
+```
+<!-- @misc{dkiku2026aitourmeeting,
     title={AI Tour Meeting: Collaborative Tour Planning by LLM Agents}, 
     author={Daisuke Kikuta},
     year={2026},
@@ -151,5 +158,4 @@ If you find this work useful, please cite our paper as follows:
     archivePrefix={arXiv},
     primaryClass={cs.AI},
     url={https://arxiv.org/abs/2602.xxxxx}, 
-}
-```
+} -->
