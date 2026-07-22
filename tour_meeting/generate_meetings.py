@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import sys
 from typing import Any, Dict, List, Literal
 
@@ -483,7 +484,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--output", "-o",
-        default=None,
+        required=True,
         help="Save generated config(s) to a JSON file",
     )
     parser.add_argument(
@@ -519,6 +520,19 @@ def main() -> None:
     )
     args = parser.parse_args()
 
+    # Confirm before overwriting an existing output file
+    if os.path.exists(args.output):
+        if sys.stdin.isatty():
+            answer = input(f"[?] Output file '{args.output}' already exists. Overwrite? [y/N]: ")
+            if answer.strip().lower() not in ("y", "yes"):
+                print("[!] Aborted.", file=sys.stderr)
+                sys.exit(1)
+        else:
+            print(f"[!] Output file '{args.output}' already exists. "
+                  "Refusing to overwrite in non-interactive mode. "
+                  "Choose a different OUTPUT file or remove the existing one.", file=sys.stderr)
+            sys.exit(1)
+
     # Generate
     print(f"[+] Generating {args.num_meetings} meeting(s) "
           f"with {args.num_participants} participants each "
@@ -530,12 +544,11 @@ def main() -> None:
         names = ", ".join(p["name"] for p in config["participants"])
         print(f"[+] Meeting {i}: {config['title']} "
               f"({len(config['participants'])} participants: {names})", file=sys.stderr)
-        if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
-                json.dump({"meetings": results}, f, indent=2, ensure_ascii=False)
-            print(f"[+] Saved to {args.output} ({i} meeting(s))", file=sys.stderr)
+        with open(args.output, "w", encoding="utf-8") as f:
+            json.dump({"meetings": results}, f, indent=2, ensure_ascii=False)
+        print(f"[+] Saved to {args.output} ({i} meeting(s))", file=sys.stderr)
 
-    configs = generate_meetings(
+    generate_meetings(
         instruction=args.instruction,
         model_name=args.gen_model,
         num_meetings=args.num_meetings,
@@ -547,10 +560,6 @@ def main() -> None:
         on_meeting=_on_meeting,
         alignment=args.alignment,
     )
-
-    if not args.output:
-        print(json.dumps({"meetings": configs}, indent=2, ensure_ascii=False))
-
 
 if __name__ == "__main__":
     main()

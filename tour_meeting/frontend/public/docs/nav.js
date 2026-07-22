@@ -305,7 +305,8 @@
     var header = document.querySelector(".site-header");
 
     if (header) {
-      document.documentElement.style.setProperty("--header-height", header.offsetHeight + "px");
+      var height = header.getBoundingClientRect().height;
+      document.documentElement.style.setProperty("--header-height", height + "px");
     }
   }
 

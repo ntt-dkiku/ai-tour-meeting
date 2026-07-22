@@ -53,10 +53,98 @@
               <span class="breadcrumb__current">Getting started</span>
             </nav>
             <h1>CLI</h1>
-            <p class="lede">This page is currently in preparation and will be available soon.</p>
+            <p class="lede">Our framework supports a CLI for scalable experiments.</p>
+            <div class="callout callout--note">
+              <p class="callout__title"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20Zm0 4.5a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5ZM13 17h-2v-6h2v6Z"/></svg>Note</p>
+              <p>The CLI is currently provided through <span class="inline-code">make</span> commands. We plan to distribute it as a dedicated package (e.g., via npm) in the future.</p>
+            </div>
           </div>
         </header>
+
+        <section class="section" id="generating-meetings">
+          <h2>Generating meetings</h2>
+          <p>You can synthetically generate meetings (i.e., participants and meeting goals) with an LLM using the <span class="inline-code">make gen-meetings</span> command:</p>
+          <pre><code class="language-bash"># Generate a meeting with three participants
+make gen-meetings \
+    INSTRUCTION="3 people touring Kyoto" \
+    GEN_MODEL=openai/gpt-5.4-mini \
+    OUTPUT=kyoto_tours.json
+
+# Generate 5 meetings with 4 participants each
+make gen-meetings \
+    INSTRUCTION="Barcelona tour" \
+    GEN_MODEL=openai/gpt-5.4-mini \
+    OUTPUT=barcelona_tours.json \
+    NUM_MEETINGS=5 \
+    NUM_PARTICIPANTS=4</code></pre>
+          <p>The available variables are listed below:</p>
+          <div class="param-list">
+            <div class="param">
+              <p class="param__head"><span class="param__name">INSTRUCTION</span><span class="param__badge">required</span></p>
+              <p class="param__desc">Text instruction for scenario generation.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">GEN_MODEL</span><span class="param__badge">required</span></p>
+              <p class="param__desc">LLM used for generation (e.g., <span class="inline-code">openai/gpt-5.4-mini</span>).</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">OUTPUT</span><span class="param__badge">required</span></p>
+              <p class="param__desc">JSON file to save the generated meeting(s) to. Results are saved as each meeting completes, so partial results survive interruptions.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">NUM_MEETINGS</span><span class="param__default">default: 1</span></p>
+              <p class="param__desc">Number of meetings to generate.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">NUM_PARTICIPANTS</span><span class="param__default">default: 3</span></p>
+              <p class="param__desc">Number of participants per meeting.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">TEMPERATURE</span><span class="param__default">default: 1.0</span></p>
+              <p class="param__desc">Sampling temperature for the generation LLM.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">SEED</span><span class="param__default">default: None</span></p>
+              <p class="param__desc">Random seed for the generation LLM.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">MAX_RETRIES</span><span class="param__default">default: 5</span></p>
+              <p class="param__desc">Max retries per meeting generation.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">MAX_TOTAL_ATTEMPTS</span><span class="param__default">default: NUM_MEETINGS * 3</span></p>
+              <p class="param__desc">Max total attempts across all meetings.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">ALIGNMENT</span><span class="param__default">default: mixed</span></p>
+              <p class="param__desc">Participant preference relation: <span class="inline-code">aligned</span> | <span class="inline-code">mixed</span> | <span class="inline-code">conflicting</span>.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="running-meetings">
+          <h2>Running meetings</h2>
+          <p>The <span class="inline-code">make run</span> command executes a Python script inside the backend container, so <span class="inline-code">make up</span> must be running first. See the <a href="./python-api.html">Python API</a> page for how to write meeting scripts.</p>
+          <pre><code class="language-bash"># Run a meeting script
+make run SCRIPT=examples/barcelona.py
+# Run a meeting script with arguments
+make run SCRIPT=examples/barcelona.py ARGS="--max-turns 10"</code></pre>
+        </section>
+
+        <section class="section" id="llm-as-a-judge">
+          <h2>Running LLM-as-a-judge</h2>
+          <p>This section is currently in preparation and will be available soon.</p>
+        </section>
       </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#generating-meetings">Generating meetings</a>
+          <a class="toc-link" href="#running-meetings">Running meetings</a>
+          <a class="toc-link" href="#llm-as-a-judge">Running LLM-as-a-judge</a>
+        </div>
+      </aside>
     </div>
 
     <script src="./nav.js" defer></script>

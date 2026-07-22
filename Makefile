@@ -150,16 +150,16 @@ MAX_TOTAL_ATTEMPTS ?=
 ALIGNMENT ?=
 gen-meetings:
 ifndef INSTRUCTION
-	@echo "Usage: make gen-meetings INSTRUCTION=\"...\" GEN_MODEL=<model> [options]"
+	@echo "Usage: make gen-meetings INSTRUCTION=\"...\" GEN_MODEL=<model> OUTPUT=<file.json> [options]"
 	@echo ""
 	@echo "Required:"
 	@echo "  INSTRUCTION       Text instruction for scenario generation"
 	@echo "  GEN_MODEL         LLM for generation (e.g. openai/gpt-4o-mini)"
+	@echo "  OUTPUT            Save generated meeting(s) to JSON file"
 	@echo ""
 	@echo "Optional:"
 	@echo "  NUM_MEETINGS      Number of meetings to generate (default: 1)"
 	@echo "  NUM_PARTICIPANTS  Number of participants per meeting (default: 3)"
-	@echo "  OUTPUT            Save config to JSON file"
 	@echo "  TEMPERATURE       Sampling temperature for generation LLM (default: 1.0)"
 	@echo "  SEED              Random seed for generation LLM (default: None)"
 	@echo "  MAX_RETRIES       Max retries per meeting generation (default: 5)"
@@ -167,19 +167,20 @@ ifndef INSTRUCTION
 	@echo "  ALIGNMENT         Participant preference relation: aligned | mixed (default) | conflicting"
 	@echo ""
 	@echo "Examples:"
-	@echo "  make gen-meetings INSTRUCTION=\"3 people touring Kyoto\" GEN_MODEL=openai/gpt-4o-mini"
-	@echo "  make gen-meetings INSTRUCTION=\"Barcelona tour\" GEN_MODEL=openai/gpt-4o-mini NUM_MEETINGS=5 NUM_PARTICIPANTS=4"
-	@echo "  make gen-meetings INSTRUCTION=\"NYC food tour\" GEN_MODEL=openai/gpt-4o-mini OUTPUT=configs.json"
+	@echo "  make gen-meetings INSTRUCTION=\"3 people touring Kyoto\" GEN_MODEL=openai/gpt-4o-mini OUTPUT=configs.json"
+	@echo "  make gen-meetings INSTRUCTION=\"Barcelona tour\" GEN_MODEL=openai/gpt-4o-mini OUTPUT=configs.json NUM_MEETINGS=5 NUM_PARTICIPANTS=4"
 	@exit 1
 else ifndef GEN_MODEL
-	@echo "Error: GEN_MODEL is required. Example: make gen-meetings INSTRUCTION=\"...\" GEN_MODEL=openai/gpt-4o-mini"
+	@echo "Error: GEN_MODEL is required. Example: make gen-meetings INSTRUCTION=\"...\" GEN_MODEL=openai/gpt-4o-mini OUTPUT=configs.json"
+	@exit 1
+else ifndef OUTPUT
+	@echo "Error: OUTPUT is required. Example: make gen-meetings INSTRUCTION=\"...\" GEN_MODEL=openai/gpt-4o-mini OUTPUT=configs.json"
 	@exit 1
 else
 	$(DOCKER_COMPOSE) exec -e PYTHONPATH=/app backend python3 -m tour_meeting.generate_meetings \
-		"$(INSTRUCTION)" --gen-model "$(GEN_MODEL)" \
+		"$(INSTRUCTION)" --gen-model "$(GEN_MODEL)" --output "$(OUTPUT)" \
 		$(if $(NUM_MEETINGS),--num-meetings $(NUM_MEETINGS)) \
 		$(if $(NUM_PARTICIPANTS),--num-participants $(NUM_PARTICIPANTS)) \
-		$(if $(OUTPUT),--output "$(OUTPUT)") \
 		$(if $(TEMPERATURE),--temperature $(TEMPERATURE)) \
 		$(if $(SEED),--seed $(SEED)) \
 		$(if $(MAX_RETRIES),--max-retries $(MAX_RETRIES)) \

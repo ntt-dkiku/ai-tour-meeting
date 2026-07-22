@@ -650,6 +650,15 @@ h3 {
   padding-left: 16px;
 }
 
+.callout p {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.page-header .callout {
+  margin-top: 14px;
+}
+
 .section .callout p + p {
   margin-top: 0;
 }
@@ -658,7 +667,7 @@ h3 {
   border-left-color: #2f6fd0;
 }
 
-.section .callout--note .callout__title {
+.callout--note .callout__title {
   color: #2f6fd0;
 }
 
@@ -666,7 +675,7 @@ h3 {
   border-left-color: #6ab0ff;
 }
 
-:root[data-theme="dark"] .section .callout--note .callout__title {
+:root[data-theme="dark"] .callout--note .callout__title {
   color: #6ab0ff;
 }
 
@@ -736,11 +745,16 @@ h3 {
 
 .table th,
 .table td {
-  padding: 14px 0;
+  padding: 14px 24px 14px 0;
   border-bottom: 1px solid var(--border);
   text-align: left;
   vertical-align: top;
   line-height: 1.65;
+}
+
+.table th:last-child,
+.table td:last-child {
+  padding-right: 0;
 }
 
 .table th {
@@ -824,6 +838,10 @@ pre .hljs-meta {
   margin: 16px 0 24px;
 }
 
+.page-header + .doc-figure {
+  margin-top: -28px;
+}
+
 .doc-figure img {
   width: 100%;
   border: 1px solid var(--border);
@@ -836,6 +854,58 @@ pre .hljs-meta {
   color: var(--faint);
   font-size: 0.85rem;
   text-align: center;
+}
+
+.param-list {
+  margin-top: 16px;
+}
+
+.param {
+  padding: 14px 0;
+}
+
+.param + .param {
+  border-top: 1px solid var(--border);
+}
+
+.param__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.param__name {
+  color: var(--accent-strong);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.param__badge {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(224, 122, 82, 0.14);
+  color: #c96442;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+:root[data-theme="dark"] .param__badge {
+  background: rgba(255, 158, 118, 0.14);
+  color: #ff9e76;
+}
+
+.param__default {
+  color: var(--faint);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.78rem;
+}
+
+.section .param__desc {
+  margin-top: 4px;
+  color: var(--muted);
 }
 
 .api-list {
@@ -1115,6 +1185,7 @@ pre .hljs-meta {
 
   .page-header {
     flex-direction: column;
+    padding-top: 0;
   }
 
   body {
