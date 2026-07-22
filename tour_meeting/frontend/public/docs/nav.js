@@ -20,12 +20,6 @@
           { key: "context-management", label: "Context management", href: "./context-management.html" },
         ],
       },
-      {
-        title: "LLM settings",
-        items: [
-          { key: "llm-settings", label: "Provider setup", href: "./llm-settings.html" },
-        ],
-      },
     ],
     "developer-guide": [
       {
@@ -301,8 +295,13 @@
     var sidebar = document.querySelector(".sidebar");
     var stickyBarHeight = 0;
 
-    if (sidebar && window.getComputedStyle(sidebar).position === "sticky") {
-      stickyBarHeight = sidebar.getBoundingClientRect().height;
+    if (sidebar) {
+      var toggle = sidebar.querySelector(".sidebar-toggle");
+      var isMobileBar = toggle && window.getComputedStyle(toggle).display !== "none";
+
+      if (isMobileBar && window.getComputedStyle(sidebar).position === "sticky") {
+        stickyBarHeight = sidebar.getBoundingClientRect().height;
+      }
     }
 
     return Math.max(96, Math.round(headerHeight + stickyBarHeight) + 20);

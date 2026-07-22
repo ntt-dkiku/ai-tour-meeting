@@ -53,10 +53,94 @@
               <span class="breadcrumb__current">Getting started</span>
             </nav>
             <h1>Python API</h1>
-            <p class="lede">This page is currently in preparation and will be available soon.</p>
+            <p class="lede">This page shows how to run tour meetings programmatically from Python scripts.</p>
           </div>
         </header>
+
+        <section class="section" id="available-functions">
+          <h2>Available functions</h2>
+          <p>The public API consists of a builder function and the <span class="inline-code">AITourMeeting</span> object it returns.</p>
+          <div class="api-list">
+            <div class="api-item">
+              <p class="api-signature"><span class="api-name">build_meeting</span>(title, global_goals, participants, constraints=None, settings=None)</p>
+              <p>Build an <span class="inline-code">AITourMeeting</span> from participant config dicts. Validates required participant keys and raises <span class="inline-code">ValueError</span> on invalid configs.</p>
+            </div>
+            <div class="api-item">
+              <p class="api-signature"><span class="api-prefix">AITourMeeting.</span><span class="api-name">run_cli</span>()</p>
+              <p>Run the meeting and print events to stdout. Async &mdash; call with <span class="inline-code">asyncio.run(meeting.run_cli())</span>.</p>
+            </div>
+            <div class="api-item">
+              <p class="api-signature"><span class="api-prefix">AITourMeeting.</span><span class="api-name">run_free_conversation</span>()</p>
+              <p>Run the meeting as an async event stream. Iterate with <span class="inline-code">async for event in meeting.run_free_conversation()</span> to handle events yourself.</p>
+            </div>
+            <div class="api-item">
+              <p class="api-signature"><span class="api-prefix">AITourMeeting.</span><span class="api-name">add_participant</span>(participant)</p>
+              <p>Add a <span class="inline-code">Participant</span> object to the meeting. <span class="inline-code">add_participants(participants)</span> accepts a list. <span class="inline-code">build_meeting</span> calls this internally.</p>
+            </div>
+            <div class="api-item">
+              <p class="api-signature"><span class="api-prefix">AITourMeeting.</span><span class="api-name">export_analytics</span>()</p>
+              <p>Export raw analytics data (discussion dynamics, route characteristics, metadata) as a dictionary for external analysis or visualization.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="minimal-example">
+          <h2>Minimal example</h2>
+          <p>See <a href="https://github.com/ntt-dkiku/ai-tour-meeting/tree/main/examples" target="_blank" rel="noopener">examples/</a> for more example scripts.</p>
+          <pre><code class="language-python">import asyncio
+from tour_meeting.cli import build_meeting
+
+meeting = build_meeting(
+    title="One-Day Tokyo Tour",
+    global_goals="Plan a fun one-day walking tour in Tokyo.",
+    participants=[
+        {
+            "name": "Alice",
+            "background": "A history enthusiast visiting Tokyo for the first time.",
+            "personality": "Curious and detail-oriented.",
+            "preferences": "Prefers temples and quiet historical sites over crowds.",
+            "personal_goals": "Visit Senso-ji and the Imperial Palace.",
+            "model_name": "vllm/0/Qwen/Qwen3-8B",
+            "role": "facilitator",
+        },
+        {
+            "name": "Bob",
+            "background": "A food blogger who writes about street food.",
+            "personality": "Enthusiastic and spontaneous.",
+            "preferences": "Wants to try local street food over sit-down restaurants.",
+            "personal_goals": "Explore Tsukiji Outer Market and ramen shops.",
+            "model_name": "vllm/0/Qwen/Qwen3-8B",
+            "system_prompt": "You are {name}, an enthusiastic foodie. {background}\nFocus on: {personal_goals} ...",
+        },
+    ],
+    constraints={"budget": "$100", "time_window_start": "09:00", "time_window_end": "18:00"},
+    settings={"max_turns": 100, "turn_rule": "round_robin", "voting_rule": "majority"},
+)
+
+asyncio.run(meeting.run_cli())</code></pre>
+        </section>
+
+        <section class="section" id="running-scripts">
+          <h2>Running scripts</h2>
+          <p>Scripts are executed inside the backend Docker container, so <span class="inline-code">make up</span> must be running first.</p>
+          <pre><code class="language-bash"># Start containers
+make up
+
+# Run a script
+make run SCRIPT=path/to/your_tour.py
+# Run a script with arguments
+make run SCRIPT=path/to/your_tour.py ARGS="--model openai/gpt-5.2"</code></pre>
+        </section>
       </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#available-functions">Available functions</a>
+          <a class="toc-link" href="#minimal-example">Minimal example</a>
+          <a class="toc-link" href="#running-scripts">Running scripts</a>
+        </div>
+      </aside>
     </div>
 
     <script src="./nav.js" defer></script>

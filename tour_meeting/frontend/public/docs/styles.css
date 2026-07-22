@@ -254,7 +254,7 @@ img {
   max-width: 1700px;
   width: 100%;
   margin: 0 auto;
-  padding: 20px 20px 72px;
+  padding: 20px 20px 16px;
 }
 
 .sidebar,
@@ -283,22 +283,6 @@ body.home-page {
 }
 
 @media (min-width: 981px) {
-  body.home-page {
-    height: auto;
-    min-height: 100vh;
-  }
-
-  body:not(.home-page) {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  body:not(.home-page) .site-header {
-    flex: 0 0 auto;
-  }
-
   .home-shell {
     max-width: 1180px;
     margin: 0 auto;
@@ -344,45 +328,26 @@ body.home-page {
   }
 }
 
-@media (min-width: 981px) {
-  .docs-frame {
-    flex: 1 1 auto;
-    height: auto;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .sidebar,
-  .page-toc {
-    position: relative;
-    top: 0;
-    max-height: 100%;
-    overflow: hidden;
-  }
-
-  .content {
-    height: 100%;
-    min-height: 0;
-    overflow: auto;
-    scrollbar-gutter: stable;
-    padding-right: 28px;
-  }
-
-  body.home-page .docs-frame,
-  body.home-page .sidebar,
-  body.home-page .page-toc,
-  body.home-page .content {
-    height: auto;
-    overflow: visible;
-    padding-right: 0;
-  }
-}
-
 .page-toc {
   position: relative;
   top: 0;
   align-self: start;
   padding: 12px 0 0 18px;
+}
+
+@media (min-width: 981px) {
+  .sidebar {
+    position: sticky;
+    top: calc(var(--header-height, 64px) + 20px);
+    max-height: calc(100vh - var(--header-height, 64px) - 20px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  .page-toc {
+    position: sticky;
+    top: calc(var(--header-height, 64px) + 20px);
+  }
 }
 
 .sidebar-toggle {
@@ -840,6 +805,39 @@ pre .hljs-meta {
   border-radius: 8px;
   background: var(--accent-soft);
   color: var(--accent-strong);
+}
+
+.api-list {
+  display: grid;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.api-signature {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--surface);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.section .api-signature {
+  color: var(--muted);
+}
+
+.api-prefix {
+  color: var(--faint);
+}
+
+.api-name {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.api-item > p + p {
+  margin-top: 8px;
 }
 
 .section a {
