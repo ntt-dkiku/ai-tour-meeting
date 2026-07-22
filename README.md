@@ -4,7 +4,7 @@
 
 <p align="center">
   <a href="https://ntt-dkiku.github.io/ai-tour-meeting/" target="_blank"><img src="https://img.shields.io/badge/📗-docs-green"></a>
-  <a href="https://arxiv.org/abs/2607.xxxxx" target="_blank"><img src="https://img.shields.io/badge/arXiv-pdf-red"></a>
+  <a href="https://arxiv.org/abs/2607.18806" target="_blank"><img src="https://img.shields.io/badge/arXiv-pdf-red"></a>
   <a href="https://ntt-rd.app.box.com/s/kvca8nvs1i3gdfh0xcvrrza7qx8w19om" target="_blank"><img src="https://img.shields.io/badge/demo-video-blue"></a>
 </p>
 
@@ -148,14 +148,13 @@ Our code is licensed by NTT. The use of our code is limited to research purposes
 ## 🤝 Citation
 If you find this work useful, please cite our paper as follows:
 ```
-Comming soon!
+@misc{kikuta2026aitourmeeting,
+      title={AI Tour Meeting: Group Travel Planning by LLM Agents}, 
+      author={Daisuke Kikuta},
+      year={2026},
+      eprint={2607.18806},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2607.18806}, 
+}
 ```
-<!-- @misc{dkiku2026aitourmeeting,
-    title={AI Tour Meeting: Collaborative Tour Planning by LLM Agents}, 
-    author={Daisuke Kikuta},
-    year={2026},
-    eprint={2602.xxxxx},
-    archivePrefix={arXiv},
-    primaryClass={cs.AI},
-    url={https://arxiv.org/abs/2602.xxxxx}, 
-} -->
