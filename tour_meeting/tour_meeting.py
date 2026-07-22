@@ -2932,7 +2932,8 @@ class AITourMeeting:
         reason = "consensus" if consensus_reached else "stopped"
 
         # ── Post-consensus satisfaction evaluation ──
-        if consensus_reached and current_route_destinations:
+        enable_post_eval = self._settings.get("enable_post_eval", True)
+        if enable_post_eval and consensus_reached and current_route_destinations:
             route_text = format_route_detail(current_route_destinations)
             for pname, participant in participant_lookup.items():
                 try:

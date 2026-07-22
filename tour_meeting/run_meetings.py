@@ -77,6 +77,13 @@ def main() -> None:
         help="Balance speaking turns across participants (default: true)",
     )
     parser.add_argument(
+        "--enable-post-eval",
+        choices=["true", "false"],
+        default=None,
+        help="Run the participants' self-evaluation at the end of each meeting "
+             "when consensus is reached (default: true)",
+    )
+    parser.add_argument(
         "--single-decider",
         default=None,
         help="0-based index or 'facilitator': the participant who acts as the "
@@ -195,6 +202,8 @@ def main() -> None:
         settings["volunteer_mode"] = args.volunteer_mode == "true"
     if args.balanced_turns is not None:
         settings["balanced_turns"] = args.balanced_turns == "true"
+    if args.enable_post_eval is not None:
+        settings["enable_post_eval"] = args.enable_post_eval == "true"
 
     cli_constraints = {
         key: value
@@ -254,6 +263,15 @@ def main() -> None:
         analytics_results.append({
             "index": i,
             "title": config["title"],
+            "participants": [
+                {
+                    "name": p["name"],
+                    "model_name": p["model_name"],
+                    "temperature": p["temperature"],
+                    "seed": p["seed"],
+                }
+                for p in participants
+            ],
             "analytics": meeting.export_analytics(),
         })
         with open(args.output, "w", encoding="utf-8") as f:
