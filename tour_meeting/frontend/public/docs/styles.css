@@ -57,6 +57,7 @@
 html {
   scroll-behavior: smooth;
   background: var(--bg);
+  overflow-x: clip;
 }
 
 body {
@@ -703,7 +704,23 @@ h3 {
 }
 
 .steps {
-  padding-left: 20px;
+  list-style: none;
+  counter-reset: steps;
+  padding-left: 0;
+  margin: 0;
+}
+
+.steps li {
+  counter-increment: steps;
+  position: relative;
+  padding-left: 36px;
+}
+
+.steps li::before {
+  content: counter(steps) ".";
+  position: absolute;
+  left: 16px;
+  top: 0;
 }
 
 .steps li + li {
@@ -805,6 +822,24 @@ pre .hljs-meta {
   border-radius: 8px;
   background: var(--accent-soft);
   color: var(--accent-strong);
+}
+
+.doc-figure {
+  margin: 0 0 24px;
+}
+
+.doc-figure img {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+}
+
+.doc-figure figcaption {
+  margin-top: 8px;
+  color: var(--faint);
+  font-size: 0.85rem;
+  text-align: center;
 }
 
 .api-list {

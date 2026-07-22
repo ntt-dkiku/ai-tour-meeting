@@ -23,16 +23,10 @@
     ],
     "developer-guide": [
       {
-        title: "Developer guide",
-        items: [
-          { key: "testing", label: "Testing and customization", href: "./reference.html" },
-          { key: "hosting", label: "Hosting and release notes", href: "./deployment.html" },
-        ],
-      },
-      {
-        title: "Coding agent integration",
+        title: "System integration",
         items: [
           { key: "agent-skills", label: "Agent skills", href: "./agent-skills.html" },
+          { key: "evaluation", label: "Evaluate your system", href: "./evaluation.html" },
         ],
       },
     ],
@@ -46,7 +40,7 @@
       {
         title: "Contact",
         items: [
-          { key: "developer", label: "Developer", href: "./developer.html" },
+          { key: "developer", label: "Maintainer", href: "./developer.html" },
           { key: "citation", label: "Citation", href: "./citation.html" },
         ],
       },

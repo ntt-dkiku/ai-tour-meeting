@@ -25,7 +25,7 @@
         <a class="site-title" href="./index.html">AI Tour Meeting</a>
         <nav class="site-tabs" aria-label="Primary">
           <a class="site-tab is-active" href="./index.html" aria-current="page">User guide</a>
-          <a class="site-tab" href="./reference.html">Developer guide</a>
+          <a class="site-tab" href="./agent-skills.html">Developer guide</a>
           <a class="site-tab" href="./changelog.html">Others</a>
         </nav>
       </div>
@@ -53,10 +53,51 @@
               <span class="breadcrumb__current">Getting started</span>
             </nav>
             <h1>GUI</h1>
-            <p class="lede">This page is currently in preparation and will be available soon.</p>
+            <p class="lede">This page guides you through the GUI. After deploying AI Tour Meeting with <span class="inline-code">make up</span>, access <span class="inline-code">localhost:3000</span> in your browser, and you will see the GUI shown below.</p>
           </div>
         </header>
+
+        <figure class="doc-figure">
+          <img src="./assets/gui_landingpage.png" alt="AI Tour Meeting GUI landing page" loading="lazy" />
+        </figure>
+
+        <section class="section" id="sidebar-menu">
+          <p>The sidebar on the left provides the following menu items:</p>
+          <ol class="steps">
+            <li><strong>New meeting</strong>: Open the meeting configuration page, where you set the title, goals, constraints, participants, and meeting settings.</li>
+            <li><strong>Random sampling</strong>: Generate a random meeting with an LLM. Useful for quickly trying the app or seeding simulation experiments.</li>
+            <li><strong>Settings</strong>: Configure LLM settings.</li>
+            <li><strong>Document</strong>: Open this documentation site.</li>
+            <li><strong>Meetings</strong>: List of your previous meetings. Click one to open its discussion and results.</li>
+          </ol>
+        </section>
+
+        <section class="section" id="meeting-settings">
+          <h2>Meeting settings</h2>
+        </section>
+
+        <section class="section" id="participant-settings">
+          <h2>Participant settings</h2>
+        </section>
+
+        <section class="section" id="meeting-monitoring">
+          <h2>Meeting monitoring</h2>
+        </section>
+
+        <section class="section" id="analytics-dashboard">
+          <h2>Analytics dashboard</h2>
+        </section>
       </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#meeting-settings">Meeting settings</a>
+          <a class="toc-link" href="#participant-settings">Participant settings</a>
+          <a class="toc-link" href="#meeting-monitoring">Meeting monitoring</a>
+          <a class="toc-link" href="#analytics-dashboard">Analytics dashboard</a>
+        </div>
+      </aside>
     </div>
 
     <script src="./nav.js" defer></script>
