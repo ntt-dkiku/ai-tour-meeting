@@ -57,7 +57,6 @@
 html {
   scroll-behavior: smooth;
   background: var(--bg);
-  overflow-x: clip;
 }
 
 body {
@@ -102,10 +101,8 @@ img {
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: start;
   gap: 18px;
-  max-width: 1700px;
   width: 100%;
-  margin: 0 auto;
-  padding: 16px 20px 0 32px;
+  padding: 16px max(20px, calc((100% - 1700px) / 2 + 20px)) 0 max(32px, calc((100% - 1700px) / 2 + 32px));
   background: var(--bg);
   overflow: visible;
 }
@@ -113,10 +110,9 @@ img {
 .site-header::after {
   content: "";
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: 0;
   bottom: 0;
-  width: 100vw;
-  transform: translateX(-50%);
   border-bottom: 1px solid var(--border);
   pointer-events: none;
 }
@@ -825,7 +821,7 @@ pre .hljs-meta {
 }
 
 .doc-figure {
-  margin: 0 0 24px;
+  margin: 16px 0 24px;
 }
 
 .doc-figure img {

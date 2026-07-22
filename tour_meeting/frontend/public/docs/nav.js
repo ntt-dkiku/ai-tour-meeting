@@ -12,11 +12,11 @@
         ],
       },
       {
-        title: "Framework",
+        title: "Technical details",
         items: [
-          { key: "design", label: "Design", href: "./design.html" },
-          { key: "participants", label: "Participants", href: "./participants.html" },
-          { key: "workflow", label: "Workflow", href: "./meeting-workflow.html" },
+          { key: "design", label: "Overall design", href: "./design.html" },
+          { key: "participants", label: "Participant", href: "./participants.html" },
+          { key: "workflow", label: "Meeting workflow", href: "./meeting-workflow.html" },
           { key: "context-management", label: "Context management", href: "./context-management.html" },
         ],
       },

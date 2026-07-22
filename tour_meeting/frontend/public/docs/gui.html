@@ -64,7 +64,7 @@
         <section class="section" id="sidebar-menu">
           <p>The sidebar on the left provides the following menu items:</p>
           <ol class="steps">
-            <li><strong>New meeting</strong>: Open the meeting configuration page, where you set the title, goals, constraints, participants, and meeting settings.</li>
+            <li><strong>New meeting</strong>: Open the meeting settings page, where you set the title, goals, constraints, participants, and meeting workflows.</li>
             <li><strong>Random sampling</strong>: Generate a random meeting with an LLM. Useful for quickly trying the app or seeding simulation experiments.</li>
             <li><strong>Settings</strong>: Configure LLM settings.</li>
             <li><strong>Document</strong>: Open this documentation site.</li>
@@ -74,18 +74,34 @@
 
         <section class="section" id="meeting-settings">
           <h2>Meeting settings</h2>
+          <p>Clicking <strong>New meeting</strong> opens the meeting settings page shown below. Here, you can set the meeting title, the participants, the global goals shared by all participants, constraints such as time and budget, and the turn and voting rules for each of the conversation and voting phases.</p>
+          <figure class="doc-figure">
+            <img src="./assets/gui_meeting_settings.png" alt="Meeting settings screen" loading="lazy" />
+          </figure>
         </section>
 
         <section class="section" id="participant-settings">
           <h2>Participant settings</h2>
+          <p>Clicking the <strong>+</strong> button in the <strong>Participants</strong> section of the meeting settings page opens the participant settings screen shown below, where you can add a participant. For each participant, you can specify a persona (e.g., background and personality), personal goals, a role, the LLM that instantiates the participant, and more.</p>
+          <figure class="doc-figure">
+            <img src="./assets/gui_participant_settings.png" alt="Participant settings screen" loading="lazy" />
+          </figure>
         </section>
 
         <section class="section" id="meeting-monitoring">
           <h2>Meeting monitoring</h2>
+          <p>Once the meeting is configured, clicking the <strong>Start</strong> button at the top right of the meeting settings page automatically takes you to the meeting screen shown below. Here, you can monitor the participants discussing with each other in a chat-style view.</p>
+          <figure class="doc-figure">
+            <img src="./assets/gui_meeting_monitor.png" alt="Meeting monitoring screen" loading="lazy" />
+          </figure>
         </section>
 
         <section class="section" id="analytics-dashboard">
           <h2>Analytics dashboard</h2>
+          <p>After the meeting ends, clicking the <strong>Statistics</strong> button at the top right opens the analytics dashboard shown below. Here, you can visually check basic metrics such as meeting duration, turn counts, token consumption, and statistics on proposal acceptance. You can also export all meeting logs and metrics in JSON format from the sidebar, enabling more detailed analysis through custom scripts using the exported JSON.</p>
+          <figure class="doc-figure">
+            <img src="./assets/gui_analysis_dashboard.png" alt="Analytics dashboard screen" loading="lazy" />
+          </figure>
         </section>
       </main>
 
