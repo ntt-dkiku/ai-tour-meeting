@@ -156,6 +156,78 @@ img {
   min-width: 0;
 }
 
+.site-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.version-menu {
+  position: relative;
+  flex: 0 0 auto;
+  /* Optically center the badge on the title's lowercase-heavy text */
+  margin-top: 2px;
+}
+
+.version-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px 2px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.version-badge svg {
+  width: 12px;
+  height: 12px;
+}
+
+.version-badge:hover,
+.version-badge:focus-visible {
+  color: var(--text);
+  background: var(--surface-strong);
+}
+
+.version-menu__list {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 80;
+  min-width: 110px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+}
+
+.version-menu__item {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.version-menu__item:hover,
+.version-menu__item:focus-visible {
+  color: var(--text);
+  background: var(--surface-strong);
+}
+
+.version-menu__item.is-current {
+  color: var(--accent-strong);
+}
+
 .site-title {
   font-size: 1.38rem;
   font-weight: 800;
@@ -197,6 +269,80 @@ img {
   display: flex;
   align-items: center;
   gap: 10px;
+  /* Match the site title's line box so the toggle centers on it */
+  height: calc(1.38rem * 1.1);
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-right: 6px;
+  color: var(--text);
+}
+
+.github-link:hover .github-link__repo,
+.github-link:focus-visible .github-link__repo {
+  color: var(--accent-strong);
+}
+
+.github-link__mark {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+}
+
+.github-link__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.github-link__repo {
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+  transition: color 0.15s ease;
+}
+
+.github-link__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.github-link__meta[hidden],
+.github-link__stat[hidden] {
+  display: none;
+}
+
+.github-link__stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.github-link__stat svg {
+  width: 14px;
+  height: 14px;
+  /* The glyphs sit slightly high in their viewBox; nudge down to center on the digits */
+  position: relative;
+  top: 1px;
+}
+
+@media (max-width: 640px) {
+  .github-link__text {
+    display: none;
+  }
+
+  .github-link {
+    margin-right: 0;
+  }
 }
 
 .theme-toggle {
@@ -1062,6 +1208,10 @@ pre .hljs-meta {
   flex: 0 0 auto;
   width: 20px;
   height: 20px;
+  /* Optical alignment: lowercase-heavy labels center slightly below the
+     geometric middle, so nudge the chevron down to match */
+  position: relative;
+  top: 1px;
 }
 
 @media (max-width: 1280px) {
