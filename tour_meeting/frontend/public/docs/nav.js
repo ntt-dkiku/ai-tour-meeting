@@ -33,16 +33,16 @@
     ],
     "others": [
       {
-        title: "Changelog",
-        items: [
-          { key: "changelog", label: "Changelog", href: "./changelog.html" },
-        ],
-      },
-      {
         title: "Contact",
         items: [
           { key: "developer", label: "Maintainer", href: "./developer.html" },
           { key: "citation", label: "Citation", href: "./citation.html" },
+        ],
+      },
+      {
+        title: "Changelog",
+        items: [
+          { key: "changelog", label: "Changelog", href: "./changelog.html" },
         ],
       },
     ],

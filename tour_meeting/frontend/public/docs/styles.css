@@ -1609,6 +1609,12 @@ pre .hljs-meta {
   flex-direction: column;
   max-width: 250px;
   margin: 0 auto;
+  transition: opacity 0.5s ease;
+}
+
+/* Loop boundary: the whole stack fades out before the demo restarts */
+.ctx-demo__stack.is-faded {
+  opacity: 0;
 }
 
 .ctx-demo__box {
@@ -1649,6 +1655,17 @@ pre .hljs-meta {
 .ctx-demo__box.is-marked {
   border-color: rgba(235, 135, 50, 0.8);
   background: rgba(235, 135, 50, 0.12);
+}
+
+/* Token-based truncation cuts through the middle of a turn: only the
+   bottom half of the block survives, with a ragged (dashed) top edge */
+.ctx-demo__box.is-halved {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  max-height: 17px;
+  padding-top: 0;
+  border-top-style: dashed;
 }
 
 .ctx-demo__box.is-removed,
@@ -1730,7 +1747,9 @@ pre .hljs-meta {
 
 .flow-demo--wide {
   margin: 16px 0 6px;
-  padding: 48px 8px 4px;
+  /* The phase badge gets its own row of clearance above the speech
+     bubbles, matching the text-to-animation spacing used in the cards */
+  padding: 80px 8px 4px;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: var(--surface);
