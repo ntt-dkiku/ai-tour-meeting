@@ -1795,10 +1795,15 @@ pre .hljs-meta {
 }
 
 .pager__link--prev .pager__icon {
+  /* The chevron glyph has ~7px of blank space on its left inside the
+     viewBox; pull it out so the arrow tip aligns with the content edge */
+  margin-left: -7px;
   transition: transform 0.15s ease;
 }
 
 .pager__link--next .pager__icon {
+  /* Mirror of the prev icon: trim the glyph's blank right side */
+  margin-right: -7px;
   transition: transform 0.15s ease;
 }
 
