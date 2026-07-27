@@ -276,13 +276,12 @@ img {
 .github-link {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  margin-right: 6px;
   color: var(--text);
+  transition: color 0.15s ease;
 }
 
-.github-link:hover .github-link__repo,
-.github-link:focus-visible .github-link__repo {
+.github-link:hover,
+.github-link:focus-visible {
   color: var(--accent-strong);
 }
 
@@ -290,59 +289,6 @@ img {
   flex: 0 0 auto;
   width: 22px;
   height: 22px;
-}
-
-.github-link__text {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  min-width: 0;
-}
-
-.github-link__repo {
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1.2;
-  transition: color 0.15s ease;
-}
-
-.github-link__meta {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.github-link__meta[hidden],
-.github-link__stat[hidden] {
-  display: none;
-}
-
-.github-link__stat {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  color: var(--muted);
-  font-size: 0.74rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.github-link__stat svg {
-  width: 14px;
-  height: 14px;
-  /* The glyphs sit slightly high in their viewBox; nudge down to center on the digits */
-  position: relative;
-  top: 1px;
-}
-
-@media (max-width: 640px) {
-  .github-link__text {
-    display: none;
-  }
-
-  .github-link {
-    margin-right: 0;
-  }
 }
 
 .theme-toggle {
@@ -1158,6 +1104,297 @@ pre .hljs-meta {
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.7;
+}
+
+/* Input context diagram (context-management.html) */
+.ctx-diagram {
+  position: relative;
+  max-width: 400px;
+  margin: 20px auto 24px;
+  padding: 44px 18px 18px;
+  border: 1.5px solid rgba(235, 135, 50, 0.5);
+  border-radius: 16px;
+  background: rgba(235, 135, 50, 0.06);
+}
+
+.ctx-diagram__title {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #b65c1f;
+}
+
+:root[data-theme="dark"] .ctx-diagram__title {
+  color: #ffb679;
+}
+
+.ctx-group {
+  position: relative;
+  margin-top: 26px;
+  padding: 34px 14px 14px;
+  border-radius: 12px;
+}
+
+.ctx-group--prev {
+  border: 1.5px solid rgba(80, 200, 120, 0.5);
+  background: rgba(80, 200, 120, 0.07);
+}
+
+.ctx-group--current {
+  border: 1.5px solid rgba(80, 160, 230, 0.5);
+  background: rgba(80, 160, 230, 0.08);
+}
+
+.ctx-group__title {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.ctx-group--prev .ctx-group__title {
+  color: var(--accent-strong);
+}
+
+.ctx-group--current .ctx-group__title {
+  color: #2f6fd0;
+}
+
+:root[data-theme="dark"] .ctx-group--current .ctx-group__title {
+  color: #6ab0ff;
+}
+
+.ctx-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 1.5px solid var(--faint);
+  border-radius: 10px;
+  background: var(--bg-elevated);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ctx-box--system {
+  background: var(--surface-strong);
+}
+
+.ctx-box--temp {
+  border-style: dashed;
+}
+
+.ctx-role {
+  flex: 0 0 auto;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--surface-strong);
+  color: var(--faint);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* Vertical connectors between stacked blocks */
+.ctx-group .ctx-box + .ctx-box,
+.ctx-diagram > .ctx-box + .ctx-group,
+.ctx-diagram > .ctx-group + .ctx-group {
+  margin-top: 16px;
+}
+
+.ctx-group .ctx-box + .ctx-box::before,
+.ctx-diagram > .ctx-box + .ctx-group::before,
+.ctx-diagram > .ctx-group + .ctx-group::before {
+  content: "";
+  position: absolute;
+  top: -17.5px;
+  left: 50%;
+  width: 2px;
+  height: 17.5px;
+  background: var(--faint);
+}
+
+/* Itinerary chain diagram (itinerary.html) */
+.route-diagram {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 20px 0 8px;
+}
+
+.route-dest {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 16px;
+  border: 1.5px solid rgba(80, 200, 120, 0.6);
+  border-radius: 12px;
+  background: rgba(80, 200, 120, 0.08);
+}
+
+.route-dest__name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.route-dest__meta {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.route-leg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 0 12px 16px;
+}
+
+.route-leg span {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--faint);
+  white-space: nowrap;
+}
+
+.route-leg::after {
+  content: "";
+  position: absolute;
+  bottom: 18px;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: var(--faint);
+}
+
+.route-leg::before {
+  content: "";
+  position: absolute;
+  bottom: 14.5px;
+  right: 8px;
+  width: 0;
+  height: 0;
+  border-left: 7px solid var(--faint);
+  border-top: 4.5px solid transparent;
+  border-bottom: 4.5px solid transparent;
+}
+
+.route-leg--more {
+  padding-bottom: 0;
+}
+
+.route-leg--more::after,
+.route-leg--more::before {
+  display: none;
+}
+
+.route-leg--more span {
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+/* Context compaction demos */
+.ctx-demo {
+  position: relative;
+  margin-top: 10px;
+  padding: 30px 6px 4px;
+}
+
+.ctx-demo__meter {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--surface-strong);
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.ctx-demo__stack {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+.ctx-demo__box {
+  overflow: hidden;
+  max-height: 40px;
+  margin-top: 8px;
+  padding: 6px 12px;
+  border: 1.5px solid var(--faint);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+  transition: max-height 0.4s ease, margin-top 0.4s ease, padding 0.4s ease,
+    opacity 0.4s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.ctx-demo__box:first-child {
+  margin-top: 0;
+}
+
+.ctx-demo__box--system {
+  background: var(--surface-strong);
+}
+
+.ctx-demo__box--current {
+  border-color: rgba(80, 160, 230, 0.7);
+  background: rgba(80, 160, 230, 0.1);
+}
+
+.ctx-demo__box--summary {
+  border-color: rgba(235, 135, 50, 0.7);
+  background: rgba(235, 135, 50, 0.1);
+}
+
+.ctx-demo__box.is-marked {
+  border-color: rgba(235, 135, 50, 0.8);
+  background: rgba(235, 135, 50, 0.12);
+}
+
+.ctx-demo__box.is-removed,
+.ctx-demo__box.is-hidden {
+  max-height: 0;
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-width: 0;
+  opacity: 0;
+}
+
+.ctx-demo__label {
+  min-height: 2.6em;
+  margin: 12px 0 0;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctx-demo__box {
+    transition: none;
+  }
 }
 
 /* Workflow demo animations (meeting-workflow.html) */

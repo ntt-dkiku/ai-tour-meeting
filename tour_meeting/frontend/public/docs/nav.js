@@ -15,6 +15,7 @@
         title: "Technical details",
         items: [
           { key: "design", label: "Overview", href: "./design.html" },
+          { key: "itinerary", label: "Itinerary", href: "./itinerary.html" },
           { key: "participants", label: "Participant", href: "./participants.html" },
           { key: "workflow", label: "Meeting workflow", href: "./meeting-workflow.html" },
           { key: "context-management", label: "Context management", href: "./context-management.html" },
@@ -377,13 +378,6 @@
 
   var GITHUB_REPO = "ntt-dkiku/ai-tour-meeting";
 
-  function formatStarCount(count) {
-    if (count >= 1000) {
-      return (Math.round(count / 100) / 10).toFixed(1).replace(/\.0$/, "") + "k";
-    }
-    return String(count);
-  }
-
   function initGithubLink() {
     var actions = document.querySelector(".site-header__actions");
     if (!actions || actions.querySelector(".github-link")) {
@@ -395,75 +389,13 @@
     link.href = "https://github.com/" + GITHUB_REPO;
     link.target = "_blank";
     link.rel = "noopener";
+    link.title = GITHUB_REPO;
     link.setAttribute("aria-label", "GitHub repository");
     link.innerHTML =
       '<svg class="github-link__mark" viewBox="0 0 24 24" aria-hidden="true">' +
       '<path fill="currentColor" d="M12 1.7a10.5 10.5 0 0 0-3.32 20.46c.53.1.72-.23.72-.5v-1.97c-2.92.63-3.54-1.24-3.54-1.24c-.48-1.21-1.17-1.53-1.17-1.53c-.95-.65.07-.64.07-.64c1.05.07 1.6 1.08 1.6 1.08c.94 1.6 2.46 1.14 3.06.87c.1-.68.37-1.14.66-1.4c-2.33-.27-4.79-1.17-4.79-5.2c0-1.14.41-2.08 1.08-2.81c-.1-.27-.47-1.34.1-2.79c0 0 .89-.28 2.9 1.08a10.06 10.06 0 0 1 5.28 0c2-1.36 2.89-1.08 2.89-1.08c.58 1.45.21 2.52.1 2.79c.68.73 1.08 1.67 1.08 2.81c0 4.04-2.46 4.93-4.81 5.19c.38.33.72.97.72 1.96v2.9c0 .28.19.61.73.5A10.5 10.5 0 0 0 12 1.7Z"/>' +
-      "</svg>" +
-      '<span class="github-link__text">' +
-      '<span class="github-link__repo">' + GITHUB_REPO + "</span>" +
-      '<span class="github-link__meta" hidden>' +
-      '<span class="github-link__stat">' +
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3.6l2.35 4.76l5.25.76l-3.8 3.7l.9 5.23L12 15.58l-4.7 2.47l.9-5.23l-3.8-3.7l5.25-.76L12 3.6Z"/></svg>' +
-      '<span class="github-link__stars-count"></span>' +
-      "</span>" +
-      '<span class="github-link__stat">' +
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 3a3 3 0 0 1 1 5.83v2.67c0 .28.22.5.5.5h7a.5.5 0 0 0 .5-.5V8.83A3 3 0 1 1 18 8.9v2.6a2.5 2.5 0 0 1-2.5 2.5H13v1.17a3 3 0 1 1-2 0V14H8.5A2.5 2.5 0 0 1 6 11.5V8.83A3 3 0 0 1 7 3Zm0 2a1 1 0 1 0 0 2a1 1 0 0 0 0-2Zm10 0a1 1 0 1 0 0 2a1 1 0 0 0 0-2ZM12 17a1 1 0 1 0 0 2a1 1 0 0 0 0-2Z"/></svg>' +
-      '<span class="github-link__forks-count"></span>' +
-      "</span>" +
-      "</span>" +
-      "</span>";
+      "</svg>";
     actions.insertBefore(link, actions.firstChild);
-
-    var meta = link.querySelector(".github-link__meta");
-    var starsCount = link.querySelector(".github-link__stars-count");
-    var forksCount = link.querySelector(".github-link__forks-count");
-
-    // Show each stat only when its count is at least 1
-    function showMeta(stars, forks) {
-      starsCount.textContent = formatStarCount(stars);
-      forksCount.textContent = formatStarCount(forks);
-      starsCount.parentNode.hidden = stars < 1;
-      forksCount.parentNode.hidden = forks < 1;
-      meta.hidden = stars < 1 && forks < 1;
-    }
-
-    // Cache the counts for an hour to stay clear of GitHub API rate limits
-    var cacheKey = "ai-tour-meeting-gh-meta";
-    try {
-      var cached = JSON.parse(localStorage.getItem(cacheKey));
-      if (cached && Date.now() - cached.time < 3600000) {
-        showMeta(cached.stars, cached.forks);
-        return;
-      }
-    } catch (e) {}
-
-    if (typeof window.fetch !== "function") {
-      return;
-    }
-
-    fetch("https://api.github.com/repos/" + GITHUB_REPO)
-      .then(function (res) {
-        return res.ok ? res.json() : null;
-      })
-      .then(function (data) {
-        if (!data || typeof data.stargazers_count !== "number") {
-          return;
-        }
-        var forks = typeof data.forks_count === "number" ? data.forks_count : 0;
-        showMeta(data.stargazers_count, forks);
-        try {
-          localStorage.setItem(
-            cacheKey,
-            JSON.stringify({
-              stars: data.stargazers_count,
-              forks: forks,
-              time: Date.now(),
-            })
-          );
-        } catch (e) {}
-      })
-      .catch(function () {});
   }
 
   // Docs versions shown in the badge next to the site title. Add entries here
