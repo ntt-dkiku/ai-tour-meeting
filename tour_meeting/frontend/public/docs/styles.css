@@ -551,6 +551,11 @@ body.home-page {
   max-width: none;
 }
 
+/* Pulls a section right up under the page header (e.g. the citation block) */
+.page-header + .section--tight {
+  margin-top: -38px;
+}
+
 .eyebrow {
   margin: 0 0 10px;
   color: var(--accent);
@@ -1218,6 +1223,76 @@ pre .hljs-meta {
   width: 2px;
   height: 17.5px;
   background: var(--faint);
+}
+
+/* Maintainer card (developer.html) */
+.maintainer-card {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin: -18px 0 20px;
+}
+
+.maintainer-art {
+  flex: 0 0 auto;
+  width: 140px;
+  height: 140px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  /* Always the dark-theme look, regardless of the site theme */
+  background: #0a0f0c;
+  cursor: pointer;
+  touch-action: none;
+}
+
+.maintainer-name {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.section .maintainer-info p + p {
+  margin-top: 2px;
+}
+
+.maintainer-affil {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.maintainer-links {
+  display: flex;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.maintainer-links a {
+  display: inline-flex;
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+
+.maintainer-links a:hover,
+.maintainer-links a:focus-visible {
+  color: var(--accent-strong);
+}
+
+.maintainer-links svg {
+  width: 22px;
+  height: 22px;
+}
+
+@media (max-width: 640px) {
+  .maintainer-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
 }
 
 /* Itinerary chain diagram (itinerary.html) */
