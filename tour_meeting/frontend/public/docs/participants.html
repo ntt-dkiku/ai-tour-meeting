@@ -59,31 +59,64 @@
 
         <section class="section" id="persona">
           <h2>Persona</h2>
-          <p>Each LLM agent (participant) is instantiated with a distinct persona. The persona is given to the LLM as a system prompt, and the participant takes actions during the meeting while role-playing according to it. The persona consists of the following attributes:</p>
+          <p>Each LLM participant (=agent) is instantiated with a distinct persona. The persona is given to the LLM as the following system prompt, and the participant takes actions during the meeting while role-playing according to it. The <span class="inline-code">{placeholder}</span> tokens are filled at runtime.</p>
+          <pre><code>You are one of the participants in a collaborative tour planning meeting.
+Your task is to actively take part in the discussion and help the group reach
+a shared itinerary that satisfies everyone's interest.
+Please carefully read the information and follow the rules below.
+
+# Your Persona
+Always role-play as the following person:
+- Name: {name}
+- Role: {role}
+- Background: {background}
+- Personality: {personality}
+- Preferences: {preferences}
+- Personal Goals: {personal_goals}
+- Speaking Style: {speaking_style}
+- Explanation Style: {explanation_style}
+
+# Meeting Info
+You are joining the following meeting:
+- Meeting Title: {meeting_title}
+- Meeting Goal: {meeting_goals}
+- {num_participants} participants (including you) are joining the meeting.
+- Other participant name(s) are as follows: {other_participants}
+{meeting_workflow}
+{constraints_text}
+
+# Rules
+Strictly follow the rules below:
+1. **Your Focus is Determining Route:** ...
+2. **Stay in Character:** Always act consistently with the persona above.
+3. **Avoid meta-commentary:** ...
+4. **Focus on Your Personal Goals:** ...
+5. **Maintain a Natural Conversational Flow:** ...</code></pre>
+          <p>The persona defined in the system prompt consists of the following elements:</p>
           <div class="param-list">
             <div class="param">
               <p class="param__head"><span class="param__name">Name</span></p>
               <p class="param__desc">The participant's name.</p>
             </div>
             <div class="param">
+              <p class="param__head"><span class="param__name">Role</span></p>
+              <p class="param__desc">The participant's role in the meeting: <span class="inline-code">facilitator</span> moderates the discussion; <span class="inline-code">attendee</span> participates as a regular member.</p>
+            </div>
+            <div class="param">
               <p class="param__head"><span class="param__name">Background</span></p>
-              <p class="param__desc">The participant's experience or situation.</p>
+              <p class="param__desc">The participant's relevant context, experience, or situation.</p>
             </div>
             <div class="param">
               <p class="param__head"><span class="param__name">Personality</span></p>
-              <p class="param__desc">The participant's stable traits.</p>
+              <p class="param__desc">The participant's stable traits, such as cautious, curious, analytical, or sociable.</p>
             </div>
             <div class="param">
               <p class="param__head"><span class="param__name">Preferences</span></p>
-              <p class="param__desc">The participant's preferences related to the tour.</p>
+              <p class="param__desc">The participant's likes, dislikes, priorities, and constraints related to the tour.</p>
             </div>
             <div class="param">
               <p class="param__head"><span class="param__name">Personal goals</span></p>
-              <p class="param__desc">The participant's personal goals in the tour. Each participant advances the discussion in pursuit of their own personal goals while remaining aligned with the global goals of the meeting.</p>
-            </div>
-            <div class="param">
-              <p class="param__head"><span class="param__name">Role</span></p>
-              <p class="param__desc">The participant's role in the meeting: <span class="inline-code">facilitator</span> or <span class="inline-code">attendee</span>.</p>
+              <p class="param__desc">The participant's specific objectives for the tour-planning discussion. Each participant advances the discussion in pursuit of their own personal goals while remaining aligned with the global goals of the meeting.</p>
             </div>
             <div class="param">
               <p class="param__head"><span class="param__name">Speaking style</span></p>
@@ -91,71 +124,70 @@
             </div>
             <div class="param">
               <p class="param__head"><span class="param__name">Explanation style</span></p>
-              <p class="param__desc">A strategy for convincing others to accept their proposal: <span class="inline-code">subjective</span>, <span class="inline-code">contrastive</span>, or both. The former provides subjective opinions of the proposal based on the participant's preferences. The latter explains the objective pros and cons by comparing the proposed itinerary with the current one in terms of objective metrics such as cost, time, and number of destinations.</p>
+              <p class="param__desc">A strategy for convincing others to accept their proposal: <span class="inline-code">subjective</span> emphasizes the participant's personal perspective and preferences; <span class="inline-code">contrastive</span> compares the proposed itinerary with the current one in terms of objective metrics such as cost and travel time; <span class="inline-code">both</span> combines the two; <span class="inline-code">auto</span> flexibly chooses the most persuasive style for the situation.</p>
             </div>
           </div>
-        </section>
-
-        <section class="section" id="llm-settings">
-          <h2>LLM settings</h2>
-          <p>You can select an LLM that instantiates each participant, together with model parameters such as temperature and seed. Both commercial LLMs and local LLMs (via Ollama or vLLM) are supported &mdash; see <a href="./getting-started.html#local-llms">Quick start</a> for how to serve local models. Context management methods, including auto-compaction and history truncation, can also be configured individually for each participant (see <a href="./context-management.html">Context management</a>).</p>
         </section>
 
         <section class="section" id="actions">
           <h2>Actions</h2>
-          <p>The meeting proceeds in a turn-based manner, and each participant may take multiple actions during their single turn. There are two types of actions: <strong>intermediate</strong> and <strong>terminal</strong>. Intermediate actions may be taken multiple times within a turn, whereas once a terminal action is taken, the current turn ends.</p>
-          <p>The intermediate actions are common to both phases:</p>
-          <div class="param-list">
-            <div class="param">
-              <p class="param__head"><span class="param__name">search</span></p>
-              <p class="param__desc">Issues a query to retrieve information, such as the location or cost of destinations, via web search.</p>
+          <p>The meeting proceeds in a turn-based manner, and each participant may take multiple actions during their single turn. There are two types of actions: <strong>intermediate</strong> actions may be taken multiple times within a turn, whereas once a <strong>terminal</strong> action is taken, the current turn ends. The intermediate actions are common to both phases, while the terminal actions differ between the conversation phase and the voting phase.</p>
+          <div class="action-map">
+            <div class="action-panel action-panel--intermediate">
+              <p class="action-panel__title">Intermediate actions <span class="action-panel__badge">both phases &middot; repeatable</span></p>
+              <div class="action-item">
+                <p class="action-item__name">search</p>
+                <p class="action-item__desc">Issues a query to retrieve information, such as the location or cost of destinations, via web search.</p>
+              </div>
+              <div class="action-item">
+                <p class="action-item__name">ask</p>
+                <p class="action-item__desc">Asks another participant a question and receives a response.</p>
+              </div>
+              <div class="action-item">
+                <p class="action-item__name">reflect</p>
+                <p class="action-item__desc">Organizes and reviews the discussion conducted so far.</p>
+              </div>
             </div>
-            <div class="param">
-              <p class="param__head"><span class="param__name">ask</span></p>
-              <p class="param__desc">Asks another participant a question and receives a response.</p>
+            <div class="action-panel action-panel--conversation">
+              <p class="action-panel__title">Terminal actions <span class="action-panel__badge">conversation phase &middot; ends the turn</span></p>
+              <div class="action-item">
+                <p class="action-item__name">propose</p>
+                <p class="action-item__desc">Proposes a new itinerary. This triggers the voting phase.</p>
+              </div>
+              <div class="action-item">
+                <p class="action-item__name">satisfied</p>
+                <p class="action-item__desc">Indicates that the participant is satisfied with the current itinerary.</p>
+              </div>
+              <div class="action-item">
+                <p class="action-item__name">pass</p>
+                <p class="action-item__desc">Ends the turn without expressing a specific position (available when the volunteer option is enabled).</p>
+              </div>
             </div>
-            <div class="param">
-              <p class="param__head"><span class="param__name">reflect</span></p>
-              <p class="param__desc">Organizes and reviews the discussion conducted so far.</p>
+            <div class="action-panel action-panel--voting">
+              <p class="action-panel__title">Terminal actions <span class="action-panel__badge">voting phase &middot; ends the turn</span></p>
+              <div class="action-item">
+                <p class="action-item__name">accept</p>
+                <p class="action-item__desc">Votes for the proposed itinerary.</p>
+              </div>
+              <div class="action-item">
+                <p class="action-item__name">reject</p>
+                <p class="action-item__desc">Votes against the proposed itinerary.</p>
+              </div>
+              <div class="action-item">
+                <p class="action-item__name">score</p>
+                <p class="action-item__desc">Assigns a score to the proposed itinerary (used with score-based voting rules).</p>
+              </div>
             </div>
           </div>
-          <p>The terminal actions differ between the conversation phase and the voting phase. In the conversation phase, they include:</p>
-          <div class="param-list">
-            <div class="param">
-              <p class="param__head"><span class="param__name">propose</span></p>
-              <p class="param__desc">Proposes a new itinerary. This triggers the voting phase.</p>
-            </div>
-            <div class="param">
-              <p class="param__head"><span class="param__name">satisfied</span></p>
-              <p class="param__desc">Indicates that the participant is satisfied with the current itinerary.</p>
-            </div>
-            <div class="param">
-              <p class="param__head"><span class="param__name">pass</span></p>
-              <p class="param__desc">Ends the turn without expressing a specific position (available when the volunteer option is enabled).</p>
-            </div>
-          </div>
-          <p>In the voting phase, they include:</p>
-          <div class="param-list">
-            <div class="param">
-              <p class="param__head"><span class="param__name">accept</span></p>
-              <p class="param__desc">Votes for the proposed itinerary.</p>
-            </div>
-            <div class="param">
-              <p class="param__head"><span class="param__name">reject</span></p>
-              <p class="param__desc">Votes against the proposed itinerary.</p>
-            </div>
-            <div class="param">
-              <p class="param__head"><span class="param__name">score</span></p>
-              <p class="param__desc">Assigns a score to the proposed itinerary (used with score-based voting rules).</p>
-            </div>
-          </div>
-          <p>See <a href="./meeting-workflow.html">Meeting workflow</a> for how these actions drive the meeting between the two phases.</p>
         </section>
 
         <section class="section" id="human-participant">
-          <h2>Human participant (interactive mode)</h2>
-          <p>AI Tour Meeting also allows human users to participate in meetings. At their turn, they can interact with the LLM participants through the chat box by executing the same actions as the LLM participants. When proposing an itinerary, they can manually edit the destinations, or click <span class="inline-code">Generate with AI</span> to have an LLM refine their proposal interactively.</p>
+          <h2>Human participant</h2>
+          <p>AI Tour Meeting also allows human users to participate in meetings. At their turn, they can interact with the LLM participants through the chat box by executing the same actions as the LLM participants. When proposing an itinerary, they can manually edit the destinations, or click <span class="inline-code">Generate with AI</span> to have an LLM refine their proposal interactively. The figure below shows the chat boxes during voting (top), when asking another participant a question (middle), and when proposing an itinerary (bottom).</p>
           <p>A typical use case of this feature is to represent friends who are unable to attend the meeting as LLM participants based on their personas. By discussing the itinerary with these agents, you can incorporate the absent participants' perspectives into the tour planning.</p>
+          <figure class="doc-figure doc-figure--narrow">
+            <img src="./assets/interaction.png" alt="Chat boxes for human participants: voting, asking a question, and proposing an itinerary" loading="lazy" />
+          </figure>
         </section>
       </main>
 
@@ -163,9 +195,8 @@
         <div class="toc-card">
           <p class="toc-title">On this page</p>
           <a class="toc-link" href="#persona">Persona</a>
-          <a class="toc-link" href="#llm-settings">LLM settings</a>
           <a class="toc-link" href="#actions">Actions</a>
-          <a class="toc-link" href="#human-participant">Human participant (interactive mode)</a>
+          <a class="toc-link" href="#human-participant">Human participant</a>
         </div>
       </aside>
     </div>

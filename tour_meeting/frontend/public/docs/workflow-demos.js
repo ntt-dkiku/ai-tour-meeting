@@ -13,7 +13,11 @@
   //   result:  "accept" | "reject" — colors the caption
   //   ms:      duration override for this step
 
-  var STEP_MS = 1500;
+  // A speech bubble lives exactly as long as its dot animation: two 1s
+  // bounce cycles (matching the hop period) plus the 0.3s stagger.
+  var SPEECH_MS = 2300;
+  // Steps leave a short beat after the bubble fades before moving on
+  var STEP_MS = 2600;
 
   // ---------------------------------------------------------------------
   // Pixel-art dot characters — a vanilla port of the GUI's CharacterAvatar
@@ -278,11 +282,9 @@
     "round-robin": {
       actors: [{ id: "A" }, { id: "B" }, { id: "C" }],
       steps: [
-        { active: "A", label: "Turn 1: A" },
-        { active: "B", arrow: ["A", "B"], label: "Turn 2: B" },
-        { active: "C", arrow: ["B", "C"], label: "Turn 3: C" },
-        { active: "A", arrow: ["C", "A"], label: "Turn 4: back to A" },
-        { active: "B", arrow: ["A", "B"], label: "Turn 5: B …" },
+        { active: "A", arrow: ["C", "A"], label: "A speaks" },
+        { active: "B", arrow: ["A", "B"], label: "B speaks" },
+        { active: "C", arrow: ["B", "C"], label: "C speaks — and back to A" },
       ],
     },
 
@@ -300,10 +302,11 @@
       actors: [{ id: "A" }, { id: "B" }, { id: "C" }],
       steps: [
         { active: "A", label: "A speaks" },
-        { active: "A", arrow: ["A", "C"], label: "A invites C to speak next" },
+        { active: "C", arrow: ["A", "C"], speech: false, label: "A invites C to speak next" },
         { active: "C", label: "C speaks" },
-        { active: "C", arrow: ["C", "B"], label: "C invites B to speak next" },
-        { active: "B", label: "B speaks …" },
+        { active: "B", arrow: ["C", "B"], speech: false, label: "C invites B to speak next" },
+        { active: "B", label: "B speaks" },
+        { active: "A", arrow: ["B", "A"], speech: false, label: "B invites A to speak next" },
       ],
     },
 
@@ -312,18 +315,23 @@
       steps: [
         { active: "A", label: "A speaks" },
         { active: "F", label: "The facilitator takes a turn" },
-        { active: "F", arrow: ["F", "C"], label: "… and picks the next speaker" },
+        { active: "C", arrow: ["F", "C"], speech: false, label: "… and picks the next speaker" },
         { active: "C", label: "C speaks" },
-        { active: "F", arrow: ["F", "B"], label: "The facilitator picks again …" },
-        { active: "B", label: "B speaks …" },
+        { active: "F", label: "The facilitator takes a turn" },
+        { active: "B", arrow: ["F", "B"], speech: false, label: "… and picks the next speaker" },
+        { active: "B", label: "B speaks" },
+        { active: "F", label: "The facilitator takes a turn" },
+        { active: "F", label: "… and picks themselves this time" },
+        { active: "F", label: "The facilitator speaks" },
+        { active: "A", arrow: ["F", "A"], speech: false, label: "… then picks A — and so on" },
       ],
     },
 
     parallel: {
       actors: [{ id: "A" }, { id: "B" }, { id: "C" }],
       steps: [
-        { phase: "voting", label: "An itinerary has been proposed" },
-        { phase: "voting", active: ["A", "B", "C"], bubbles: { A: ACCEPT, B: REJECT, C: ACCEPT }, label: "All participants vote at the same time", ms: 2400 },
+        { label: "An itinerary has been proposed" },
+        { active: ["A", "B", "C"], bubbles: { A: ACCEPT, B: REJECT, C: ACCEPT }, label: "All participants vote at the same time", ms: 2400 },
       ],
     },
 
@@ -350,49 +358,49 @@
     majority: {
       actors: [{ id: "A" }, { id: "B" }, { id: "C" }],
       steps: [
-        { phase: "voting", active: "A", bubbles: { A: ACCEPT }, label: "A votes" },
-        { phase: "voting", active: "B", bubbles: { A: ACCEPT, B: REJECT }, label: "B votes" },
-        { phase: "voting", active: "C", bubbles: { A: ACCEPT, B: REJECT, C: ACCEPT }, label: "C votes" },
-        { phase: "voting", bubbles: { A: ACCEPT, B: REJECT, C: ACCEPT }, label: "2 of 3 accept — the proposal is adopted", result: "accept", ms: 2400 },
+        { active: "A", bubbles: { A: ACCEPT }, label: "A votes" },
+        { active: "B", bubbles: { A: ACCEPT, B: REJECT }, label: "B votes" },
+        { active: "C", bubbles: { A: ACCEPT, B: REJECT, C: ACCEPT }, label: "C votes" },
+        { bubbles: { A: ACCEPT, B: REJECT, C: ACCEPT }, label: "2 of 3 accept — the proposal is adopted", result: "accept", ms: 2400 },
       ],
     },
 
     unanimous: {
       actors: [{ id: "A" }, { id: "B" }, { id: "C" }],
       steps: [
-        { phase: "voting", active: "A", bubbles: { A: ACCEPT }, label: "A votes" },
-        { phase: "voting", active: "B", bubbles: { A: ACCEPT, B: REJECT }, label: "B votes" },
-        { phase: "voting", active: "C", bubbles: { A: ACCEPT, B: REJECT, C: ACCEPT }, label: "C votes" },
-        { phase: "voting", bubbles: { A: ACCEPT, B: REJECT, C: ACCEPT }, label: "Not unanimous — the proposal is rejected", result: "reject", ms: 2400 },
+        { active: "A", bubbles: { A: ACCEPT }, label: "A votes" },
+        { active: "B", bubbles: { A: ACCEPT, B: REJECT }, label: "B votes" },
+        { active: "C", bubbles: { A: ACCEPT, B: REJECT, C: ACCEPT }, label: "C votes" },
+        { bubbles: { A: ACCEPT, B: REJECT, C: ACCEPT }, label: "Not unanimous — the proposal is rejected", result: "reject", ms: 2400 },
       ],
     },
 
     "single-decider": {
       actors: [{ id: "A" }, { id: "B", tag: "decider" }, { id: "C" }],
       steps: [
-        { phase: "voting", dim: ["A", "C"], label: "Only the designated decider votes" },
-        { phase: "voting", active: "B", dim: ["A", "C"], bubbles: { B: ACCEPT }, label: "B accepts the proposal" },
-        { phase: "voting", dim: ["A", "C"], bubbles: { B: ACCEPT }, label: "The proposal is adopted", result: "accept", ms: 2100 },
+        { dim: ["A", "C"], label: "Only the designated decider votes" },
+        { active: "B", dim: ["A", "C"], bubbles: { B: ACCEPT }, label: "B accepts the proposal" },
+        { dim: ["A", "C"], bubbles: { B: ACCEPT }, label: "The proposal is adopted", result: "accept", ms: 2100 },
       ],
     },
 
     "most-pleasure": {
       actors: [{ id: "A" }, { id: "B" }, { id: "C" }],
       steps: [
-        { phase: "voting", active: "A", bubbles: { A: score(7) }, label: "A scores the proposal" },
-        { phase: "voting", active: "B", bubbles: { A: score(7), B: score(4) }, label: "B scores the proposal" },
-        { phase: "voting", active: "C", bubbles: { A: score(7), B: score(4), C: score(6) }, label: "C scores the proposal" },
-        { phase: "voting", bubbles: { A: score(7), B: score(4), C: score(6) }, label: "Sum 17 ≥ current itinerary's 15 — adopted", result: "accept", ms: 2600 },
+        { active: "A", bubbles: { A: score(7) }, label: "A scores the proposal" },
+        { active: "B", bubbles: { A: score(7), B: score(4) }, label: "B scores the proposal" },
+        { active: "C", bubbles: { A: score(7), B: score(4), C: score(6) }, label: "C scores the proposal" },
+        { bubbles: { A: score(7), B: score(4), C: score(6) }, label: "Sum 17 ≥ current itinerary's 15 — adopted", result: "accept", ms: 2600 },
       ],
     },
 
     "least-misery": {
       actors: [{ id: "A" }, { id: "B" }, { id: "C" }],
       steps: [
-        { phase: "voting", active: "A", bubbles: { A: score(7) }, label: "A scores the proposal" },
-        { phase: "voting", active: "B", bubbles: { A: score(7), B: score(4) }, label: "B scores the proposal" },
-        { phase: "voting", active: "C", bubbles: { A: score(7), B: score(4), C: score(6) }, label: "C scores the proposal" },
-        { phase: "voting", bubbles: { A: score(7), B: score(4), C: score(6) }, label: "Min 4 < current itinerary's 5 — rejected", result: "reject", ms: 2600 },
+        { active: "A", bubbles: { A: score(7) }, label: "A scores the proposal" },
+        { active: "B", bubbles: { A: score(7), B: score(4) }, label: "B scores the proposal" },
+        { active: "C", bubbles: { A: score(7), B: score(4), C: score(6) }, label: "C scores the proposal" },
+        { bubbles: { A: score(7), B: score(4), C: score(6) }, label: "Min 4 < current itinerary's 5 — rejected", result: "reject", ms: 2600 },
       ],
     },
   };
@@ -428,15 +436,17 @@
   }
 
   function drawArrow(root, fromId, toId) {
+    var svg = root.querySelector(".flow-demo__arrows");
     var path = root.querySelector(".flow-demo__arrow-path");
     if (!fromId || !toId) {
-      path.removeAttribute("d");
+      // Fade out, keeping the last path so it doesn't blink away
+      svg.classList.remove("is-visible");
       return;
     }
     var from = root.querySelector('[data-actor="' + fromId + '"] .flow-actor__sprite');
     var to = root.querySelector('[data-actor="' + toId + '"] .flow-actor__sprite');
     if (!from || !to) {
-      path.removeAttribute("d");
+      svg.classList.remove("is-visible");
       return;
     }
     var rootRect = root.getBoundingClientRect();
@@ -448,41 +458,104 @@
     var mid = (x1 + x2) / 2;
     var lift = Math.min(30, Math.abs(x2 - x1) * 0.35) + 12;
     path.setAttribute("d", "M " + x1 + " " + y + " Q " + mid + " " + (y - lift) + " " + x2 + " " + y);
+    svg.classList.add("is-visible");
+  }
+
+  function setBubble(el, spec, speech) {
+    var bubble = el.querySelector(".flow-actor__bubble");
+    var sig = spec ? spec.type + "|" + spec.text : speech ? "speech" : "";
+    if (bubble.dataset.sig === sig) {
+      return;
+    }
+    bubble.dataset.sig = sig;
+    if (bubble._timer) {
+      window.clearTimeout(bubble._timer);
+      bubble._timer = null;
+    }
+
+    function show() {
+      bubble.className = "flow-actor__bubble";
+      bubble.textContent = "";
+      if (spec) {
+        bubble.textContent = spec.text;
+        bubble.classList.add("flow-actor__bubble--" + spec.type);
+      } else if (speech) {
+        bubble.innerHTML = "<i></i><i></i><i></i>";
+        bubble.classList.add("flow-actor__bubble--speech");
+      } else {
+        return;
+      }
+      // Reflow so the pop-in transition plays from the hidden state
+      void bubble.offsetWidth;
+      bubble.classList.add("is-visible");
+      if (speech) {
+        // The bubble disappears exactly when the two dot cycles finish
+        bubble._timer = window.setTimeout(function () {
+          bubble.classList.remove("is-visible");
+          bubble.dataset.sig = "";
+        }, SPEECH_MS);
+      }
+    }
+
+    if (bubble.classList.contains("is-visible")) {
+      // Let the old bubble fade out before the new one pops in
+      bubble.classList.remove("is-visible");
+      bubble._timer = window.setTimeout(show, 240);
+    } else {
+      show();
+    }
   }
 
   function apply(root, cfg, step) {
     var active = step.active ? [].concat(step.active) : [];
     var dim = step.dim || [];
     var bubbles = step.bubbles || {};
+    var arrow = step.arrow || [];
+    var hasArrow = arrow.length > 0;
+
+    // Cancel any in-flight arrow/bubble sequence from the previous step
+    (root._timers || []).forEach(window.clearTimeout);
+    root._timers = [];
+    function later(ms, fn) {
+      root._timers.push(window.setTimeout(fn, ms));
+    }
 
     cfg.actors.forEach(function (actor) {
       var el = root.querySelector('[data-actor="' + actor.id + '"]');
       var isActive = active.indexOf(actor.id) !== -1;
-      el.classList.toggle("is-active", isActive);
       el.classList.toggle("is-dim", dim.indexOf(actor.id) !== -1);
 
-      var bubble = el.querySelector(".flow-actor__bubble");
       var spec = bubbles[actor.id];
       // Active speakers with no explicit bubble get animated speech dots
-      // (suppressed on arrow steps so the bubble doesn't collide with it)
-      var speech = !spec && isActive && !step.arrow && step.speech !== false;
-      var sig = spec ? spec.type + "|" + spec.text : speech ? "speech" : "";
-      if (bubble.dataset.sig !== sig) {
-        bubble.dataset.sig = sig;
-        bubble.className = "flow-actor__bubble";
-        bubble.textContent = "";
-        if (spec) {
-          bubble.textContent = spec.text;
-          bubble.classList.add("is-visible", "flow-actor__bubble--" + spec.type);
-        } else if (speech) {
-          bubble.innerHTML = "<i></i><i></i><i></i>";
-          bubble.classList.add("is-visible", "flow-actor__bubble--speech");
-        }
+      var speech = !spec && isActive && step.speech !== false;
+      if (isActive && !spec && hasArrow) {
+        // The arrow hands the turn over: light up (and speak, unless the
+        // step defers speaking) only after it has arrived and faded out
+        el.classList.remove("is-active");
+        setBubble(el, null, false);
+        later(1000, function () {
+          el.classList.add("is-active");
+          if (speech) {
+            setBubble(el, null, true);
+          }
+        });
+      } else {
+        el.classList.toggle("is-active", isActive);
+        setBubble(el, spec, speech);
       }
     });
 
-    var arrow = step.arrow || [];
-    drawArrow(root, arrow[0], arrow[1]);
+    // Sequence: previous bubble fades out -> arrow fades in -> arrow
+    // fades out -> the new speaker lights up and speaks
+    drawArrow(root, null, null);
+    if (hasArrow) {
+      later(300, function () {
+        drawArrow(root, arrow[0], arrow[1]);
+      });
+      later(900, function () {
+        drawArrow(root, null, null);
+      });
+    }
 
     var phaseEl = root.querySelector(".flow-demo__phase");
     if (step.phase) {
@@ -506,7 +579,9 @@
       var step = cfg.steps[index];
       apply(root, cfg, step);
       index = (index + 1) % cfg.steps.length;
-      timer = window.setTimeout(tick, step.ms || STEP_MS);
+      // Arrow steps play a longer sequence (fade -> arrow -> bubble)
+      var duration = step.ms || (step.arrow ? STEP_MS + 1000 : STEP_MS);
+      timer = window.setTimeout(tick, duration);
     }
 
     function stop() {

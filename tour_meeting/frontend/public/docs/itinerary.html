@@ -59,28 +59,62 @@
 
         <section class="section" id="definition">
           <h2>Definition</h2>
-          <p>An itinerary is an ordered sequence of destinations, together with the transportation between them. Participants propose itineraries during the conversation phase, and the accepted one becomes the group's current itinerary until it is replaced by the next accepted proposal (see <a href="./meeting-workflow.html">Meeting workflow</a>).</p>
-          <div class="route-diagram" role="img" aria-label="An example itinerary: Kyoto Station, then a 30-minute bus ride to Kinkaku-ji, then a 25-minute train ride to Fushimi Inari">
-            <div class="route-dest">
-              <span class="route-dest__name">Kyoto Sta.</span>
-              <span class="route-dest__meta">9:00 &middot; &yen;0</span>
+          <p>An itinerary is an ordered sequence of destinations, together with the transportation between them.</p>
+          <div class="route-demo" role="img" aria-label="An example itinerary: Kyoto Station, then a 5-minute train ride to Fushimi Inari, then a 10-minute train ride to Tofuku-ji">
+            <div class="route-stats">
+              <div class="route-stat">
+                <span class="route-stat__label">Time window</span>
+                <span class="route-stat__value">09:00 &ndash; 12:00</span>
+              </div>
+              <div class="route-stat">
+                <span class="route-stat__label">Total cost</span>
+                <span class="route-stat__value">&yen;900</span>
+              </div>
+              <div class="route-stat">
+                <span class="route-stat__label">Destinations</span>
+                <span class="route-stat__value">3</span>
+              </div>
             </div>
-            <div class="route-leg"><span>bus &middot; 30 min &middot; &yen;230</span></div>
-            <div class="route-dest">
-              <span class="route-dest__name">Kinkaku-ji</span>
-              <span class="route-dest__meta">9:30&ndash;10:30 &middot; &yen;500</span>
+            <div class="route-chain">
+              <div class="route-card">
+                <span class="route-card__num">1</span>
+                <span class="route-card__emoji">🚉</span>
+                <p class="route-card__name">Kyoto Sta.</p>
+                <p class="route-card__desc">Meet up at the central gate and set off.</p>
+                <p class="route-card__meta"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16a8 8 0 0 1 0-16Zm-1 3v5.41l3.3 3.3l1.4-1.42L13 11.59V7h-2Z"/></svg><strong>09:00</strong> &middot; 15 min</p>
+                <p class="route-card__cost">&yen;0</p>
+              </div>
+              <div class="route-leg">
+                <span class="route-leg__mode">🚃</span>
+                <svg class="route-leg__arrow" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.17l-3.58-3.59L14 6l6 6l-6 6l-1.41-1.41L16.17 13H4v-2Z"/></svg>
+                <span class="route-leg__meta">5 min</span>
+                <span class="route-leg__meta">&yen;150</span>
+              </div>
+              <div class="route-card">
+                <span class="route-card__num">2</span>
+                <span class="route-card__emoji">⛩️</span>
+                <p class="route-card__name">Fushimi Inari</p>
+                <p class="route-card__desc">Thousands of vermilion torii gates up the mountain.</p>
+                <p class="route-card__meta"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16a8 8 0 0 1 0-16Zm-1 3v5.41l3.3 3.3l1.4-1.42L13 11.59V7h-2Z"/></svg><strong>09:20</strong> &middot; 90 min</p>
+                <p class="route-card__cost">&yen;0</p>
+              </div>
+              <div class="route-leg">
+                <span class="route-leg__mode">🚃</span>
+                <svg class="route-leg__arrow" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 11h12.17l-3.58-3.59L14 6l6 6l-6 6l-1.41-1.41L16.17 13H4v-2Z"/></svg>
+                <span class="route-leg__meta">10 min</span>
+                <span class="route-leg__meta">&yen;150</span>
+              </div>
+              <div class="route-card">
+                <span class="route-card__num">3</span>
+                <span class="route-card__emoji">🍁</span>
+                <p class="route-card__name">Tofuku-ji</p>
+                <p class="route-card__desc">A Zen temple famed for the maple valley below Tsutenkyo Bridge.</p>
+                <p class="route-card__meta"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20a10 10 0 0 0 0-20Zm0 2a8 8 0 1 1 0 16a8 8 0 0 1 0-16Zm-1 3v5.41l3.3 3.3l1.4-1.42L13 11.59V7h-2Z"/></svg><strong>11:00</strong> &middot; 60 min</p>
+                <p class="route-card__cost">&yen;600</p>
+              </div>
+              <div class="route-more">&hellip;</div>
             </div>
-            <div class="route-leg"><span>train &middot; 25 min &middot; &yen;280</span></div>
-            <div class="route-dest">
-              <span class="route-dest__name">Fushimi Inari</span>
-              <span class="route-dest__meta">11:00&ndash;12:30 &middot; &yen;0</span>
-            </div>
-            <div class="route-leg route-leg--more"><span>&hellip;</span></div>
           </div>
-        </section>
-
-        <section class="section" id="destination-attributes">
-          <h2>Destination attributes</h2>
           <p>Each destination in an itinerary includes the following information:</p>
           <div class="param-list">
             <div class="param">
@@ -120,7 +154,6 @@
         <div class="toc-card">
           <p class="toc-title">On this page</p>
           <a class="toc-link" href="#definition">Definition</a>
-          <a class="toc-link" href="#destination-attributes">Destination attributes</a>
           <a class="toc-link" href="#constraint-validation">Constraint validation</a>
         </div>
       </aside>

@@ -57,13 +57,8 @@
           </div>
         </header>
 
-        <section class="section" id="meeting-components">
-          <h2>Meeting components</h2>
-          <p>A tour meeting consists of global goals, participants, constraints, a turn rule, and a voting rule. The global goals are a high-level objective shared among all participants, e.g., planning a one-day sightseeing tour in Tokyo. Each participant advances the discussion in pursuit of their own personal goals while remaining aligned with the global goals. Constraints restrict the itinerary in terms of the travel date, budget, and time window.</p>
-        </section>
-
-        <section class="section" id="conversation-and-voting-phases">
-          <h2>Conversation and voting phases</h2>
+        <section class="section" id="overall-workflow">
+          <h2>Overall workflow</h2>
           <p>The meeting proceeds according to the specified turn rule, under which participants sequentially take <a href="./participants.html#actions">actions</a> multiple times within their turns. This normal state is referred to as the <strong>conversation phase</strong>.</p>
           <p>Once a participant proposes an itinerary (i.e., terminates their turn with <span class="inline-code">propose</span>), the meeting transitions to the <strong>voting phase</strong>. In this phase, all participants except the proposer cast votes on the proposed itinerary. After collecting all votes, the acceptance or rejection of the proposal is determined in accordance with the specified voting rule. If the itinerary is accepted, the current itinerary is replaced with the proposed one; if it is rejected, the current itinerary remains unchanged. The meeting then returns to the conversation phase, and the turns resume with the next participant after the proposer.</p>
           <p>When all participants consecutively indicate satisfaction with the current itinerary (i.e., terminate their turns with <span class="inline-code">satisfied</span>), consensus is considered reached and the meeting concludes. In practice, the termination condition may also be constrained by a maximum number of turns or a maximum execution time, in addition to the unanimous agreement.</p>
@@ -76,41 +71,45 @@
           <div class="demo-grid">
             <div class="demo-card">
               <p class="demo-card__name">round_robin</p>
-              <div class="flow-demo" data-demo="round-robin" role="img" aria-label="Animation of the round robin turn rule"></div>
               <p class="demo-card__desc">Rotates participants in a fixed cyclic order.</p>
+              <div class="flow-demo" data-demo="round-robin" role="img" aria-label="Animation of the round robin turn rule"></div>
             </div>
             <div class="demo-card">
               <p class="demo-card__name">random</p>
-              <div class="flow-demo" data-demo="random" role="img" aria-label="Animation of the random turn rule"></div>
               <p class="demo-card__desc">Rotates participants randomly.</p>
+              <div class="flow-demo" data-demo="random" role="img" aria-label="Animation of the random turn rule"></div>
             </div>
             <div class="demo-card">
               <p class="demo-card__name">inviting</p>
-              <div class="flow-demo" data-demo="inviting" role="img" aria-label="Animation of the inviting turn rule"></div>
               <p class="demo-card__desc">Lets the current speaker determine the next speaker.</p>
+              <div class="flow-demo" data-demo="inviting" role="img" aria-label="Animation of the inviting turn rule"></div>
             </div>
             <div class="demo-card">
               <p class="demo-card__name">facilitating</p>
-              <div class="flow-demo" data-demo="facilitating" role="img" aria-label="Animation of the facilitating turn rule"></div>
               <p class="demo-card__desc">Assigns an additional turn to a facilitator after each turn, who then determines the next speaker.</p>
+              <div class="flow-demo" data-demo="facilitating" role="img" aria-label="Animation of the facilitating turn rule"></div>
             </div>
             <div class="demo-card">
-              <p class="demo-card__name">parallel</p>
+              <p class="demo-card__name">parallel (voting phase only)</p>
+              <p class="demo-card__desc">Lets all participants vote simultaneously.</p>
               <div class="flow-demo" data-demo="parallel" role="img" aria-label="Animation of the parallel turn rule"></div>
-              <p class="demo-card__desc">Lets all participants vote simultaneously (voting phase only).</p>
             </div>
           </div>
+        </section>
+
+        <section class="section" id="turn-options">
+          <h2>Turn options</h2>
           <p>Two additional options make the turn rules more flexible:</p>
           <div class="demo-grid">
             <div class="demo-card">
               <p class="demo-card__name">Balancing</p>
-              <div class="flow-demo" data-demo="balancing" role="img" aria-label="Animation of the balancing option"></div>
               <p class="demo-card__desc">Organizes speaking turns into cycles such that all participants take turns once per cycle to ensure fairness.</p>
+              <div class="flow-demo" data-demo="balancing" role="img" aria-label="Animation of the balancing option"></div>
             </div>
             <div class="demo-card">
               <p class="demo-card__name">Volunteer</p>
-              <div class="flow-demo" data-demo="volunteer" role="img" aria-label="Animation of the volunteer option"></div>
               <p class="demo-card__desc">Allows participants to select <span class="inline-code">pass</span> as a terminal action and skip their turn (i.e., only those who wish to speak take a turn).</p>
+              <div class="flow-demo" data-demo="volunteer" role="img" aria-label="Animation of the volunteer option"></div>
             </div>
           </div>
         </section>
@@ -121,28 +120,28 @@
           <div class="demo-grid">
             <div class="demo-card">
               <p class="demo-card__name">majority</p>
-              <div class="flow-demo" data-demo="majority" role="img" aria-label="Animation of majority voting"></div>
               <p class="demo-card__desc">The proposed itinerary replaces the current itinerary if it receives a majority of <span class="inline-code">accept</span> votes.</p>
+              <div class="flow-demo" data-demo="majority" role="img" aria-label="Animation of majority voting"></div>
             </div>
             <div class="demo-card">
               <p class="demo-card__name">unanimous</p>
-              <div class="flow-demo" data-demo="unanimous" role="img" aria-label="Animation of unanimous voting"></div>
               <p class="demo-card__desc">The proposed itinerary replaces the current itinerary only if all participants vote <span class="inline-code">accept</span>.</p>
+              <div class="flow-demo" data-demo="unanimous" role="img" aria-label="Animation of unanimous voting"></div>
             </div>
             <div class="demo-card">
               <p class="demo-card__name">single_decider</p>
-              <div class="flow-demo" data-demo="single-decider" role="img" aria-label="Animation of single decider voting"></div>
               <p class="demo-card__desc">A specified participant alone casts the binary vote, and the current itinerary is updated accordingly.</p>
+              <div class="flow-demo" data-demo="single-decider" role="img" aria-label="Animation of single decider voting"></div>
             </div>
             <div class="demo-card">
               <p class="demo-card__name">most_pleasure</p>
-              <div class="flow-demo" data-demo="most-pleasure" role="img" aria-label="Animation of most pleasure voting"></div>
               <p class="demo-card__desc">The proposed itinerary replaces the current itinerary if the sum of all participants' scores is greater than or equal to that of the current itinerary.</p>
+              <div class="flow-demo" data-demo="most-pleasure" role="img" aria-label="Animation of most pleasure voting"></div>
             </div>
             <div class="demo-card">
               <p class="demo-card__name">least_misery</p>
-              <div class="flow-demo" data-demo="least-misery" role="img" aria-label="Animation of least misery voting"></div>
               <p class="demo-card__desc">The proposed itinerary replaces the current itinerary if the minimum score across participants is greater than or equal to that of the current itinerary.</p>
+              <div class="flow-demo" data-demo="least-misery" role="img" aria-label="Animation of least misery voting"></div>
             </div>
           </div>
           <p>These rules can be set from all three interfaces &mdash; see the <a href="./gui.html#meeting-settings">GUI</a>, <a href="./cli.html#running-meetings">CLI</a>, and <a href="./python-api.html">Python API</a> pages for how to configure them.</p>
@@ -152,9 +151,9 @@
       <aside class="page-toc" aria-label="On this page">
         <div class="toc-card">
           <p class="toc-title">On this page</p>
-          <a class="toc-link" href="#meeting-components">Meeting components</a>
-          <a class="toc-link" href="#conversation-and-voting-phases">Conversation and voting phases</a>
+          <a class="toc-link" href="#overall-workflow">Overall workflow</a>
           <a class="toc-link" href="#turn-rules">Turn rules</a>
+          <a class="toc-link" href="#turn-options">Turn options</a>
           <a class="toc-link" href="#voting-rules">Voting rules</a>
         </div>
       </aside>
