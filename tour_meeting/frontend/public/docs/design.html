@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="Design guide for AI Tour Meeting" />
-    <title>Overall design - AI Tour Meeting</title>
+    <title>Overview (Technical details) - AI Tour Meeting</title>
     <script>
       (function () {
         try {
@@ -52,11 +52,65 @@
               <span aria-hidden="true">&gt;</span>
               <span class="breadcrumb__current">Technical details</span>
             </nav>
-            <h1>Overall design</h1>
-            <p class="lede">This page is currently in preparation and will be available soon.</p>
+            <h1>Overview</h1>
+            <p class="lede">This page gives a technical overview of AI Tour Meeting and the key concepts used throughout the framework.</p>
           </div>
         </header>
+
+        <figure class="doc-figure doc-figure--plain">
+          <img src="./assets/tourmeeting_overview.png" alt="An overview of AI Tour Meeting" loading="lazy" />
+        </figure>
+
+        <section class="section" id="framework-overview">
+          <h2>Framework overview</h2>
+          <p>AI Tour Meeting orchestrates a group travel planning discussion among multiple LLM-based agents. As shown in the figure above, you first configure the meeting settings &mdash; the global goals, constraints, participants, and meeting workflow &mdash; and then start the meeting. Each participant is instantiated with a distinct persona and collaborates with the others to find an itinerary that satisfies their constraints and preferences through natural language discussion.</p>
+          <p>The meeting alternates between two phases. In the <strong>conversation phase</strong>, participants take turns searching for information, asking each other questions, and proposing itineraries. Once an itinerary is proposed, the meeting transitions to the <strong>voting phase</strong>, where the participants decide whether to accept or reject it. This two-phase process continues until all participants are satisfied with the currently accepted itinerary. See <a href="./meeting-workflow.html">Meeting workflow</a> for the details of this process.</p>
+        </section>
+
+        <section class="section" id="itinerary">
+          <h2>Itinerary</h2>
+          <p>An itinerary proposed during the meeting is a sequence of destinations, together with the transportation between them. Each destination includes a name, a description, a monetary cost, an arrival time, a duration of stay, and the transportation mode, cost, and duration from the previous destination. This structured representation allows the framework to validate an itinerary against the meeting constraints (e.g., budget and time window) and to compare itineraries in terms of objective metrics.</p>
+        </section>
+
+        <section class="section" id="monitoring-and-metrics">
+          <h2>Monitoring and metrics</h2>
+          <p>The framework collects various metrics to analyze both system-level performance and the dynamics of discussions:</p>
+          <ul>
+            <li><strong>System-level metrics</strong>: the agents' token usage, the number of retries, and the number of time violations at destinations in the proposed itineraries.</li>
+            <li><strong>Discussion-dynamics metrics</strong>: the number of meeting steps and turns, the message history, the distribution of executed action types, the distribution of votes and scores, and the details of the proposed itineraries.</li>
+          </ul>
+          <p>You can leverage these metrics to analyze discussions flexibly from multiple perspectives. Basic analyses, such as computing representative statistics and distributions for each metric, are available out of the box in the <a href="./gui.html">analytics dashboard</a>, and all raw data can be exported as JSON for custom analysis (see <a href="./python-api.html">Python API</a>).</p>
+        </section>
+
+        <section class="section" id="interfaces">
+          <h2>Interfaces</h2>
+          <p>AI Tour Meeting provides three interfaces on top of the same engine, so you can pick the one that fits your use case:</p>
+          <div class="path-cards">
+            <a class="path-card" href="./gui.html">
+              <span class="path-card__title">GUI <span aria-hidden="true">&rsaquo;</span></span>
+              <p>Create and run meetings from the browser app.</p>
+            </a>
+            <a class="path-card" href="./cli.html">
+              <span class="path-card__title">CLI <span aria-hidden="true">&rsaquo;</span></span>
+              <p>Run meetings from the terminal.</p>
+            </a>
+            <a class="path-card" href="./python-api.html">
+              <span class="path-card__title">Python API <span aria-hidden="true">&rsaquo;</span></span>
+              <p>Script and customize meetings in Python.</p>
+            </a>
+          </div>
+        </section>
       </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#framework-overview">Framework overview</a>
+          <a class="toc-link" href="#itinerary">Itinerary</a>
+          <a class="toc-link" href="#monitoring-and-metrics">Monitoring and metrics</a>
+          <a class="toc-link" href="#interfaces">Interfaces</a>
+        </div>
+      </aside>
     </div>
 
     <script src="./nav.js" defer></script>

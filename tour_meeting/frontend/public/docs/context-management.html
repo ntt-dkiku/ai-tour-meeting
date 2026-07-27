@@ -53,10 +53,53 @@
               <span class="breadcrumb__current">Technical details</span>
             </nav>
             <h1>Context management</h1>
-            <p class="lede">This page is currently in preparation and will be available soon.</p>
+            <p class="lede">This page describes how each participant's input context is constructed and kept within the LLM's context window.</p>
           </div>
         </header>
+
+        <section class="section" id="input-context">
+          <h2>Input context</h2>
+          <p>The figure below shows the structure of the input context of a participant. The context starts with a system prompt defining the participant's persona and the meeting settings, after which phase markers and action logs are appended alternately as the memory. During the participant's turn, the actions taken so far in the current turn and the phase instructions are appended to this memory, and the model generates the next action. Once the turn ends, all the actions are recorded in the action logs.</p>
+          <figure class="doc-figure">
+            <img src="./assets/context_management.png" alt="Input context of a participant" loading="lazy" />
+          </figure>
+          <p>The <strong>phase marker</strong> is a system message that indicates the boundary between the conversation and voting phases. <strong>Action logs</strong> store the actions of all participants in each phase in speaking order. The <strong>phase instruction</strong> is temporary context inserted immediately before action generation; it describes the actions available in the current phase and specifies the JSON schema for the output.</p>
+          <p>When constructing the LLM input, the system prompt is assigned the <span class="inline-code">system</span> role, while phase markers and phase instructions are assigned the <span class="inline-code">user</span> role. The participant's own previous actions are assigned the <span class="inline-code">assistant</span> role, whereas actions from the other participants are assigned the <span class="inline-code">user</span> role, making it easier for the model to distinguish between itself and the other participants. Each participant action is also prefixed with the speaker's name.</p>
+        </section>
+
+        <section class="section" id="retry-loop">
+          <h2>Retry loop</h2>
+          <p>If an action output contains invalid JSON or violates a time or cost constraint in the proposed itinerary, the corresponding error message is temporarily appended to the end of the context, and the model is prompted to generate the output again. The maximum number of retries defaults to three.</p>
+        </section>
+
+        <section class="section" id="context-compaction">
+          <h2>Context compaction</h2>
+          <p>To keep the context within the LLM's context window during long meetings, the framework supports three context compaction methods. They can be configured individually for each participant.</p>
+          <div class="param-list">
+            <div class="param">
+              <p class="param__head"><span class="param__name">Summarization</span></p>
+              <p class="param__desc">A specified portion of the context is summarized and inserted immediately after the system prompt, followed by the remaining previous-turn context in its original form.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">Turn-window truncation</span></p>
+              <p class="param__desc">Retains only the most recent fixed number of turns and removes all earlier turns from memory.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">Token-based truncation</span></p>
+              <p class="param__desc">Retains only the most recent context up to a specified number of tokens and removes the rest.</p>
+            </div>
+          </div>
+        </section>
       </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#input-context">Input context</a>
+          <a class="toc-link" href="#retry-loop">Retry loop</a>
+          <a class="toc-link" href="#context-compaction">Context compaction</a>
+        </div>
+      </aside>
     </div>
 
     <script src="./nav.js" defer></script>

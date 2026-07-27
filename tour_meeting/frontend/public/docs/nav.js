@@ -14,7 +14,7 @@
       {
         title: "Technical details",
         items: [
-          { key: "design", label: "Overall design", href: "./design.html" },
+          { key: "design", label: "Overview", href: "./design.html" },
           { key: "participants", label: "Participant", href: "./participants.html" },
           { key: "workflow", label: "Meeting workflow", href: "./meeting-workflow.html" },
           { key: "context-management", label: "Context management", href: "./context-management.html" },
@@ -438,6 +438,10 @@
       }
     } catch (e) {}
 
+    if (typeof window.fetch !== "function") {
+      return;
+    }
+
     fetch("https://api.github.com/repos/" + GITHUB_REPO)
       .then(function (res) {
         return res.ok ? res.json() : null;
@@ -531,13 +535,34 @@
     });
   }
 
+  // Header widgets are cosmetic: a failure in them must never prevent the
+  // sidebar and page navigation below from rendering.
+  function safeCall(fn) {
+    try {
+      fn();
+    } catch (e) {
+      if (window.console && console.error) {
+        console.error(e);
+      }
+    }
+  }
+
   function init() {
-    initGithubLink();
-    initVersionBadge();
+    safeCall(initGithubLink);
+    safeCall(initVersionBadge);
     updateHeaderHeight();
     window.addEventListener("resize", updateHeaderHeight);
-    initSyntaxHighlight();
-    initCopyButtons();
+    // The initial measurement can catch the header before styles/fonts have
+    // applied (a huge unstyled height), which breaks the sticky sidebar and
+    // page toc. Re-measure whenever the header's size actually changes, and
+    // once more after everything has loaded.
+    window.addEventListener("load", updateHeaderHeight);
+    var headerEl = document.querySelector(".site-header");
+    if (headerEl && "ResizeObserver" in window) {
+      new ResizeObserver(updateHeaderHeight).observe(headerEl);
+    }
+    safeCall(initSyntaxHighlight);
+    safeCall(initCopyButtons);
 
     var sidebars = document.querySelectorAll("[data-doc-sidebar]");
     Array.prototype.forEach.call(sidebars, function (sidebar) {
