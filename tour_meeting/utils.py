@@ -4,6 +4,7 @@ import re
 from typing import Any, Dict, List, Optional, Tuple
 
 from .types import (
+    AdviceInjected,
     AskExchange,
     Delta,
     MeetingFinished,
@@ -97,6 +98,8 @@ def format_event(event: Any) -> Optional[str]:
         return f"  [ask] {event.asker} -> {event.target}: {event.question[:50]}..."
     if isinstance(event, RoundEnd):
         return f"\n=== Round {event.round_number} ended ==="
+    if isinstance(event, AdviceInjected):
+        return f"\n[advice] {event.source}: {event.message[:80]}"
     if isinstance(event, Timeout):
         return "\n[timeout]"
     if isinstance(event, MeetingFinished):

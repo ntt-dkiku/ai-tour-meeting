@@ -26,8 +26,8 @@
       {
         title: "System integration",
         items: [
-          { key: "agent-skills", label: "Agent skills", href: "./agent-skills.html" },
           { key: "evaluation", label: "Evaluate your system", href: "./evaluation.html" },
+          { key: "agent-skills", label: "Agent skills", href: "./agent-skills.html" },
         ],
       },
     ],

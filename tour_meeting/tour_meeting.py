@@ -3,7 +3,11 @@ import asyncio
 import random
 import logging
 from contextlib import suppress
-from typing import Any, Dict, List, Literal, Optional, Union, AsyncIterator
+import inspect
+from typing import Any, Dict, List, Literal, Optional, Tuple, Union, AsyncIterator, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .integration import ExternalSystem
 from .messages import HumanMessage, AIMessage
 
 from .participant import (
@@ -32,6 +36,7 @@ from .types import (
     SatisfiedUpdate,
     RoundEnd,
     DeadlockIntervention,
+    AdviceInjected,
 )
 from .deadlock import DeadlockDetector, DEFAULT_SIGNALS as DEADLOCK_DEFAULT_SIGNALS
 from .analytics import MeetingAnalytics
@@ -156,9 +161,15 @@ class AITourMeeting:
         self._human_vote_queue: Optional[asyncio.Queue[Dict[str, Any]]] = None
         self._human_select_queue: Optional[asyncio.Queue[str]] = None
         self._human_ask_queue: Optional[asyncio.Queue[str]] = None
+        # Advisory messages queued by external systems (see inject_advice)
+        self._advice_inbox: List[Tuple[str, str]] = []
+        # External system seated among the participants (see add_external_system)
+        self._external_system: Optional["ExternalSystem"] = None
+        self._external_seat_index: Optional[int] = None
         self._order: List[str] = []
-        self.initial_route: Optional[List[str]] = None
-        self.final_route: Optional[List[str]] = None
+        # The last accepted itinerary (destination dicts); None until a
+        # proposal is accepted.
+        self.final_route: Optional[List[Dict[str, Any]]] = None
         self.analytics = MeetingAnalytics()
         # Pre-configured meeting parameters (used as defaults by run_free_conversation)
         self._title = title
@@ -166,11 +177,34 @@ class AITourMeeting:
         self._constraints = constraints
         self._settings = settings or {}
 
-    def add_participant(self, participant: Participant) -> None:
+    def add_participant(self, participant: Union[Participant, "ExternalSystem"]) -> None:
+        from .integration import ExternalSystem
+        if isinstance(participant, ExternalSystem):
+            self.add_external_system(participant)
+            return
         self.participants.append(participant)
 
-    def add_participants(self, participants: List[Participant]) -> None:
-        self.participants.extend(participants)
+    def add_participants(self, participants: List[Union[Participant, "ExternalSystem"]]) -> None:
+        for participant in participants:
+            self.add_participant(participant)
+
+    def add_external_system(self, system: "ExternalSystem") -> None:
+        """Seat an :class:`~tour_meeting.integration.ExternalSystem`.
+
+        The seat's position in the speaking order matches where it was added:
+        participants added before it speak earlier, ones added after speak
+        later (override with :meth:`set_order`). Only one external system can
+        take a seat; its callbacks are dispatched automatically when the
+        meeting runs.
+        """
+        if self._external_system is not None and self._external_system is not system:
+            raise ValueError("Only one external system can join a meeting.")
+        self._external_system = system
+        system.meeting = self
+        if system.participate:
+            self.enable_human(system.name)
+            if self._external_seat_index is None:
+                self._external_seat_index = len(self.participants)
 
     def reset(self):
         self.history = []
@@ -179,7 +213,6 @@ class AITourMeeting:
         self._human_vote_queue = asyncio.Queue() if self._human_enabled else None
         self._human_select_queue = asyncio.Queue() if self._human_enabled else None
         self._human_ask_queue = asyncio.Queue() if self._human_enabled else None
-        self.initial_route = None
         self.final_route = None
         self.analytics = MeetingAnalytics()
         for participant in self.participants:
@@ -244,6 +277,43 @@ class AITourMeeting:
         if not self._human_enabled or self._human_ask_queue is None:
             raise RuntimeError("Human is not enabled for this meeting.")
         self._human_ask_queue.put_nowait(answer)
+
+    def inject_advice(self, message: str, source: str = "Advisor") -> None:
+        """Queue an advisory message for the meeting.
+
+        The message is appended to the shared history right before the next
+        turn begins, so every participant sees it on their next turn — the
+        same mechanism as the built-in deadlock mediation, but driven by
+        external code (e.g., a recommender system under evaluation). Unlike
+        the human-participant interface, this does not occupy a seat or a
+        turn and can be called at any time while consuming the event stream.
+        """
+        text = (message or "").strip()
+        if not text:
+            return
+        self._advice_inbox.append((text, (source or "Advisor").strip() or "Advisor"))
+
+    def get_conversation_history(self) -> List[Dict[str, Any]]:
+        """The conversation history so far.
+
+        Returns a list of ``{"speaker", "text", "turn"}`` dicts in
+        chronological order, including the participants' utterances and the
+        system's phase notices. Also attached to human-facing events
+        (``HumanTurn``, ``HumanVote``, ...) as ``event.conversation_history``.
+        """
+        entries: List[Dict[str, Any]] = []
+        for msg in self.history:
+            name = getattr(msg, "name", "") or ""
+            content = getattr(msg, "content", "") or ""
+            if not name or not content:
+                continue
+            extras = getattr(msg, "additional_kwargs", None) or {}
+            entries.append({
+                "speaker": name,
+                "text": content,
+                "turn": extras.get("turn"),
+            })
+        return entries
 
     def _is_human_ask_target(self, target_name: str) -> bool:
         """Whether an ``ask`` targets the human participant.
@@ -543,10 +613,93 @@ class AITourMeeting:
         Termination: After a full round, if ALL participants chose satisfied AND at least
         one proposal was accepted → meeting ends.
 
+        When an :class:`~tour_meeting.integration.ExternalSystem` is among the
+        participants, its turns/votes are dispatched to its ``on_*`` callbacks
+        automatically — no special handling needed by the consumer.
+
         Args:
             constraints: Either a pre-formatted string or a dict with keys like
                 travel_date, time_window_start, time_window_end, budget.
         """
+        stream = self._run_free_conversation(
+            global_goals=global_goals,
+            turn_rule=turn_rule,
+            voting_rule=voting_rule,
+            resume_from_history=resume_from_history,
+            max_turns=max_turns,
+            time_limit=time_limit,
+            volunteer_mode=volunteer_mode,
+            balanced_turns=balanced_turns,
+            vote_turn_rule=vote_turn_rule,
+            single_decider=single_decider,
+            human_role=human_role,
+            title=title,
+            constraints=constraints,
+        )
+        system = self._external_system
+        if system is None:
+            async for event in stream:
+                yield event
+            return
+
+        # Seat the external system in the speaking order at its seat position
+        # (an explicit set_order() beforehand takes priority).
+        if system.participate and "__YOU__" not in (self._order or []):
+            if self._order:
+                self.set_order(self._order + ["__YOU__"])
+            else:
+                names = [p.name for p in self.participants]
+                idx = self._external_seat_index
+                idx = len(names) if idx is None else min(idx, len(names))
+                self.set_order(names[:idx] + ["__YOU__"] + names[idx:])
+
+        async def _call(callback, event):
+            result = callback(event)
+            if inspect.isawaitable(result):
+                result = await result
+            # Typed actions (pydantic models, e.g. Propose / Vote) are
+            # converted to the engine's payload dicts.
+            if hasattr(result, "model_dump"):
+                result = result.model_dump(exclude_none=True)
+            return result
+
+        async for event in stream:
+            yield event
+            await _call(system.on_event, event)
+            if not system.participate:
+                continue
+            if isinstance(event, HumanTurn):
+                payload = await _call(system.on_turn, event)
+                if payload is not None:
+                    self.submit_human(payload)
+            elif isinstance(event, HumanVote):
+                payload = await _call(system.on_vote, event)
+                if payload is not None:
+                    self.submit_human_vote(payload)
+            elif isinstance(event, HumanAsk):
+                answer = await _call(system.on_ask, event)
+                self.submit_human_ask_answer(answer or "")
+            elif isinstance(event, HumanSelectSpeaker):
+                picked = await _call(system.on_select_speaker, event)
+                self.submit_human_selection(picked or "")
+
+    async def _run_free_conversation(
+        self,
+        global_goals: Optional[str] = None,
+        turn_rule: Optional[str] = None,
+        voting_rule: Optional[str] = None,
+        resume_from_history: bool = False,
+        max_turns: Optional[int] = None,
+        time_limit: Optional[int] = None,
+        volunteer_mode: Optional[bool] = None,
+        balanced_turns: Optional[bool] = None,
+        vote_turn_rule: Optional[str] = None,
+        single_decider: Optional[str] = None,
+        human_role: Optional[str] = None,
+        title: Optional[str] = None,
+        constraints: Optional[Union[str, Dict[str, Any]]] = None,
+    ) -> AsyncIterator[MeetingEvent]:
+        """Core event-stream generator behind :meth:`run_free_conversation`."""
         if not self.participants:
             raise RuntimeError("No participants have been added.")
 
@@ -1077,6 +1230,7 @@ class AITourMeeting:
                                 asker=ha["asker"],
                                 target=ha["target"],
                                 question=ha["question"],
+                                conversation_history=self.get_conversation_history(),
                             )
                             queue_task = asyncio.create_task(queue.get())
                             continue
@@ -1463,6 +1617,7 @@ class AITourMeeting:
                     vote_data = None
                     vote_timed_out = False
                     v_human_steps_parts: List[str] = []
+                    vote_ask_exchanges: List[Dict[str, Any]] = []
                     for v_step in range(1, human_max_steps + 1):
                         v_can_ask = bool(vote_candidates) and v_step < human_max_steps
                         yield HumanVote(
@@ -1472,6 +1627,8 @@ class AITourMeeting:
                             options={"proposals": proposals, "voting_rule": voting_rule},
                             step=v_step, max_steps=human_max_steps,
                             candidates=vote_candidates, can_ask=v_can_ask,
+                            conversation_history=self.get_conversation_history(),
+                            ask_exchanges=list(vote_ask_exchanges),
                         )
 
                         remaining_time = None
@@ -1504,6 +1661,7 @@ class AITourMeeting:
                             async for ev in run_human_ask(
                                 target, question, turn, v_step, human_max_steps,
                                 v_human_steps_parts,
+                                exchanges=vote_ask_exchanges,
                             ):
                                 yield ev
                             continue
@@ -1781,6 +1939,7 @@ class AITourMeeting:
                                 yield HumanAsk(
                                     turn=ha["turn"], asker=ha["asker"],
                                     target=ha["target"], question=ha["question"],
+                                    conversation_history=self.get_conversation_history(),
                                 )
                                 vq_task = asyncio.create_task(vote_queue.get())
                                 continue
@@ -2350,6 +2509,7 @@ class AITourMeeting:
                 current_route = route_draft.route if hasattr(route_draft, "route") else None
                 current_route_destinations = route_plan_payload.get("destinations")
                 current_route_proposer = proposer_name
+                self.final_route = current_route_destinations
                 if voting_rule in {"most_pleasure", "least_misery"}:
                     current_route_representative_score = proposed_route_representative_score
                 has_accepted_proposal = True
@@ -2394,6 +2554,7 @@ class AITourMeeting:
         async def run_human_ask(
             target_display: str, question: str, ask_turn: int,
             step_number: int, max_steps: int, steps_parts: List[str],
+            exchanges: Optional[List[Dict[str, Any]]] = None,
         ):
             """The human asks an LLM participant; that participant answers.
 
@@ -2456,6 +2617,12 @@ class AITourMeeting:
                 f"[Step {step_number}/{max_steps} - ask]\n{question}\n"
                 f"Ask: {target_display}\nAskA: {response}"
             )
+            if exchanges is not None:
+                exchanges.append({
+                    "target": target_display,
+                    "question": question,
+                    "response": response,
+                })
 
         # ── Human turn handler ──
 
@@ -2484,6 +2651,7 @@ class AITourMeeting:
             need_modification = False
             concluded = False
 
+            turn_ask_exchanges: List[Dict[str, Any]] = []
             for step in range(1, human_max_steps + 1):
                 can_ask = bool(candidates) and step < human_max_steps
                 yield HumanTurn(
@@ -2491,6 +2659,8 @@ class AITourMeeting:
                     step=step, max_steps=human_max_steps,
                     candidates=candidates, can_ask=can_ask, can_propose=True,
                     current_route=list(current_route_destinations or []),
+                    conversation_history=self.get_conversation_history(),
+                    ask_exchanges=list(turn_ask_exchanges),
                 )
 
                 remaining_time = None
@@ -2538,7 +2708,8 @@ class AITourMeeting:
                     # participant; the fragment lands in steps_log_parts so the
                     # final bubble keeps it.
                     async for ev in run_human_ask(
-                        target, msg, turn, step, human_max_steps, steps_log_parts
+                        target, msg, turn, step, human_max_steps, steps_log_parts,
+                        exchanges=turn_ask_exchanges,
                     ):
                         yield ev
                     continue
@@ -2674,6 +2845,20 @@ class AITourMeeting:
             consensus_reached = False
 
             while True:
+                # Drain externally queued advice (inject_advice) so every
+                # participant sees it starting from the upcoming turn.
+                while self._advice_inbox:
+                    advice_text, advice_source = self._advice_inbox.pop(0)
+                    self.history.append(
+                        AIMessage(
+                            content=f"Advice from {advice_source}\n{advice_text}",
+                            name=system_history_name,
+                        )
+                    )
+                    yield AdviceInjected(
+                        turn=turn + 1, source=advice_source, message=advice_text,
+                    )
+
                 if human_facilitates:
                     # The human is the facilitator: prompt them to pick the next
                     # speaker (the LLM path is bypassed). An empty candidate list
@@ -2686,6 +2871,7 @@ class AITourMeeting:
                             turn=turn + 1,
                             speaker=self._human_name,
                             candidates=list(candidates),
+                            conversation_history=self.get_conversation_history(),
                         )
                         remaining_time = None
                         if time_limit is not None:
@@ -3036,7 +3222,10 @@ class AITourMeeting:
                 self.analytics.turn_started(turns + 1, self._human_name)
                 yield TurnStart(turn=turns + 1, speaker=self._human_name)
                 from .types import HumanTurn
-                yield HumanTurn(turn=turns + 1, speaker=self._human_name)
+                yield HumanTurn(
+                    turn=turns + 1, speaker=self._human_name,
+                    conversation_history=self.get_conversation_history(),
+                )
 
                 remaining = None
                 if time_limit is not None:

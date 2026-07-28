@@ -2,7 +2,10 @@
 from __future__ import annotations
 
 import logging
-from typing import Any, Dict, List, Optional, Set, Union
+from typing import Any, Dict, List, Optional, Set, Union, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .integration import ExternalSystem
 
 from .llm import load_llm
 from .participant import Participant
@@ -116,11 +119,16 @@ def _validate_participant(idx: int, cfg: Dict[str, Any]) -> None:
 def build_meeting(
     title: str,
     global_goals: str,
-    participants: List[Dict[str, Any]],
+    participants: List[Union[Dict[str, Any], Participant, "ExternalSystem"]],
     constraints: Optional[Union[str, Dict[str, Any]]] = None,
     settings: Optional[Dict[str, Any]] = None,
 ) -> AITourMeeting:
     """Build an AITourMeeting from participant config dicts.
+
+    An entry may also be a ready-made :class:`~tour_meeting.participant.Participant`
+    instance, or an :class:`~tour_meeting.integration.ExternalSystem` instance;
+    the latter takes the seat at its position in the list and its callbacks
+    are dispatched automatically when the meeting runs.
 
     Each participant dict should contain:
       Required: name, model_name, background, personality, preferences, personal_goals
@@ -139,7 +147,11 @@ def build_meeting(
     if not participants:
         raise ValueError("participants list must not be empty")
 
+    from .integration import ExternalSystem
+
     for i, cfg in enumerate(participants):
+        if isinstance(cfg, (ExternalSystem, Participant)):
+            continue
         _validate_participant(i, cfg)
 
     meeting = AITourMeeting(
@@ -149,6 +161,12 @@ def build_meeting(
         settings=settings,
     )
     for cfg in participants:
+        if isinstance(cfg, ExternalSystem):
+            meeting.add_external_system(cfg)
+            continue
+        if isinstance(cfg, Participant):
+            meeting.add_participant(cfg)
+            continue
         llm = load_llm(
             model_name=cfg["model_name"],
             temperature=cfg.get("temperature", 0.7),

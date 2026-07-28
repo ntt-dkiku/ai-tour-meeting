@@ -25,7 +25,7 @@
         <a class="site-title" href="./index.html">AI Tour Meeting</a>
         <nav class="site-tabs" aria-label="Primary">
           <a class="site-tab" href="./index.html">User guide</a>
-          <a class="site-tab is-active" href="./agent-skills.html" aria-current="page">Developer guide</a>
+          <a class="site-tab is-active" href="./evaluation.html" aria-current="page">Developer guide</a>
           <a class="site-tab" href="./developer.html">Others</a>
         </nav>
       </div>
@@ -48,15 +48,290 @@
         <header class="page-header">
           <div class="page-header__copy">
             <nav class="breadcrumb" aria-label="Breadcrumb">
-              <a class="breadcrumb__link" href="./agent-skills.html">Developer guide</a>
+              <a class="breadcrumb__link" href="./evaluation.html">Developer guide</a>
               <span aria-hidden="true">&gt;</span>
               <span class="breadcrumb__current">System integration</span>
             </nav>
             <h1>Evaluate your system</h1>
-            <p class="lede">This page is currently in preparation and will be available soon.</p>
+            <p class="lede">This page shows how to plug your own system &mdash; e.g., a group travel recommender &mdash; into a meeting and evaluate how well it can guide the LLM agents.</p>
           </div>
         </header>
+
+        <section class="section" id="integration-styles">
+          <h2>Integration styles</h2>
+          <p>There are two ways to bring your system into a meeting, and they can be combined:</p>
+          <ul>
+            <li><strong>As a participant</strong> &mdash; your system takes one seat, proposes itineraries on its turns, and gets voted on by the LLM agents.</li>
+            <li><strong>As an advisor</strong> &mdash; your system stays outside the turn rotation and injects advice that every agent sees.</li>
+          </ul>
+        </section>
+
+        <section class="section" id="integrate-as-a-participant">
+          <h2>Integrate as a participant</h2>
+          <p>Subclass <span class="inline-code">ExternalSystem</span> and override the callbacks: each one receives an event describing what is being asked, and its return value is submitted as your system's action. Add the instance to <span class="inline-code">participants</span> like any other participant, and run the meeting as usual.</p>
+          <pre><code class="language-python">import asyncio
+from openai import OpenAI
+from tour_meeting.cli import build_meeting
+from tour_meeting.participant import Participant
+from tour_meeting.integration import ExternalSystem
+from tour_meeting.types import (
+    Ask, ExternalSystemAsk, ExternalSystemTurn, ExternalSystemVote,
+    Propose, RouteDraft, Vote,
+)
+
+client = OpenAI()
+
+class MyRecSys(ExternalSystem):
+    name = "RecSys"
+    system_prompt = "You are an AI assistant for recommending a sightseeing tour."
+
+    def on_turn(self, event: ExternalSystemTurn) -> Ask | Propose:
+        # First, spend a step asking each agent about their preferences;
+        # on the last step (event.can_ask is False), conclude with a proposal.
+        if event.can_ask and event.step <= len(event.candidates):
+            target = event.candidates[event.step - 1]
+            return Ask(target=target, message="What do you want to prioritize on this trip?")
+        draft = self.recommend(event)
+        return Propose(message=draft.message, route=draft.route)
+
+    def on_vote(self, event: ExternalSystemVote) -> Vote:
+        # A vote on another participant's proposal
+        proposal = event.options["proposals"][0]
+        accept = len(proposal["destinations"]) >= 2  # your own criteria here
+        return Vote(accept=accept, message="Works for me." if accept else "I disagree.")
+
+    def on_ask(self, event: ExternalSystemAsk) -> str:
+        # An agent asked your system a question: let an LLM answer it
+        conversation = "\n".join(f"{m['speaker']}: {m['text']}" for m in event.conversation_history)
+        response = client.responses.create(
+            model="gpt-5.5",
+            input=[
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": f"Discussion so far:\n{conversation}\n\n{event.asker} asked you: {event.question}\nAnswer briefly."},
+            ],
+        )
+        return response.output_text
+
+    def recommend(self, event: ExternalSystemTurn) -> RouteDraft:
+        # What your system can read off the event:
+        history = event.conversation_history   # [{"speaker", "text", "turn"}, ...]
+        answers = event.ask_exchanges          # [{"target", "question", "response"}, ...]
+        current = event.current_route          # the adopted itinerary (dicts)
+
+        # Call your own system here. This one asks an LLM to draft the
+        # route, parsed straight into the itinerary format (RouteDraft).
+        conversation = "\n".join(f"{m['speaker']}: {m['text']}" for m in history)
+        preferences = "\n".join(f"{a['target']}: {a['response']}" for a in answers)
+        response = client.responses.parse(
+            model="gpt-5.5",
+            input=[
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": f"Based on the following discussion, recommend a route:\n{conversation}\n\nAnswers you collected from the participants:\n{preferences}"},
+            ],
+            text_format=RouteDraft,
+        )
+        return response.output_parsed
+
+alice = Participant(name="Alice", personality="...", ...)  # LLM agents with personas
+bob = Participant(name="Bob", personality="...", ...)
+recsys = MyRecSys()
+
+meeting = build_meeting(
+    title="One-Day Kyoto Tour",
+    global_goals="Plan a one-day sightseeing tour in Kyoto.",
+    participants=[recsys, alice, bob],
+)
+asyncio.run(meeting.run_cli())</code></pre>
+
+          <h3 id="participant-inputs">Inputs</h3>
+          <p>Each event carries the data your system needs to decide its action:</p>
+          <div class="param-list">
+            <div class="param">
+              <p class="param__head"><span class="param__name">ExternalSystemTurn</span></p>
+              <div class="param__desc">
+                <p>Your turn.</p>
+                <ul>
+                  <li><span class="inline-code">event.conversation_history</span> &mdash; the discussion so far, as <span class="inline-code">[{"speaker", "text", "turn"}, ...]</span></li>
+                  <li><span class="inline-code">event.ask_exchanges</span> &mdash; Q&amp;A from this turn's ask steps, as <span class="inline-code">[{"target", "question", "response"}, ...]</span></li>
+                  <li><span class="inline-code">event.current_route</span> &mdash; the currently adopted itinerary, as destination dicts</li>
+                  <li><span class="inline-code">event.candidates</span> &mdash; participants you may ask</li>
+                  <li><span class="inline-code">event.can_ask</span> / <span class="inline-code">event.can_propose</span> &mdash; actions still allowed on this step</li>
+                  <li><span class="inline-code">event.step</span> / <span class="inline-code">event.max_steps</span> &mdash; position in the multi-step turn</li>
+                </ul>
+              </div>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">ExternalSystemVote</span></p>
+              <div class="param__desc">
+                <p>A vote request.</p>
+                <ul>
+                  <li><span class="inline-code">event.conversation_history</span> &mdash; the discussion so far, as <span class="inline-code">[{"speaker", "text", "turn"}, ...]</span></li>
+                  <li><span class="inline-code">event.options["proposals"][0]</span> &mdash; the proposal to judge (<span class="inline-code">participant</span>, <span class="inline-code">message</span>, <span class="inline-code">destinations</span>)</li>
+                  <li><span class="inline-code">event.options["voting_rule"]</span> &mdash; whether a binary vote or a score is expected</li>
+                  <li><span class="inline-code">event.candidates</span> / <span class="inline-code">event.ask_exchanges</span> &mdash; asking before judging is allowed too, as in <span class="inline-code">ExternalSystemTurn</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">ExternalSystemAsk</span></p>
+              <div class="param__desc">
+                <p>An agent's question to your system.</p>
+                <ul>
+                  <li><span class="inline-code">event.conversation_history</span> &mdash; the discussion so far, as <span class="inline-code">[{"speaker", "text", "turn"}, ...]</span></li>
+                  <li><span class="inline-code">event.asker</span> &mdash; who asked</li>
+                  <li><span class="inline-code">event.question</span> &mdash; the question</li>
+                </ul>
+              </div>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">ExternalSystemSelectSpeaker</span></p>
+              <div class="param__desc">
+                <p>Facilitator only.</p>
+                <ul>
+                  <li><span class="inline-code">event.conversation_history</span> &mdash; the discussion so far, as <span class="inline-code">[{"speaker", "text", "turn"}, ...]</span></li>
+                  <li><span class="inline-code">event.candidates</span> &mdash; participants to pick the next speaker from</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <h3 id="participant-outputs">Outputs</h3>
+          <p>Return one of the following from the corresponding callback:</p>
+          <pre><code class="language-python">from tour_meeting.types import Speak, Ask, Propose, Satisfied, Vote
+
+# on_turn -> a TurnAction
+Speak(message="...")                       # just talk
+Ask(target="Alice", message="...")         # intermediate, repeatable
+Propose(message="...", route=[...])        # propose an itinerary (list of Destination)
+Satisfied()                                # agree to conclude
+
+# on_vote -> a Vote
+Vote(accept=True, message="...")   # majority / unanimous / single_decider
+Vote(score=8)                      # most_pleasure / least_misery (10-point)
+
+# on_ask -> the answer string, e.g. "Yes, it is open on Mondays."
+# on_select_speaker -> the next speaker's name, e.g. "Alice" (facilitator only)</code></pre>
+
+          <h3 id="itinerary-format">Itinerary format</h3>
+          <p>A proposed <span class="inline-code">route</span> is a list of <span class="inline-code">Destination</span> models (see <a href="./itinerary.html">Itinerary</a>); all fields are strings and optional. The itineraries your system reads (<span class="inline-code">current_route</span>, <span class="inline-code">destinations</span>) arrive as plain dicts with the same keys:</p>
+          <pre><code class="language-python">from tour_meeting.types import Destination
+
+Destination(
+    name="Kinkaku-ji",
+    description="The Golden Pavilion.",
+    start_time="09:30",                  # arrival time, "HH:MM"
+    stay_duration="60 min",
+    cost="¥500",                         # currency symbol + number only
+    transport_mode="bus",                # from the previous destination
+    travel_time_from_previous="40 min",
+    transport_cost="¥230",
+)</code></pre>
+          <p><span class="inline-code">RouteDraft</span> bundles a proposal <span class="inline-code">message</span> with the <span class="inline-code">route</span> &mdash; since both are pydantic models, they plug directly into structured-output APIs, as in the example above. Proposed itineraries are validated against the meeting constraints just like the LLM agents' proposals (see <a href="./itinerary.html#constraint-validation">constraint validation</a>).</p>
+        </section>
+
+        <section class="section" id="integrate-as-an-advisor">
+          <h2>Integrate as an advisor</h2>
+          <p>Your system can also guide the agents without taking a seat: override only <span class="inline-code">on_event()</span> (leaving <span class="inline-code">on_turn</span> unimplemented means no seat), observe the meeting, and call <span class="inline-code">self.advise()</span> at any time. The advice is delivered as a system message (<span class="inline-code">Advice from {name}</span>) that every agent sees on their next turn.</p>
+          <pre><code class="language-python">import asyncio
+from tour_meeting.cli import build_meeting
+from tour_meeting.participant import Participant
+from tour_meeting.integration import ExternalSystem
+from tour_meeting.types import MeetingEvent, RoutePlanUpdate
+
+class MyAdvisor(ExternalSystem):
+    name = "RecSys"
+
+    def on_event(self, event: MeetingEvent) -> None:
+        if isinstance(event, RoutePlanUpdate):
+            # A new itinerary was adopted: let your system review it
+            feedback = self.review(event.route_plan)
+            if feedback:
+                self.advise(feedback)
+
+alice = Participant(name="Alice", personality="...", ...)  # LLM agents with personas
+bob = Participant(name="Bob", personality="...", ...)
+advisor = MyAdvisor()
+
+meeting = build_meeting(
+    title="One-Day Kyoto Tour",
+    global_goals="Plan a one-day sightseeing tour in Kyoto.",
+    participants=[alice, bob, advisor],  # no seat: order doesn't matter
+)
+asyncio.run(meeting.run_cli())</code></pre>
+          <h3 id="advisor-inputs">Inputs</h3>
+          <p><span class="inline-code">on_event()</span> receives every event in the meeting stream. The ones most useful for an advisor:</p>
+          <div class="param-list">
+            <div class="param">
+              <p class="param__head"><span class="param__name">TurnFinal</span></p>
+              <div class="param__desc">
+                <p>A participant concluded their turn.</p>
+                <ul>
+                  <li><span class="inline-code">event.speaker</span> / <span class="inline-code">event.turn</span> &mdash; who spoke, and when</li>
+                  <li><span class="inline-code">event.text</span> &mdash; what they said</li>
+                  <li><span class="inline-code">event.route_plan</span> &mdash; the proposed itinerary, if the turn ended with a proposal</li>
+                </ul>
+              </div>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">RoutePlanUpdate</span></p>
+              <div class="param__desc">
+                <p>A new itinerary was adopted.</p>
+                <ul>
+                  <li><span class="inline-code">event.route_plan</span> &mdash; the adopted itinerary</li>
+                  <li><span class="inline-code">event.speaker</span> &mdash; whose proposal it was</li>
+                </ul>
+              </div>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">ProposalVoteResult</span></p>
+              <div class="param__desc">
+                <p>Voting on a proposal finished.</p>
+                <ul>
+                  <li><span class="inline-code">event.proposer</span> / <span class="inline-code">event.accepted</span> &mdash; whose proposal, and whether it passed</li>
+                  <li><span class="inline-code">event.vote_summary</span> &mdash; the individual votes</li>
+                </ul>
+              </div>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">SatisfiedUpdate</span></p>
+              <div class="param__desc">
+                <p>A participant declared (dis)satisfaction with the current itinerary.</p>
+                <ul>
+                  <li><span class="inline-code">event.speaker</span> / <span class="inline-code">event.satisfied</span> &mdash; who, and which way</li>
+                  <li><span class="inline-code">event.satisfied_count</span> / <span class="inline-code">event.total_count</span> &mdash; progress toward consensus</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <p>See <span class="inline-code">tour_meeting/types.py</span> for the full event list. The conversation history is available at any time via <span class="inline-code">self.meeting.get_conversation_history()</span>.</p>
+
+          <h3 id="advisor-outputs">Outputs</h3>
+          <ul>
+            <li><span class="inline-code">self.advise(message)</span> &mdash; free-form text delivered to every agent as a system message (<span class="inline-code">Advice from {name}</span>); an <span class="inline-code">AdviceInjected</span> event is emitted when it lands</li>
+          </ul>
+        </section>
+
+        <section class="section" id="evaluate-the-outcome">
+          <h2>Evaluate the outcome</h2>
+          <p>Whether your system can guide the agents appropriately can be measured from several angles:</p>
+          <ul>
+            <li><strong>Acceptance</strong>: track <span class="inline-code">ProposalVoteResult</span> events to see how often the agents accept your system's proposals, and whether the final adopted itinerary is yours.</li>
+            <li><strong>Agent satisfaction</strong>: the participants' post-meeting self-evaluation (<span class="inline-code">post_consensus_evaluations</span> in the analytics) scores how well the final itinerary satisfies each persona's goals and preferences.</li>
+            <li><strong>Discussion dynamics</strong>: <span class="inline-code">export_analytics()</span> provides the number of turns to consensus, the action distributions, and the vote/score distributions for deeper analysis (see <a href="./python-api.html">Python API</a>).</li>
+          </ul>
+          <p>To evaluate at scale, generate many synthetic groups with diverse personas using <a href="./cli.html#generating-meetings"><span class="inline-code">make gen-meetings</span></a> and run your integration script across them, comparing against baselines such as meetings without your system.</p>
+        </section>
       </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#integration-styles">Integration styles</a>
+          <a class="toc-link" href="#integrate-as-a-participant">Integrate as a participant</a>
+          <a class="toc-link" href="#integrate-as-an-advisor">Integrate as an advisor</a>
+          <a class="toc-link" href="#evaluate-the-outcome">Evaluate the outcome</a>
+        </div>
+      </aside>
     </div>
 
     <script src="./nav.js" defer></script>

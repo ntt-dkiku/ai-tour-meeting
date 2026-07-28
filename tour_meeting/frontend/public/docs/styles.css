@@ -592,6 +592,14 @@ h3 {
   letter-spacing: -0.01em;
 }
 
+.section h3 {
+  margin-top: 28px;
+}
+
+.section h3:first-child {
+  margin-top: 0;
+}
+
 .lede {
   color: var(--muted);
   font-size: 1.02rem;
@@ -1022,6 +1030,19 @@ pre .hljs-meta {
 .section .param__desc {
   margin-top: 4px;
   color: var(--muted);
+}
+
+.section .param__desc p {
+  margin: 0;
+}
+
+.section .param__desc ul {
+  margin: 8px 0 0;
+  padding-left: 22px;
+}
+
+.section .param__desc li + li {
+  margin-top: 6px;
 }
 
 .api-list {
