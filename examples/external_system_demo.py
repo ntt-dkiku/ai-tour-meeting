@@ -1,59 +1,102 @@
 """Minimal end-to-end demo: an external recommender joins an LLM-agent meeting.
 
-The system asks Alice about her budget first, then proposes a fixed Kyoto
-route; the LLM agents (gpt-5.4-mini) discuss and vote on it.
+The system asks Alice about her preferences first, then has an LLM draft a
+route from the discussion (parsed straight into RouteDraft via structured
+outputs); the LLM agents discuss and vote on it.
 """
 import asyncio
+
+import litellm
 
 from tour_meeting.cli import build_meeting
 from tour_meeting.integration import ExternalSystem
 from tour_meeting.types import (
     Ask,
-    Destination,
+    ExternalSystemAsk,
     ExternalSystemTurn,
     ExternalSystemVote,
     Propose,
+    RouteDraft,
     Vote,
 )
+
+MODEL = "openai/gpt-5.4-mini"
 
 
 class MyRecSys(ExternalSystem):
     name = "RecSys"
+    system_prompt = "You are a recommender system for short sightseeing tours in Kyoto."
 
     def on_turn(self, event: ExternalSystemTurn):
+        # First, spend a step asking an agent about their preferences;
+        # on the last step (event.can_ask is False), conclude with a proposal.
         if event.can_ask and not event.ask_exchanges:
             return Ask(target=event.candidates[0],
                        message="What do you want to prioritize on this trip?")
-        print(f"\n>>> [RecSys] answers collected: {event.ask_exchanges}")
-        return Propose(
-            message="Based on your preferences, how about this classic route?",
-            route=[
-                Destination(
-                    name="Fushimi Inari", description="Thousands of torii gates.",
-                    start_time="09:00", stay_duration="90 min", cost="¥0",
-                    transport_mode="train", travel_time_from_previous="5 min",
-                    transport_cost="¥150",
-                ),
-                Destination(
-                    name="Tofuku-ji", description="Zen temple with gardens.",
-                    start_time="10:45", stay_duration="60 min", cost="¥600",
-                    transport_mode="train", travel_time_from_previous="10 min",
-                    transport_cost="¥150",
-                ),
-            ],
+        draft = self.recommend(event)
+        return Propose(message=draft.message, route=draft.route)
+
+    def recommend(self, event: ExternalSystemTurn) -> RouteDraft:
+        conversation = "\n".join(
+            f"{m['speaker']}: {m['text']}" for m in event.conversation_history
         )
+        answers = "\n".join(
+            f"{a['target']}: {a['response']}" for a in event.ask_exchanges
+        )
+        response = litellm.responses(
+            model=MODEL,
+            input=[
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": (
+                    "Based on the following discussion, recommend a short morning "
+                    f"route (2-3 stops):\n{conversation}\n\n"
+                    f"Answers you collected from the participants:\n{answers}"
+                )},
+            ],
+            text_format=RouteDraft,
+        )
+        return RouteDraft.model_validate_json(response.output_text)
 
     def on_vote(self, event: ExternalSystemVote):
-        return Vote(accept=True, message="Happy with the accepted route.")
+        # Judge the proposal with the LLM as well.
+        proposal = event.options["proposals"][0]
+        stops = ", ".join(d["name"] for d in proposal["destinations"])
+        response = litellm.responses(
+            model=MODEL,
+            input=[
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": (
+                    f"{proposal['participant']} proposed this route: {stops}.\n"
+                    f"Their message: {proposal['message']}\n"
+                    "Should a short-morning-tour recommender accept it? "
+                    "Answer with exactly 'accept' or 'reject' and one short reason."
+                )},
+            ],
+        )
+        text = response.output_text.strip()
+        return Vote(accept=text.lower().startswith("accept"), message=text)
 
-    def on_ask(self, event):
-        return "I recommend places that match everyone's stated preferences."
+    def on_ask(self, event: ExternalSystemAsk) -> str:
+        conversation = "\n".join(
+            f"{m['speaker']}: {m['text']}" for m in event.conversation_history
+        )
+        response = litellm.responses(
+            model=MODEL,
+            input=[
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": (
+                    f"Discussion so far:\n{conversation}\n\n"
+                    f"{event.asker} asked you: {event.question}\nAnswer briefly."
+                )},
+            ],
+        )
+        return response.output_text
 
 
 def persona(name, prefs):
     return {
         "name": name,
-        "model_name": "openai/gpt-5.4-mini",
+        "model_name": MODEL,
         "background": f"{name} is visiting Kyoto for the first time.",
         "personality": "Friendly and concise.",
         "preferences": prefs,
