@@ -6,7 +6,7 @@ outputs); the LLM agents discuss and vote on it.
 """
 import asyncio
 
-import litellm
+from openai import OpenAI
 
 from tour_meeting.cli import build_meeting
 from tour_meeting.integration import ExternalSystem
@@ -20,7 +20,8 @@ from tour_meeting.types import (
     Vote,
 )
 
-MODEL = "openai/gpt-5.4-mini"
+MODEL = "gpt-5.4-mini"
+client = OpenAI()
 
 
 class MyRecSys(ExternalSystem):
@@ -43,7 +44,7 @@ class MyRecSys(ExternalSystem):
         answers = "\n".join(
             f"{a['target']}: {a['response']}" for a in event.ask_exchanges
         )
-        response = litellm.responses(
+        response = client.responses.parse(
             model=MODEL,
             input=[
                 {"role": "system", "content": self.system_prompt},
@@ -55,32 +56,19 @@ class MyRecSys(ExternalSystem):
             ],
             text_format=RouteDraft,
         )
-        return RouteDraft.model_validate_json(response.output_text)
+        return response.output_parsed
 
     def on_vote(self, event: ExternalSystemVote):
-        # Judge the proposal with the LLM as well.
+        # A vote on another participant's proposal
         proposal = event.options["proposals"][0]
-        stops = ", ".join(d["name"] for d in proposal["destinations"])
-        response = litellm.responses(
-            model=MODEL,
-            input=[
-                {"role": "system", "content": self.system_prompt},
-                {"role": "user", "content": (
-                    f"{proposal['participant']} proposed this route: {stops}.\n"
-                    f"Their message: {proposal['message']}\n"
-                    "Should a short-morning-tour recommender accept it? "
-                    "Answer with exactly 'accept' or 'reject' and one short reason."
-                )},
-            ],
-        )
-        text = response.output_text.strip()
-        return Vote(accept=text.lower().startswith("accept"), message=text)
+        accept = len(proposal["destinations"]) >= 2  # your own criteria here
+        return Vote(accept=accept, message="Works for me." if accept else "I disagree.")
 
     def on_ask(self, event: ExternalSystemAsk) -> str:
         conversation = "\n".join(
             f"{m['speaker']}: {m['text']}" for m in event.conversation_history
         )
-        response = litellm.responses(
+        response = client.responses.create(
             model=MODEL,
             input=[
                 {"role": "system", "content": self.system_prompt},
@@ -96,7 +84,7 @@ class MyRecSys(ExternalSystem):
 def persona(name, prefs):
     return {
         "name": name,
-        "model_name": MODEL,
+        "model_name": f"openai/{MODEL}",
         "background": f"{name} is visiting Kyoto for the first time.",
         "personality": "Friendly and concise.",
         "preferences": prefs,
