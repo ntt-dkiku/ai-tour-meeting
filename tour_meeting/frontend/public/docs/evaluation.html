@@ -232,13 +232,17 @@ Destination(
           <h2>Integrate as an advisor</h2>
           <p>Your system can also guide the agents without taking a seat: override only <span class="inline-code">on_event()</span> (leaving <span class="inline-code">on_turn</span> unimplemented means no seat), observe the meeting, and call <span class="inline-code">self.advise()</span> at any time. The advice is delivered as a system message (<span class="inline-code">Advice from {name}</span>) that every agent sees on their next turn.</p>
           <pre><code class="language-python">import asyncio
+from openai import OpenAI
 from tour_meeting.cli import build_meeting
 from tour_meeting.participant import Participant
 from tour_meeting.integration import ExternalSystem
 from tour_meeting.types import MeetingEvent, RoutePlanUpdate
 
+client = OpenAI()
+
 class MyAdvisor(ExternalSystem):
     name = "RecSys"
+    system_prompt = "You are a critical reviewer of sightseeing itineraries."
 
     def on_event(self, event: MeetingEvent) -> None:
         if isinstance(event, RoutePlanUpdate):
@@ -246,6 +250,18 @@ class MyAdvisor(ExternalSystem):
             feedback = self.review(event.route_plan)
             if feedback:
                 self.advise(feedback)
+
+    def review(self, route_plan: dict) -> str:
+        stops = "\n".join(f"- {d['name']}" for d in route_plan["destinations"])
+        response = client.responses.create(
+            model="gpt-5.5",
+            input=[
+                {"role": "system", "content": self.system_prompt},
+                {"role": "user", "content": f"The group adopted this itinerary:\n{stops}\n\nPoint out its single biggest weakness in one or two sentences, as advice to the group. If it is already excellent, reply with exactly 'OK'."},
+            ],
+        )
+        text = response.output_text.strip()
+        return "" if text == "OK" else text
 
 alice = Participant(name="Alice", personality="...", ...)  # LLM agents with personas
 bob = Participant(name="Bob", personality="...", ...)
