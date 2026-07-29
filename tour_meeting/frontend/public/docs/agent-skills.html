@@ -53,10 +53,45 @@
               <span class="breadcrumb__current">System integration</span>
             </nav>
             <h1>Agent skills</h1>
-            <p class="lede">This page is currently in preparation and will be available soon.</p>
+            <p class="lede">The repository provides agent skills that support coding agents in coding against and operating AI Tour Meeting.</p>
           </div>
         </header>
+
+        <section class="section" id="skill-locations">
+          <h2>Locations</h2>
+          <div class="param-list">
+            <div class="param">
+              <p class="param__head"><span class="param__name">.claude/skills/ai-tour-meeting/SKILL.md</span></p>
+              <p class="param__desc">Loaded by <a href="https://code.claude.com/docs/en/skills" target="_blank" rel="noopener">Claude Code</a> as a project skill: the agent reads its description at session start and pulls in the full instructions whenever a task matches.</p>
+            </div>
+            <div class="param">
+              <p class="param__head"><span class="param__name">.agents/skills/ai-tour-meeting/SKILL.md</span></p>
+              <p class="param__desc">The same content at the cross-agent location, for Codex and other skill-aware tools.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="what-it-covers">
+          <h2>What it covers</h2>
+          <p>The skill condenses everything an agent needs to work with this repo, verified against the implementation:</p>
+          <ul>
+            <li><strong>Deployment</strong> &mdash; <span class="inline-code">make</span> targets, API keys in <span class="inline-code">docker/.env</span>, ports, and local LLM serving (Ollama / vLLM options and how server URLs resolve).</li>
+            <li><strong>Running scripts and experiments</strong> &mdash; <span class="inline-code">make run SCRIPT=...</span>, and the <span class="inline-code">gen-meetings</span> &rarr; <span class="inline-code">run-meetings</span> &rarr; <span class="inline-code">post-eval</span> batch pipeline.</li>
+            <li><strong>Python API</strong> &mdash; <span class="inline-code">build_meeting</span> with every participant/meeting setting and its default, the event stream, results (<span class="inline-code">final_route</span>, analytics), the human seat, and <a href="./evaluation.html">external-system integration</a>.</li>
+            <li><strong>Formatting</strong> &mdash; model names need litellm-style prefixes (<span class="inline-code">openai/gpt-5.2</span>, <span class="inline-code">ollama/{i}/{model}</span>, <span class="inline-code">vllm/{i}/{model}</span>).</li>
+            <li><strong>Testing</strong> &mdash; <span class="inline-code">pytest tests/</span> runs against mocked LLMs, no API keys needed.</li>
+          </ul>
+        </section>
+
       </main>
+
+      <aside class="page-toc" aria-label="On this page">
+        <div class="toc-card">
+          <p class="toc-title">On this page</p>
+          <a class="toc-link" href="#skill-locations">Locations</a>
+          <a class="toc-link" href="#what-it-covers">What it covers</a>
+        </div>
+      </aside>
     </div>
 
     <script src="./nav.js" defer></script>
