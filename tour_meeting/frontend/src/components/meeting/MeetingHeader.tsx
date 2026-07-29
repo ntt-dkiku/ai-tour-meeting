@@ -25,7 +25,8 @@ const MeetingHeader: React.FC<MeetingHeaderProps> = ({
   onResumeMeeting,
 }) => {
   const statusLower = status.toLowerCase();
-  const canResume = statusLower === "stopped";
+  // An errored meeting is resumable too (e.g., after fixing API keys).
+  const canResume = statusLower === "stopped" || statusLower.startsWith("error");
 
   return (
     <PageHeader title={meetingTitle || "Meeting"} subtitle={globalGoals}>

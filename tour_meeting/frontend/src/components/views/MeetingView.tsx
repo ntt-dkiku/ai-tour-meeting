@@ -123,6 +123,10 @@ const MeetingView: React.FC<MeetingViewProps> = ({
   modelGroups,
   defaultModel,
 }) => {
+  // "error: <reason>" from the WS error/status events; anything else is not an error.
+  const errorMessage = status.toLowerCase().startsWith("error")
+    ? status.replace(/^error:?\s*/i, "") || "The meeting stopped due to an unexpected error."
+    : null;
   return (
     <div className="flex-1 flex flex-col min-h-0">
       <MeetingHeader
@@ -155,6 +159,7 @@ const MeetingView: React.FC<MeetingViewProps> = ({
             parallelVoting={parallelVoting}
             votingRule={votingRule}
             humanName={humanName}
+            errorMessage={errorMessage}
           />
         </div>
       </div>

@@ -84,6 +84,18 @@ def _minutes_to_time_str(mins: int) -> str:
     return f"{h:02d}:{m:02d}"
 
 
+def is_authentication_error(exc: Exception) -> bool:
+    """Whether an LLM call failed because of a missing/invalid API key.
+
+    These are unrecoverable by retrying, so callers fail fast and the meeting
+    aborts instead of running on with empty turns.
+    """
+    if isinstance(exc, litellm.exceptions.AuthenticationError):
+        return True
+    # A missing key surfaces as BadRequestError ("You didn't provide an API key").
+    return isinstance(exc, litellm.exceptions.BadRequestError) and "api key" in str(exc).lower()
+
+
 class RouteTimeViolation(Exception):
     """Raised when a proposed route has timing inconsistencies."""
     def __init__(self, message: str, raw_output: str = ""):
@@ -1534,6 +1546,8 @@ class Participant:
                 return result
             except Exception as exc:
                 last_exception = exc
+                if is_authentication_error(exc):
+                    raise
                 if isinstance(exc, (RouteTimeViolation, RouteCostViolation)):
                     retry_causes.append("constraint")
                 elif getattr(exc, "raw_output", ""):
@@ -1735,6 +1749,8 @@ class Participant:
                         })
                     break
                 except Exception as exc:
+                    if is_authentication_error(exc):
+                        raise
                     step_retries += 1
                     raw_output = getattr(exc, "raw_output", "") or (content if "content" in dir() else "")
                     if raw_output:
@@ -2187,6 +2203,8 @@ class Participant:
                         })
                     break
                 except Exception as exc:
+                    if is_authentication_error(exc):
+                        raise
                     step_retries += 1
                     raw_output = getattr(exc, "raw_output", "") or (content if "content" in dir() else "")
                     if raw_output:

@@ -14,6 +14,7 @@ from .participant import (
     Participant,
     RouteDraft,
     Destination,
+    is_authentication_error,
 )
 from .types import (
     MeetingEvent,
@@ -1350,6 +1351,11 @@ class AITourMeeting:
                         break
             except Exception as exc:
                 logger.exception("Free conversation turn failed for %s", participant.name)
+                if is_authentication_error(exc):
+                    raise RuntimeError(
+                        f"Meeting aborted: LLM authentication failed for {participant.name} "
+                        f"({exc}). Set your API keys (docker/.env or GUI Settings) and retry."
+                    ) from exc
                 error_text = self._format_turn_error("participate in free conversation", exc)
                 for chunk_text in self._chunk_text(error_text):
                     yield Delta(turn=current_turn, speaker=participant.name, delta=chunk_text)
@@ -2026,6 +2032,11 @@ class AITourMeeting:
                             break
                 except Exception as exc:
                     logger.exception("Vote failed for %s", voter.name)
+                    if is_authentication_error(exc):
+                        raise RuntimeError(
+                            f"Meeting aborted: LLM authentication failed for {voter.name} "
+                            f"({exc}). Set your API keys (docker/.env or GUI Settings) and retry."
+                        ) from exc
                     error_text = self._format_turn_error("vote on proposal", exc)
                     for ct in self._chunk_text(error_text):
                         yield Delta(turn=current_vote_turn, speaker=voter.name, delta=ct)
@@ -2300,6 +2311,11 @@ class AITourMeeting:
                                 break
                     except Exception as exc:
                         logger.exception("Parallel vote failed for %s", voter_p.name)
+                        if is_authentication_error(exc):
+                            raise RuntimeError(
+                                f"Meeting aborted: LLM authentication failed for {voter_p.name} "
+                                f"({exc}). Set your API keys (docker/.env or GUI Settings) and retry."
+                            ) from exc
                         error_text = self._format_turn_error("vote on proposal", exc)
                     finally:
                         vq_task.cancel()
@@ -2653,6 +2669,11 @@ class AITourMeeting:
                     )
                 except Exception as exc:
                     logger.exception("Answering the human's question failed for %s", target_p.name)
+                    if is_authentication_error(exc):
+                        raise RuntimeError(
+                            f"Meeting aborted: LLM authentication failed for {target_p.name} "
+                            f"({exc}). Set your API keys (docker/.env or GUI Settings) and retry."
+                        ) from exc
                     response = self._format_turn_error("answer the question", exc)
                 if target_p.last_llm_calls:
                     self.analytics.record_llm_calls([

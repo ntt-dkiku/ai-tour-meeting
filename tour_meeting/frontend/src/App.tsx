@@ -3623,7 +3623,15 @@ const ensureSettingsCache = useCallback((meetingId: string): MeetingSettingsCach
             // Resume button stays clickable after a reload.
             status={
               status === "idle"
-                ? meetings.find((m) => m.id === currentMeetingId)?.status ?? status
+                ? (() => {
+                    const meta = meetings.find((m) => m.id === currentMeetingId);
+                    if (!meta?.status) return status;
+                    // Carry the stored failure reason so the error banner can
+                    // show it after a page reload too.
+                    return meta.status === "error" && meta.status_detail
+                      ? `error: ${meta.status_detail}`
+                      : meta.status;
+                  })()
                 : status
             }
             onBackToSettings={backToSettings}

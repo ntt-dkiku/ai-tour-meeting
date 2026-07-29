@@ -112,6 +112,10 @@ interface ChatMessagesProps {
   /** The human participant's engine name (chat events carry it as speaker);
       shown with a "(You)" suffix in the UI. */
   humanName?: string;
+  /** The reason the meeting stopped on an error; rendered at the end of the
+      log, and the typing dots are suppressed — no final message is coming
+      for the in-progress turn. */
+  errorMessage?: string | null;
 }
 
 const ChatMessages: React.FC<ChatMessagesProps> = ({
@@ -128,6 +132,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
   parallelVoting = false,
   votingRule = "majority",
   humanName = "You",
+  errorMessage = null,
 }) => {
   const humanRealName = normalizeHumanName(humanName);
   // Speaker label with the "(You)" suffix for the human participant.
@@ -803,6 +808,7 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
     // The human counts too: while it's their turn and they're preparing an
     // action, their box shows the same typing dots as an LLM in progress.
     const isGenerating =
+      !errorMessage &&
       entry.name !== "System" &&
       !shouldRenderMainBox &&
       !entry.invitationHighlight &&
@@ -1573,6 +1579,15 @@ const ChatMessages: React.FC<ChatMessagesProps> = ({
             }
             return renderMessageEntry(entry as LogEntry & { kind: "message" }, i);
           })
+        )}
+        {errorMessage && (
+          <div className="mt-2 flex items-start gap-2.5 rounded-lg border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-800 dark:border-red-800 dark:bg-red-950 dark:text-red-200">
+            <AlertTriangle className="w-4 h-4 mt-0.5 shrink-0" />
+            <div className="min-w-0 break-words">
+              <span className="font-semibold">Meeting stopped: </span>
+              {errorMessage}
+            </div>
+          </div>
         )}
         <div ref={logsEndRef} />
         </div>
