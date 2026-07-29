@@ -131,8 +131,16 @@ def validate_route_costs(route_draft) -> List[str]:
     return violations
 
 
-def validate_route_times(route_draft) -> List[str]:
+def validate_route_times(
+    route_draft,
+    time_window_start: Optional[str] = None,
+    time_window_end: Optional[str] = None,
+) -> List[str]:
     """Check a RouteDraft for timing violations.
+
+    Beyond internal consistency (formats, reachable start times), stops that
+    fall outside the meeting's time window ("HH:MM" strings, when given) are
+    violations too.
 
     Returns a list of human-readable violation descriptions.
     Empty list means the route is valid.
@@ -163,6 +171,31 @@ def validate_route_times(route_draft) -> List[str]:
                     f"{name}: travel_time_from_previous '{tv_raw}' is not a parseable "
                     "duration. Use a format like '15 min' ('0 min' if adjacent)."
                 )
+    # Meeting time-window checks
+    tw_start = _parse_time_to_minutes(time_window_start)
+    tw_end = _parse_time_to_minutes(time_window_end)
+    if destinations and tw_start is not None:
+        first = destinations[0]
+        first_start = _parse_time_to_minutes(getattr(first, "start_time", ""))
+        if first_start is not None and first_start < tw_start:
+            violations.append(
+                f"{getattr(first, 'name', 'stop 1')}: start_time "
+                f"{getattr(first, 'start_time', '?')} is before the meeting's "
+                f"time window start ({time_window_start})."
+            )
+    if tw_end is not None:
+        for i, dest in enumerate(destinations, 1):
+            start = _parse_time_to_minutes(getattr(dest, "start_time", ""))
+            stay = _parse_duration_minutes(getattr(dest, "stay_duration", ""))
+            if start is None or stay is None:
+                continue
+            if start + stay > tw_end:
+                violations.append(
+                    f"{getattr(dest, 'name', '') or f'stop {i}'}: ends at "
+                    f"{_minutes_to_time_str(start + stay)}, past the meeting's "
+                    f"time window end ({time_window_end})."
+                )
+
     if len(destinations) < 2:
         return violations
 
@@ -737,6 +770,10 @@ class Participant:
         self._compact_cache_summary: Optional[str] = None  # Cached summary text
         self.meeting_title: str = ""  # Set by tour_meeting.py before meeting starts
         self.constraints_text: str = ""  # Set by tour_meeting.py before meeting starts
+        # Structured time window ("HH:MM" or None), set by tour_meeting.py;
+        # used to validate proposed routes mechanically (with retry feedback).
+        self.time_window_start: Optional[str] = None
+        self.time_window_end: Optional[str] = None
         self.meeting_workflow: str = ""  # Set by tour_meeting.py before meeting starts
         self.last_token_usage: Optional[Dict[str, int]] = None  # Track token usage from last turn (input/output/total)
         self.last_llm_calls: List[Dict[str, Any]] = []  # Per-step LLM call records for context size tracking
@@ -2331,8 +2368,12 @@ class Participant:
                         str(exc),
                         raw_output=_safe_json_text(sanitized),
                     ) from exc
-                # Validate timing consistency
-                time_violations = validate_route_times(draft)
+                # Validate timing consistency and the meeting's time window
+                time_violations = validate_route_times(
+                    draft,
+                    time_window_start=self.time_window_start,
+                    time_window_end=self.time_window_end,
+                )
                 if time_violations:
                     _last_valid_draft[0] = draft
                     _last_violations[0] = time_violations
@@ -2340,7 +2381,8 @@ class Participant:
                     raise RouteTimeViolation(
                         f"The proposed route has timing violations:\n{violations_text}\n"
                         "Please fix the start_time of each destination so that "
-                        "start_time >= (previous start_time + previous stay_duration + travel_time_from_previous).",
+                        "start_time >= (previous start_time + previous stay_duration + travel_time_from_previous), "
+                        "and keep every stop within the meeting's time window.",
                         raw_output=_safe_json_text(sanitized),
                     )
                 # Validate cost format (currency symbol + number only)

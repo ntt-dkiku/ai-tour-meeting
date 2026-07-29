@@ -9,6 +9,7 @@ from tour_meeting.participant import (
     Destination,
     RouteDraft,
     validate_route_costs,
+    validate_route_times,
 )
 
 
@@ -204,3 +205,57 @@ class TestValidateRouteCosts:
         )
         violations = validate_route_costs(draft)
         assert len(violations) == 2
+
+
+class TestValidateRouteTimesTimeWindow:
+    """Time-window checks in validate_route_times (retry-feedback source)."""
+
+    @staticmethod
+    def _draft(*dests):
+        return RouteDraft(message="m", route=list(dests))
+
+    @staticmethod
+    def _dest(name, start, stay, travel="10 min"):
+        return Destination(
+            name=name, start_time=start, stay_duration=stay,
+            travel_time_from_previous=travel,
+        )
+
+    def test_within_window_is_valid(self):
+        draft = self._draft(
+            self._dest("A", "09:00", "60 min", travel="0 min"),
+            self._dest("B", "10:30", "60 min"),
+        )
+        assert validate_route_times(
+            draft, time_window_start="09:00", time_window_end="18:00"
+        ) == []
+
+    def test_start_before_window(self):
+        draft = self._draft(self._dest("A", "08:30", "60 min", travel="0 min"))
+        violations = validate_route_times(
+            draft, time_window_start="09:00", time_window_end="18:00"
+        )
+        assert len(violations) == 1
+        assert "before the meeting's time window start" in violations[0]
+
+    def test_end_past_window(self):
+        # A ends at 17:50, fine; B ends at 19:10, past 18:00.
+        draft = self._draft(
+            self._dest("A", "17:00", "50 min", travel="0 min"),
+            self._dest("B", "18:10", "60 min"),
+        )
+        violations = validate_route_times(
+            draft, time_window_start="09:00", time_window_end="18:00"
+        )
+        assert [v for v in violations if "past the meeting's time window end" in v]
+        assert all("A:" not in v for v in violations)
+
+    def test_no_window_means_no_window_checks(self):
+        draft = self._draft(self._dest("A", "05:00", "600 min", travel="0 min"))
+        assert validate_route_times(draft) == []
+
+    def test_single_stop_route_is_checked(self):
+        # The window check must run even for routes shorter than two stops.
+        draft = self._draft(self._dest("A", "17:30", "60 min", travel="0 min"))
+        violations = validate_route_times(draft, time_window_end="18:00")
+        assert len(violations) == 1

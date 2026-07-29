@@ -748,6 +748,24 @@ class AITourMeeting:
             constraints_text = build_constraints_text(constraints)
         elif isinstance(constraints, str):
             constraints_text = constraints
+
+        # Extract a structured time window for mechanical route validation
+        # (the other constraints stay prompt-only). Pre-formatted constraint
+        # strings are matched against the build_constraints_text format.
+        tw_start_text: Optional[str] = None
+        tw_end_text: Optional[str] = None
+        if isinstance(constraints, dict):
+            tw_start_text = (constraints.get("time_window_start") or "").strip() or None
+            tw_end_text = (constraints.get("time_window_end") or "").strip() or None
+        elif constraints_text:
+            m = re.search(r"Time Window:\s*(\S+)\s*-\s*(\S+)", constraints_text)
+            if m:
+                tw_start_text, tw_end_text = m.group(1), m.group(2)
+            else:
+                m = re.search(r"Start Time:\s*(\S+)", constraints_text)
+                tw_start_text = m.group(1) if m else None
+                m = re.search(r"End Time:\s*(\S+)", constraints_text)
+                tw_end_text = m.group(1) if m else None
         supported_turn_rules = {"round_robin", "inviting", "facilitating", "random"}
         if turn_rule not in supported_turn_rules:
             raise NotImplementedError(f"turn_rule '{turn_rule}' is not supported.")
@@ -780,6 +798,8 @@ class AITourMeeting:
                 p.meeting_title = title
             if constraints_text is not None:
                 p.constraints_text = constraints_text
+            p.time_window_start = tw_start_text
+            p.time_window_end = tw_end_text
             p.meeting_workflow = meeting_workflow_text
 
         self._stop = asyncio.Event()
@@ -909,6 +929,38 @@ class AITourMeeting:
                         f"- {curr.get('name', '?')}: {old_time} -> {new_time}"
                     )
             return adjustments
+
+        def route_window_violations(destinations_payload: List[Dict[str, Any]]) -> List[str]:
+            """Stops that fall outside the meeting's time window.
+
+            The window is enforced with retry feedback while the proposer
+            regenerates the route; this re-check catches proposals that still
+            violate it after the retry budget, so the violation can be
+            surfaced to the group (who can reject the proposal in voting).
+            """
+            notes: List[str] = []
+            tw_start = parse_time_to_minutes(tw_start_text)
+            tw_end = parse_time_to_minutes(tw_end_text)
+            if not destinations_payload or (tw_start is None and tw_end is None):
+                return notes
+            first_start = parse_time_to_minutes(destinations_payload[0].get("start_time"))
+            if tw_start is not None and first_start is not None and first_start < tw_start:
+                notes.append(
+                    f"- {destinations_payload[0].get('name', '?')}: starts at "
+                    f"{destinations_payload[0].get('start_time')} before the time window start ({tw_start_text})"
+                )
+            if tw_end is not None:
+                for d in destinations_payload:
+                    start = parse_time_to_minutes(d.get("start_time"))
+                    stay = parse_duration_minutes(d.get("stay_duration"))
+                    if start is None or stay is None:
+                        continue
+                    if start + stay > tw_end:
+                        notes.append(
+                            f"- {d.get('name', '?')}: ends at {minutes_to_time_str(start + stay)} "
+                            f"past the time window end ({tw_end_text})"
+                        )
+            return notes
 
         def format_route_detail(
             destinations: List[Dict[str, Any]],
@@ -1469,6 +1521,9 @@ class AITourMeeting:
                 route_block = f"[Route Proposal]\n{route_text}"
                 if route_adjustments:
                     route_block += "\nThe following destinations had their arrival times corrected because the proposed times were too early:\n" + "\n".join(route_adjustments)
+                window_notes = route_window_violations(route_plan_payload["destinations"])
+                if window_notes:
+                    route_block += "\nWarning: this proposal violates the meeting's time window:\n" + "\n".join(window_notes)
                 if history_steps_log:
                     history_content = f"[Steps]\n{history_steps_log}\n\n{route_block}"
                 else:
