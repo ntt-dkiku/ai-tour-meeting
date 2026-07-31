@@ -12,6 +12,10 @@ This repo is the official implementation of "AI Tour Meeting: Group Travel Plann
   1) a simulation tool for analyzing the behavior of multiple LLM-based agents during tour planning discussions
   2) a recommender system where persona-based agents act on behalf of group members who are unable to participate and provide ideas from their perspectives
 
+
+https://github.com/user-attachments/assets/a28b8944-08b7-4eef-9223-8028a9cf6fc8
+
+
 ## 🚀 Getting Started
 
 ### 0. Requirements
