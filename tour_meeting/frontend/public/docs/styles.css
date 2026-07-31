@@ -950,11 +950,17 @@ pre .hljs-meta {
   margin-top: -28px;
 }
 
-.doc-figure img {
+.doc-figure img,
+.doc-figure video {
   width: 100%;
   border: 1px solid var(--border);
   border-radius: 18px;
   background: #fff;
+}
+
+.doc-figure video {
+  background: #000;
+  display: block;
 }
 
 .doc-figure--narrow {

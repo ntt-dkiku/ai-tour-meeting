@@ -8,13 +8,11 @@
   <a href="https://ntt-rd.app.box.com/s/kvca8nvs1i3gdfh0xcvrrza7qx8w19om" target="_blank"><img src="https://img.shields.io/badge/demo-video-blue"></a>
 </p>
 
+https://github.com/user-attachments/assets/a28b8944-08b7-4eef-9223-8028a9cf6fc8
+
 This repo is the official implementation of "AI Tour Meeting: Group Travel Planning by LLM Agents" (arXiv preprint). AI Tour Meeting is a group travel planning framework powered by multiple LLM-based agents, where the agents collaborate with each other to find an itinerary that satisfies their constraints and preferences. Its two primary use cases include, but not limited to:
   1) a simulation tool for analyzing the behavior of multiple LLM-based agents during tour planning discussions
   2) a recommender system where persona-based agents act on behalf of group members who are unable to participate and provide ideas from their perspectives
-
-
-https://github.com/user-attachments/assets/a28b8944-08b7-4eef-9223-8028a9cf6fc8
-
 
 ## 🚀 Getting Started
 
